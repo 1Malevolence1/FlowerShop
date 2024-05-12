@@ -21,7 +21,7 @@ public class FlowerService implements FlowerServiceImpl {
     }
 
     @Override
-    public Iterable<Flower> allFlower() {
+    public List<Flower> allFlowers() {
         return flowerRepository.findAll();
     }
 

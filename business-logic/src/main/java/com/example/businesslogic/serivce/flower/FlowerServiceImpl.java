@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface FlowerServiceImpl {
 
-    Iterable<Flower> allFlower();
+    List<Flower> allFlowers();
 
     Optional<Flower> findFlower(Long id);
 

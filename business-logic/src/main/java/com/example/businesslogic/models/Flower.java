@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(schema = "manager", name = "flower")
+@Table(schema = "manager", name = "flowers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,10 +28,10 @@ public class Flower {
 
 
     @Column(name = "accountingQuantity")
-    private Double accountingQuantity;
+    private Integer accountingQuantity;
 
     @Column(name = "actualQuantity")
-    private Double actualQuantity;
+    private Integer actualQuantity;
 
 
 
