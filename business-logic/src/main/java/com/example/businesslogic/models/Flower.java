@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
+
 @Entity
 @Table(schema = "manager", name = "flowers")
 @Data
@@ -15,15 +18,16 @@ public class Flower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+
     @Column(name = "title")
     private String title;
 
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "extra_charge")
-    private Double extraCharge;
+    private BigDecimal extraCharge;
 
 
 

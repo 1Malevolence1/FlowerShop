@@ -1,4 +1,4 @@
-package com.example.businesslogic.controler;
+package com.example.businesslogic.controler.flower;
 
 import com.example.businesslogic.models.Flower;
 import com.example.businesslogic.serivce.flower.FlowerService;

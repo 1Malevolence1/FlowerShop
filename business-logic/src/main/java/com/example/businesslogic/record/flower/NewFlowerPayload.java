@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public record NewFlowerPayload(
 
@@ -16,8 +17,8 @@ public record NewFlowerPayload(
         @NotBlank(message = "Название не должно быть пустым")
         String title,
 
-        Double price,
-        Double extraCharge,
+        BigDecimal price,
+        BigDecimal extraCharge,
         Integer accountingQuantity,
         Integer actualQuantity
 
