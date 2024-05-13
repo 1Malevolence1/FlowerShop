@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание цветка</title>
+</head>
+<body>
+
+<h1>Добавить цветок в базу</h1>
+<div data-th-if="${errors}">
+    <h2>Допущены ошибки</h2>
+    <ul>
+        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+
+<div>
+
+    <form data-th-action="@{/main/flowers/create}"  method="post">
+        <input type="text" name="title"   placeholder="Название"/><br>
+        <input type="number" name="price"  placeholder="Цена"/><br>
+        <input type="number" name="extraCharge"  placeholder="Наценка"/><br>
+        <input type="number" name="accountingQuantity" placeholder="Учётное количество"/><br>
+        <input type="number" name="actualQuantity" placeholder="Фактическое количество"/><br>
+        <input type="submit" value="Добавить цветок"/>
+    </form>
+</div>
+</body>
+</html>

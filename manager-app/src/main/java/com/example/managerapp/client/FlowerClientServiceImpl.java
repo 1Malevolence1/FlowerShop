@@ -1,8 +1,9 @@
 package com.example.managerapp.client;
 
-import com.example.managerapp.flower.Flower;
-import com.example.managerapp.flower.NewFlowerPayload;
-import com.example.managerapp.flower.UpdateFlowerPayload;
+
+import com.example.managerapp.record.flower.Flower;
+import com.example.managerapp.record.flower.NewFlowerPayload;
+import com.example.managerapp.record.flower.UpdateFlowerPayload;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public interface FlowerClientServiceImpl {
 
     Optional<Flower> findFlower(Long id);
 
-    Flower createFlower(NewFlowerPayload newFlowerPayload);
+    Flower createFlower(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity);
 
     void updateFlower(Long id, UpdateFlowerPayload payload);
 

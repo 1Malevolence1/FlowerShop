@@ -1,10 +1,15 @@
 package com.example.managerapp.client;
 
-import com.example.managerapp.flower.Flower;
-import com.example.managerapp.flower.NewFlowerPayload;
-import com.example.managerapp.flower.UpdateFlowerPayload;
+
+import com.example.managerapp.exeption.BadRequestException;
+import com.example.managerapp.record.flower.Flower;
+import com.example.managerapp.record.flower.NewFlowerPayload;
+import com.example.managerapp.record.flower.UpdateFlowerPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -33,8 +38,21 @@ public class FlowerClientService implements FlowerClientServiceImpl {
     }
 
     @Override
-    public Flower createFlower(NewFlowerPayload newFlowerPayload) {
-        return null;
+    public Flower createFlower(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
+        try {
+            return restClient.post().uri("/main/flowers/create").contentType(MediaType.APPLICATION_JSON).body(
+                    new NewFlowerPayload(
+                            title,
+                            price,
+                            extraCharge,
+                            accountingQuantity,
+                            actualQuantity
+                    )).retrieve().body(Flower.class);
+        }
+        catch (HttpClientErrorException.BadRequest badRequestException) {
+            ProblemDetail problemDetail = badRequestException.getResponseBodyAs(ProblemDetail.class);
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
+        }
     }
 
     @Override

@@ -25,10 +25,10 @@ public class Flower {
     private String title;
 
     @Column(name = "price")
-    private Double price;
+    private Integer price;
 
     @Column(name = "extra_charge")
-    private Double extraCharge;
+    private Integer extraCharge;
 
 
 

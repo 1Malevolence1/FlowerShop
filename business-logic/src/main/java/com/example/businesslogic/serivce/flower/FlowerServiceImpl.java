@@ -14,7 +14,8 @@ public interface FlowerServiceImpl {
 
     Optional<Flower> findFlower(Long id);
 
-    Flower createFlower(NewFlowerPayload newFlowerPayload);
+    Flower createFlower(String title, Integer price, Integer extraCharge,
+                        Integer accountingQuantity, Integer actualQuantity);
 
     void updateFlower(Long id, UpdateFlowerPayload payload);
 

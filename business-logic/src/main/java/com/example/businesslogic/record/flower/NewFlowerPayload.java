@@ -14,9 +14,16 @@ public record NewFlowerPayload(
 
         @NotBlank(message = "Название не должно быть пустым")
         String title,
-        Double price,
-        Double extraCharge,
+
+        @NotNull
+        Integer price,
+
+        @NotNull
+        Integer extraCharge,
+        @NotNull
         Integer accountingQuantity,
+
+        @NotNull
         Integer actualQuantity
 
 ) {

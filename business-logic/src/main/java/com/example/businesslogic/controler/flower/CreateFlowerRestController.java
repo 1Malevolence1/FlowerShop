@@ -39,7 +39,7 @@ public class CreateFlowerRestController {
                 throw new BindException(bindingResult);
             }
         }
-        Flower newFlower = flowerService.createFlower(payload);
+        Flower newFlower = flowerService.createFlower(payload.title(), payload.price(), payload.extraCharge(), payload.accountingQuantity(), payload.actualQuantity());
         log.info("Добавлен цветок: {}", newFlower);
         return ResponseEntity.created(
                 uriComponentsBuilder.replacePath("main/flowers/{flowerId}").build(Map.of("flowerId", newFlower.getId()))).body(newFlower);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Список цветов</title>
     <style>
-        /  *     Добавил стили для улучшения внешнего вида     *  /
+        /  *        *         Добавил стили для улучшения внешнего вида         *        *  /
         table {
             border-collapse: collapse;
             width: 100%;
@@ -24,12 +24,26 @@
             background-color: #f2f2f2;
         }
 
+        .no-decimal td:last-child::after {
+            content: '';
+        }
+
         tr.even {
             background-color: #f8f8f8;
         }
 
         tr.odd {
             background-color: #f2f2f2;
+        }
+
+        / *  Добавил стили для flexbox контейнера и кнопки  * /
+        .flex-container {
+            display: flex; / *  Используем flexbox  * /
+            justify-content: space-between; / *  Распределяем элементы равномерно  * /
+        }
+
+        button {
+            margin-left: 10px; / *  Отступ слева от таблицы  * /
         }
     </style>
 </head>
@@ -40,24 +54,34 @@
 <div th:if="${flowers.isEmpty()}">
     <p>Цветов нет.</p>
 </div>
-<div>
-    <table>
-        <tr>
-            <th>Название цветка</th>
-            <th>Цена</th>
-            <th>Дополнительная плата</th>
-            <th>Учётное количество</th>
-            <th>Фактическое количество</th>
-        </tr>
-        <tr th:each="flower: ${flowers}" class="even"> <!-- Добавил класс для четных строк -->
-            <td th:text="${flower.title}">Цветок</td>
-            <td th:text="${flower.price}">Цена</td>
-            <td th:text="${flower.extraCharge}">Дополнительная плата</td>
-            <td th:text="${flower.accountingQuantity}">Учётное количество</td>
-            <td th:text="${flower.actualQuantity}">Фактическое количество</td>
-        </tr>
-    </table>
+<div class="flex-container">
+    <div>
+        <table>
+            <tr>
+                <th>Название цветка</th>
+                <th>Цена</th>
+                <th>Наценка</th>
+                <th>Учётное количество</th>
+                <th>Фактическое количество</th>
+            </tr>
+            <tr th:each="flower: ${flowers}">
+                <td th:text="${flower.title}">Цветок</td>
+                <td th:text="${flower.price + ' руб.'}">Цена</td>
+                <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
+                <td th:text="${flower.accountingQuantity}">Учётное количество</td>
+                <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+            </tr>
+        </table>
+    </div>
+
+
 </div>
 
+
+<div style="display: flex; justify-content: flex-end;">
+    <a data-th-href="@{/main/flowers/create}" style="margin-left: auto;">
+        <button type="button">Добавить Цветок</button>
+    </a>
+</div>
 </body>
 </html>

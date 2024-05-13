@@ -35,17 +35,16 @@ public class FlowerService implements FlowerServiceImpl {
 
     @Override
     @Transactional
-    public Flower createFlower(NewFlowerPayload payload) {
-
+    public Flower createFlower(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
         return flowerRepository.save(new Flower(
                 null,
-                payload.title(),
-                payload.price(),
-                payload.extraCharge(),
-                payload.accountingQuantity(),
-                payload.actualQuantity()));
-
+                title,
+                price,
+                extraCharge,
+                accountingQuantity,
+                actualQuantity));
     }
+
 
     @Override
     @Transactional
