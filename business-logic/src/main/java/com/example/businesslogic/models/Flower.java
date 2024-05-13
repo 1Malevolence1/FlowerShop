@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.Currency;
 
 @Entity
 @Table(schema = "manager", name = "flowers")
@@ -24,10 +25,10 @@ public class Flower {
     private String title;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "extra_charge")
-    private BigDecimal extraCharge;
+    private Double extraCharge;
 
 
 

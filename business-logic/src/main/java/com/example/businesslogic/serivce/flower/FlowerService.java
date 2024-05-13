@@ -2,9 +2,11 @@ package com.example.businesslogic.serivce.flower;
 
 import com.example.businesslogic.models.Flower;
 import com.example.businesslogic.record.flower.NewFlowerPayload;
+import com.example.businesslogic.record.flower.UpdateFlowerPayload;
 import com.example.businesslogic.repository.FlowerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class FlowerService implements FlowerServiceImpl {
+
 
     private final FlowerRepository flowerRepository;
 
@@ -31,7 +34,9 @@ public class FlowerService implements FlowerServiceImpl {
     }
 
     @Override
+    @Transactional
     public Flower createFlower(NewFlowerPayload payload) {
+
         return flowerRepository.save(new Flower(
                 null,
                 payload.title(),
@@ -39,10 +44,28 @@ public class FlowerService implements FlowerServiceImpl {
                 payload.extraCharge(),
                 payload.accountingQuantity(),
                 payload.actualQuantity()));
+
     }
 
     @Override
-    public void deleteFlower(Long id) {
+    @Transactional
+    public void updateFlower(Long id, UpdateFlowerPayload payload) {
+        flowerRepository.findById(id).ifPresentOrElse(
+                newDataForflower -> {
+                    newDataForflower.setTitle(payload.title());
+                    newDataForflower.setPrice(payload.price());
+                    newDataForflower.setAccountingQuantity(payload.accountingQuantity());
+                    newDataForflower.setActualQuantity(payload.actualQuantity());
+                    newDataForflower.setExtraCharge(payload.extraCharge());
+                }, () -> {
+                    throw new NoSuchElementException();
+                }
+        );
+    }
 
+    @Override
+    @Transactional
+    public void deleteFlower(Long id) {
+        flowerRepository.deleteById(id);
     }
 }
