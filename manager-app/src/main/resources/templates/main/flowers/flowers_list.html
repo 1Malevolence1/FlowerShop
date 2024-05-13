@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список цветов</title>
+    <style>
+        /  *     Добавил стили для улучшения внешнего вида     *  /
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-top: 3px solid #ddd;
+            border-bottom: 3px solid #ddd;
+        }
+
+        td, th {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-size: 16px;
+            color: #333;
+            background-color: #f2f2f2;
+        }
+
+        tr.even {
+            background-color: #f8f8f8;
+        }
+
+        tr.odd {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Список цветов</h1>
+
+<div th:if="${flowers.isEmpty()}">
+    <p>Цветов нет.</p>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Название цветка</th>
+            <th>Цена</th>
+            <th>Дополнительная плата</th>
+            <th>Учётное количество</th>
+            <th>Фактическое количество</th>
+        </tr>
+        <tr th:each="flower: ${flowers}" class="even"> <!-- Добавил класс для четных строк -->
+            <td th:text="${flower.title}">Цветок</td>
+            <td th:text="${flower.price}">Цена</td>
+            <td th:text="${flower.extraCharge}">Дополнительная плата</td>
+            <td th:text="${flower.accountingQuantity}">Учётное количество</td>
+            <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
