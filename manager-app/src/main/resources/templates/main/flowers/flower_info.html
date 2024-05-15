@@ -56,13 +56,16 @@
 <h1>[[${flower.title}]]</h1>
 
 <ul>
-    <li><strong>ID:</strong> <span>${flower.id}</span></li>
-    <li><strong>Название:</strong> <span>${flower.title}</span></li>
-    <li><strong>Цена:</strong> <span>${flower.price}</span></li>
-    <li><strong>Наценка:</strong> <span>${flower.extraCharge}</span></li>
-    <li><strong>Учётное количество:</strong> <span>${flower.accountingQuantity}</span></li>
-    <li><strong>Фактическое количество:</strong> <span>${flower.actualQuantity}</span></li>
+
+    <li> <strong>ID </strong>: <span data-th-text="${flower.id}"></span> </li>
+    <li> <strong>Название </strong>: <span data-th-text="${flower.title}"></span> </li>
+    <li> <strong>Цена </strong>: <span data-th-text="${flower.price}"></span> </li>
+    <li> <strong>Наценка </strong>: <span data-th-text="${flower.extraCharge}"></span> </li>
+    <li> <strong>Учётное количестов </strong>: <span data-th-text="${flower.accountingQuantity}"></span> </li>
+    <li> <strong>Фактичесокое количество </strong>: <span data-th-text="${flower.actualQuantity}"></span> </li>
 </ul>
+
+
 
 <form method="post" data-th-action="@{/main/flower/{flower}/delete(flower=${flower.id})}">
     <button type="submit">Удалить</button>
@@ -75,6 +78,12 @@
 <form method="get" data-th-href="@{/main/flowers/list}">
     <button type="button">Назад</button>
 </form>
+
+
+
+<button id="animatedButton">Нажми меня!</button>
+
+
 
 </body>
 </html>
