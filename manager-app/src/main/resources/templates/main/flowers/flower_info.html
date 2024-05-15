@@ -22,6 +22,15 @@
     <button type="submit">Удалить</button>
 </form>
 
+<form method="get" >
+    <a data-th-href="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}">
+        <button  type="button"> Обновить </button></a>
+</form>
 
+
+<form method="get" >
+    <a data-th-href="@{/main/flowers/list}">
+        <button  type="button"> Назад </button></a>
+</form>
 </body>
 </html>

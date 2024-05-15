@@ -57,7 +57,13 @@ public class FlowerClientService implements FlowerClientServiceImpl {
 
     @Override
     public void updateFlower(Long id, UpdateFlowerDTO payload) {
-
+        try {
+            restClient.patch().uri("/main/flower/{flowerId}", id)
+                    .contentType(MediaType.APPLICATION_JSON).body(payload)
+                    .retrieve().toBodilessEntity();
+        } catch (HttpClientErrorException.BadRequest exception){
+            throw exception;
+        }
     }
 
     @Override

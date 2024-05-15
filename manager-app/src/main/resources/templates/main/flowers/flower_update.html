@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать</title>
+</head>
+<body>
+
+<h1>Редактирование товара &laquo;[[${flower.title}]]&raquo;    </h1>
+
+<div data-th-if="${errors}">
+    <h2>Допущены ошибки</h2>
+    <ul>
+        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+
+    <form data-th-action="@{/main/flowers/create}"  method="post">
+        <input type="text" name="title"   placeholder="Название" data-th-value="${payload?.title}"/><br>
+        <input type="number" name="price"  placeholder="Цена" data-th-value="${payload?.price}"/><br>
+        <input type="number" name="extraCharge"  placeholder="Наценка" data-th-value="${payload?.extraCharge}"/><br>
+        <input type="number" name="accountingQuantity" placeholder="Учётное количество" data-th-value="${payload?.accountingQuantity}"/><br>
+        <input type="number" name="actualQuantity" placeholder="Фактическое количество" data-th-value="${payload?.actualQuantity}"/><br>
+        <input type="submit" value="Обновить"/>
+    </form>
+</div>
+
+
+<form method="get" >
+    <a data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}">
+        <button  type="button"> Назад </button></a>
+</form>
+</body>
+</html>
