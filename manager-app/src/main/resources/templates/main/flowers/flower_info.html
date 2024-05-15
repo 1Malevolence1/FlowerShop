@@ -2,35 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>[[${flower.title}]] &ndash; </title>
+    <title>[[${flower.title}]] &ndash; Цветочный магазин</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<h1 data-th-text="${flower.title}"></h1>
+<h1>[[${flower.title}]]</h1>
+
 <ul>
-
-    <li> <strong>ID </strong>: <span data-th-text="${flower.id}"></span> </li>
-    <li> <strong>Название </strong>: <span data-th-text="${flower.title}"></span> </li>
-    <li> <strong>Цена </strong>: <span data-th-text="${flower.price}"></span> </li>
-    <li> <strong>Наценка </strong>: <span data-th-text="${flower.extraCharge}"></span> </li>
-    <li> <strong>Учётное количестов </strong>: <span data-th-text="${flower.accountingQuantity}"></span> </li>
-    <li> <strong>Фактичесокое количество </strong>: <span data-th-text="${flower.actualQuantity}"></span> </li>
+    <li><strong>ID:</strong> <span>${flower.id}</span></li>
+    <li><strong>Название:</strong> <span>${flower.title}</span></li>
+    <li><strong>Цена:</strong> <span>${flower.price}</span></li>
+    <li><strong>Наценка:</strong> <span>${flower.extraCharge}</span></li>
+    <li><strong>Учётное количество:</strong> <span>${flower.accountingQuantity}</span></li>
+    <li><strong>Фактическое количество:</strong> <span>${flower.actualQuantity}</span></li>
 </ul>
-
 
 <form method="post" data-th-action="@{/main/flower/{flower}/delete(flower=${flower.id})}">
     <button type="submit">Удалить</button>
 </form>
 
-<form method="get" >
-    <a data-th-href="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}">
-        <button  type="button"> Обновить </button></a>
+<form method="get" data-th-href="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}">
+    <button type="button">Обновить</button>
 </form>
 
-
-<form method="get" >
-    <a data-th-href="@{/main/flowers/list}">
-        <button  type="button"> Назад </button></a>
+<form method="get" data-th-href="@{/main/flowers/list}">
+    <button type="button">Назад</button>
 </form>
+
 </body>
 </html>

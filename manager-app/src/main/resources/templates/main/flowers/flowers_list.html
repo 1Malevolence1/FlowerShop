@@ -2,89 +2,107 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список цветов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /  *        *         Добавил стили для улучшения внешнего вида         *        *  /
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border-top: 3px solid #ddd;
-            border-bottom: 3px solid #ddd;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
         }
 
-        td, th {
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
         th {
-            font-size: 16px;
-            color: #333;
             background-color: #f2f2f2;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        .no-decimal td:last-child::after {
-            content: '';
-        }
-
-        tr.even {
+        tr:nth-child(even) {
             background-color: #f8f8f8;
         }
 
-        tr.odd {
-            background-color: #f2f2f2;
+        .add-button {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
         }
 
-        / *  Добавил стили для flexbox контейнера и кнопки  * /
-        .flex-container {
-            display: flex; / *  Используем flexbox  * /
-            justify-content: space-between; / *  Распределяем элементы равномерно  * /
-        }
-
-        button {
-            margin-left: 10px; / *  Отступ слева от таблицы  * /
+        .add-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
 
-<h1>Список цветов</h1>
+<div class="container">
+    <h1>Список цветов</h1>
 
-<div th:if="${flowers.isEmpty()}">
-    <p>Цветов нет.</p>
-</div>
-<div class="flex-container">
-    <div>
-        <table>
-            <tr>
-                <th>Название цветка</th>
-                <th>Цена</th>
-                <th>Наценка</th>
-                <th>Учётное количество</th>
-                <th>Фактическое количество</th>
-                <th>Подробная информация</th>
-            </tr>
-            <tr th:each="flower: ${flowers}">
-                <td th:text="${flower.title}">Цветок</td>
-                <td th:text="${flower.price + ' руб.'}">Цена</td>
-                <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
-                <td th:text="${flower.accountingQuantity}">Учётное количество</td>
-                <td th:text="${flower.actualQuantity}">Фактическое количество</td>
-                <td><a  data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}"
-                data-th-text="подробнее"></a></td>
-            </tr>
-        </table>
+    <div th:if="${flowers.isEmpty()}">
+        <p>Цветов нет.</p>
     </div>
 
+    <table>
+        <tr>
+            <th>Название цветка</th>
+            <th>Цена</th>
+            <th>Наценка</th>
+            <th>Учётное количество</th>
+            <th>Фактическое количество</th>
+            <th>Подробная информация</th>
+        </tr>
+        <tr th:each="flower: ${flowers}">
+            <td th:text="${flower.title}">Цветок</td>
+            <td th:text="${flower.price + ' руб.'}">Цена</td>
+            <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
+            <td th:text="${flower.accountingQuantity}">Учётное количество</td>
+            <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+            <td><a data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}" class="info-link">Подробнее</a></td>
+        </tr>
+    </table>
 
-</div>
-
-
-<div style="display: flex; justify-content: flex-end;">
-    <a data-th-href="@{/main/flowers/create}" style="margin-left: auto;">
-        <button type="button">Добавить Цветок</button>
+    <a data-th-href="@{/main/flowers/create}" class="add-button">
+        <i class="fas fa-plus"></i> Добавить Цветок
     </a>
 </div>
+
 </body>
 </html>
