@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${flower.title}]] &ndash; </title>
+</head>
+<body>
+
+<h1 data-th-text="${flower.title}"></h1>
+<ul>
+
+    <li> <strong>ID </strong>: <span data-th-text="${flower.id}"></span> </li>
+    <li> <strong>Название </strong>: <span data-th-text="${flower.title}"></span> </li>
+    <li> <strong>Цена </strong>: <span data-th-text="${flower.price}"></span> </li>
+    <li> <strong>Наценка </strong>: <span data-th-text="${flower.extraCharge}"></span> </li>
+    <li> <strong>Учётное количестов </strong>: <span data-th-text="${flower.accountingQuantity}"></span> </li>
+    <li> <strong>Фактичесокое количество </strong>: <span data-th-text="${flower.actualQuantity}"></span> </li>
+</ul>
+
+
+</body>
+</html>

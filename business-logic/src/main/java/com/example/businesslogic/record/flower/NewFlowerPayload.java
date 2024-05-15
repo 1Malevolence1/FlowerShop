@@ -1,32 +1,30 @@
 package com.example.businesslogic.record.flower;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.Currency;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public record NewFlowerPayload(
 
-        @NotBlank(message = "Название не должно быть пустым")
+
+        @NotBlank
         String title,
 
-        @NotNull
-        Integer price,
+        @PositiveOrZero
+        int price,
 
-        @NotNull
-        Integer extraCharge,
-        @NotNull
-        Integer accountingQuantity,
+        @PositiveOrZero
+        int extraCharge,
 
-        @NotNull
-        Integer actualQuantity
+        @PositiveOrZero
+        int accountingQuantity,
+
+        @PositiveOrZero
+        int actualQuantity
 
 ) {
+
 
 }
 

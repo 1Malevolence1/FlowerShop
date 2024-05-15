@@ -63,6 +63,7 @@
                 <th>Наценка</th>
                 <th>Учётное количество</th>
                 <th>Фактическое количество</th>
+                <th>Подробная информация</th>
             </tr>
             <tr th:each="flower: ${flowers}">
                 <td th:text="${flower.title}">Цветок</td>
@@ -70,6 +71,8 @@
                 <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
                 <td th:text="${flower.accountingQuantity}">Учётное количество</td>
                 <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+                <td><a  data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}"
+                data-th-text="подробнее"></a></td>
             </tr>
         </table>
     </div>

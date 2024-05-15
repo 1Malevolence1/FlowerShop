@@ -4,6 +4,7 @@ package com.example.businesslogic.controler.flower;
 import com.example.businesslogic.models.Flower;
 import com.example.businesslogic.record.flower.UpdateFlowerPayload;
 import com.example.businesslogic.serivce.flower.FlowerService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("main/flowers/flower/{flowerId:\\d+}")
+@RequestMapping("main/flower/{flowerId:\\d+}")
 @Slf4j
 public class ManagerFlowerRestController {
     private final FlowerService flowerService;
@@ -33,6 +34,11 @@ public class ManagerFlowerRestController {
         return flowerService.findFlower(id).orElseThrow(() -> new NoSuchElementException("Цветок с id %d не найден".formatted(id)));
     }
 
+
+    @GetMapping()
+    public Flower getFlower(@ModelAttribute("flower") Flower flower){
+        return flower;
+    }
 
     @PatchMapping()
     public ResponseEntity<?> updateDateFlower(@PathVariable(name = "flowerId") Long id,

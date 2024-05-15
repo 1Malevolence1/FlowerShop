@@ -1,8 +1,8 @@
 package com.example.businesslogic.serivce.flower;
 
 
+import com.example.businesslogic.dto.NewFlowerDTO;
 import com.example.businesslogic.models.Flower;
-import com.example.businesslogic.record.flower.NewFlowerPayload;
 import com.example.businesslogic.record.flower.UpdateFlowerPayload;
 
 import java.util.List;
@@ -14,8 +14,7 @@ public interface FlowerServiceImpl {
 
     Optional<Flower> findFlower(Long id);
 
-    Flower createFlower(String title, Integer price, Integer extraCharge,
-                        Integer accountingQuantity, Integer actualQuantity);
+    Flower createFlower(NewFlowerDTO newFlowerDTO);
 
     void updateFlower(Long id, UpdateFlowerPayload payload);
 
