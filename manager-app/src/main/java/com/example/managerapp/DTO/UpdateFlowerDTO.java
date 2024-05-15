@@ -11,15 +11,15 @@ public class UpdateFlowerDTO {
     private String title;
 
 
-    private  int price = 0;
+    private  Integer price = 0;
 
-    private  int extraCharge = 0;
+    private  Integer extraCharge = 0;
 
-    private  int accountingQuantity = 0;
+    private  Integer accountingQuantity = 0;
 
-    private  int actualQuantity = 0;
+    private  Integer actualQuantity = 0;
 
-    public UpdateFlowerDTO(String title, int price, int extraCharge, int accountingQuantity, int actualQuantity) {
+    public UpdateFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
         this.title = title;
         this.price = price;
         this.extraCharge = extraCharge;

@@ -14,7 +14,7 @@ public class BadRequestException extends RuntimeException{
         this.errors = errors;
     }
 
-    public BadRequestException(String message, List<String> errors, String oneErrors) {
+    public BadRequestException(String message, List<String> errors) {
         super(message);
         this.errors = errors;
     }

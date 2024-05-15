@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
+import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
@@ -61,8 +62,9 @@ public class FlowerClientService implements FlowerClientServiceImpl {
             restClient.patch().uri("/main/flower/{flowerId}", id)
                     .contentType(MediaType.APPLICATION_JSON).body(payload)
                     .retrieve().toBodilessEntity();
-        } catch (HttpClientErrorException.BadRequest exception){
-            throw exception;
+        }  catch (HttpClientErrorException.BadRequest badRequestException) {
+            ProblemDetail problemDetail = badRequestException.getResponseBodyAs(ProblemDetail.class);
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
         }
     }
 

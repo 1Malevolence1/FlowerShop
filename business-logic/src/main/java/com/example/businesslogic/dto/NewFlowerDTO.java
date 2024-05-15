@@ -14,24 +14,26 @@ public class NewFlowerDTO {
       private String title;
 
       @PositiveOrZero(message = "цена должна быть больше или равно 0")
-      private  int price = 0;
+      private  Integer price;
       @PositiveOrZero(message = "наценка должна быть больше или равно 0")
-      private  int extraCharge = 0;
+      private  Integer extraCharge;
       @PositiveOrZero(message = "Учётное количество должно быть больше или равно 0")
-      private  int accountingQuantity = 0;
+      private  Integer accountingQuantity;
       @PositiveOrZero(message = "Фактиченское количество должно быть больше или равно 0")
-      private  int actualQuantity = 0;
+      private  Integer actualQuantity;
 
 
-    public NewFlowerDTO(String title, int price, int extraCharge, int accountingQuantity, int actualQuantity) {
+    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
         this.title = title;
-        this.price = price;
-        this.extraCharge = extraCharge;
-        this.accountingQuantity = accountingQuantity;
-        this.actualQuantity = actualQuantity;
+        this.price = checkObjectOnNullOtherwiseReturnZero(price);
+        this.extraCharge = checkObjectOnNullOtherwiseReturnZero(extraCharge);
+        this.accountingQuantity = checkObjectOnNullOtherwiseReturnZero(accountingQuantity);;
+        this.actualQuantity = checkObjectOnNullOtherwiseReturnZero(actualQuantity);
     }
 
-    public NewFlowerDTO() {
+    private Integer checkObjectOnNullOtherwiseReturnZero(Integer object){
+        if(object == null) return 0;
+        else return object;
     }
 }
 

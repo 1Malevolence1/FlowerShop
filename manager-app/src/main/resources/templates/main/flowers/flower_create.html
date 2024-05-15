@@ -16,11 +16,11 @@
 
 
     <form data-th-action="@{/main/flowers/create}"  method="post">
-        <input type="text" name="title"   placeholder="Название"/><br>
-        <input type="number" name="price"  placeholder="Цена" data-th-value="0"/><br>
-        <input type="number" name="extraCharge"  placeholder="Наценка" data-th-value="0"/><br>
-        <input type="number" name="accountingQuantity" placeholder="Учётное количество" data-th-value="0"/><br>
-        <input type="number" name="actualQuantity" placeholder="Фактическое количество" data-th-value="0"/><br>
+        <input type="text" name="title"   placeholder="Название" data-th-value="${payload?.title}"/><br>
+        <input type="number" name="price"  placeholder="Цена" data-th-value="${payload?.price}"/><br>
+        <input type="number" name="extraCharge"  placeholder="Наценка" data-th-value="${payload?.extraCharge}"/><br>
+        <input type="number" name="accountingQuantity" placeholder="Учётное количество" data-th-value="${payload?.accountingQuantity}"/><br>
+        <input type="number" name="actualQuantity" placeholder="Фактическое количество" data-th-value="${payload?.actualQuantity}"/><br>
         <input type="submit" value="Добавить цветок"/>
     </form>
 </div>

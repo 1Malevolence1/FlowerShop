@@ -2,8 +2,9 @@ package com.example.businesslogic.serivce.flower;
 
 
 import com.example.businesslogic.dto.NewFlowerDTO;
+import com.example.businesslogic.dto.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
-import com.example.businesslogic.record.flower.UpdateFlowerPayload;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public interface FlowerServiceImpl {
 
     Flower createFlower(NewFlowerDTO newFlowerDTO);
 
-    void updateFlower(Long id, UpdateFlowerPayload payload);
+    void updateFlower(Long id, UpdateFlowerDTO payload);
 
     void deleteFlower(Long id);
 

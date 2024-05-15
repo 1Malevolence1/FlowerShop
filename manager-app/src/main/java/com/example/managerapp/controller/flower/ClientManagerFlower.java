@@ -2,8 +2,8 @@ package com.example.managerapp.controller.flower;
 
 import com.example.managerapp.DTO.Flower;
 import com.example.managerapp.DTO.UpdateFlowerDTO;
+import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.FlowerClientService;
-import com.example.managerapp.exeption.BadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,18 +35,19 @@ public class ClientManagerFlower {
     }
 
     @PostMapping("update")
-    public String updateDataFlower(@ModelAttribute(name = "product", binding = false) Flower flower,
+    public String updateDataFlower(@ModelAttribute(name = "flower", binding = false) Flower flower,
                                    UpdateFlowerDTO updateFlowerDTO,
                                    Model model){
         try {
+
             flowerClientService.updateFlower(flower.id(),updateFlowerDTO);
             log.info("Обновлён цветок с айди {}", flower.id());
-            return "main/flower/%d/flower_info".formatted(flower.id());
+            return "redirect:/main/flower/%d/info".formatted(flower.id());
 
         } catch (BadRequestException badRequestException){
             model.addAttribute("payload", updateFlowerDTO);
             model.addAttribute("errors", badRequestException.getErrors());
-            return "redirect:/main/flower/flower_update";
+            return "main/flowers/flower_update";
         }
     }
 

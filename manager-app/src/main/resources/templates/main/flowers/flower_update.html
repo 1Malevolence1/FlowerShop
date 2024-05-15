@@ -15,12 +15,12 @@
     </ul>
 </div>
 
-    <form data-th-action="@{/main/flowers/create}"  method="post">
-        <input type="text" name="title"   placeholder="Название" data-th-value="${payload?.title}"/><br>
-        <input type="number" name="price"  placeholder="Цена" data-th-value="${payload?.price}"/><br>
-        <input type="number" name="extraCharge"  placeholder="Наценка" data-th-value="${payload?.extraCharge}"/><br>
-        <input type="number" name="accountingQuantity" placeholder="Учётное количество" data-th-value="${payload?.accountingQuantity}"/><br>
-        <input type="number" name="actualQuantity" placeholder="Фактическое количество" data-th-value="${payload?.actualQuantity}"/><br>
+    <form data-th-action="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}"  method="post">
+        <input type="text" name="title"   placeholder="Название" data-th-value="${flower.title}"/><br>
+        <input type="number" name="price"  placeholder="Цена" data-th-value="${flower.price}"/><br>
+        <input type="number" name="extraCharge"  placeholder="Наценка" data-th-value="${flower.extraCharge}"/><br>
+        <input type="number" name="accountingQuantity" placeholder="Учётное количество" data-th-value="${flower.accountingQuantity}"/><br>
+        <input type="number" name="actualQuantity" placeholder="Фактическое количество" data-th-value="${flower.actualQuantity}"/><br>
         <input type="submit" value="Обновить"/>
     </form>
 </div>

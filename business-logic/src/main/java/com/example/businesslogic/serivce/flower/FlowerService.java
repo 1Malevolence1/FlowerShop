@@ -1,8 +1,9 @@
 package com.example.businesslogic.serivce.flower;
 
 import com.example.businesslogic.dto.NewFlowerDTO;
+import com.example.businesslogic.dto.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
-import com.example.businesslogic.record.flower.UpdateFlowerPayload;
+
 import com.example.businesslogic.repository.FlowerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -56,14 +57,14 @@ public class FlowerService implements FlowerServiceImpl {
     // возможно нужно тоже сделать sql исключения
     @Override
     @Transactional
-    public void updateFlower(Long id, UpdateFlowerPayload payload) {
+    public void updateFlower(Long id, UpdateFlowerDTO payload) {
         flowerRepository.findById(id).ifPresentOrElse(
                 newDataForflower -> {
-                    newDataForflower.setTitle(payload.title());
-                    newDataForflower.setPrice(payload.price());
-                    newDataForflower.setAccountingQuantity(payload.accountingQuantity());
-                    newDataForflower.setActualQuantity(payload.actualQuantity());
-                    newDataForflower.setExtraCharge(payload.extraCharge());
+                    newDataForflower.setTitle(payload.getTitle());
+                    newDataForflower.setPrice(payload.getPrice());
+                    newDataForflower.setAccountingQuantity(payload.getAccountingQuantity());
+                    newDataForflower.setActualQuantity(payload.getActualQuantity());
+                    newDataForflower.setExtraCharge(payload.getExtraCharge());
                 }, () -> {
                     throw new NoSuchElementException();
                 }

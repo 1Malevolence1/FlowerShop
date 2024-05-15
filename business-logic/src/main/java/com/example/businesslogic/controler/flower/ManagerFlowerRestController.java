@@ -1,12 +1,13 @@
 package com.example.businesslogic.controler.flower;
 
 
+import com.example.businesslogic.dto.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
-import com.example.businesslogic.record.flower.UpdateFlowerPayload;
+
 import com.example.businesslogic.serivce.flower.FlowerService;
 import jakarta.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -42,7 +43,7 @@ public class ManagerFlowerRestController {
 
     @PatchMapping()
     public ResponseEntity<?> updateDateFlower(@PathVariable(name = "flowerId") Long id,
-                                              @Valid @RequestBody UpdateFlowerPayload payload,
+                                              @Valid @RequestBody UpdateFlowerDTO payload,
                                               BindingResult bindingResult) throws BindException {
 
         if(bindingResult.hasErrors()){
