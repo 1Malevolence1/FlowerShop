@@ -9,11 +9,12 @@ import java.util.List;
 public class BadRequestException extends RuntimeException{
     private final List<String> errors;
 
+
     public BadRequestException(List<String> errors) {
         this.errors = errors;
     }
 
-    public BadRequestException(String message, List<String> errors) {
+    public BadRequestException(String message, List<String> errors, String oneErrors) {
         super(message);
         this.errors = errors;
     }

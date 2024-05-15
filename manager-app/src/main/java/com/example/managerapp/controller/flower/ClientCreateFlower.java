@@ -3,7 +3,7 @@ package com.example.managerapp.controller.flower;
 import com.example.managerapp.DTO.NewFlowerDTO;
 import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.FlowerClientService;
-import com.example.managerapp.record.flower.Flower;
+import com.example.managerapp.DTO.Flower;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +37,7 @@ public class ClientCreateFlower {
           Flower newFlower = flowerClientService.createFlower(payload);
             log.info("Добавлен новый цветок: {}", payload);
             return "redirect:/main/flower/%d/info".formatted(newFlower.id());
+
         } catch (BadRequestException exception){
                 model.addAttribute("payload", payload);
                 model.addAttribute("errors", exception.getErrors());

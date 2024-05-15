@@ -3,8 +3,7 @@ package com.example.managerapp.client;
 
 import com.example.managerapp.DTO.NewFlowerDTO;
 import com.example.managerapp.DTO.UpdateFlowerDTO;
-import com.example.managerapp.record.flower.Flower;
-import com.example.managerapp.record.flower.UpdateFlowerPayload;
+import com.example.managerapp.DTO.Flower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -63,6 +62,10 @@ public class FlowerClientService implements FlowerClientServiceImpl {
 
     @Override
     public void deleteFlower(Long id) {
-
+            try {
+                restClient.delete().uri("/main/flower/{flowerId}", id).retrieve().toBodilessEntity();
+            } catch (HttpClientErrorException.NotFound exception){
+                throw exception;
+            }
     }
 }

@@ -3,17 +3,13 @@ package com.example.managerapp.controller.flower;
 import com.example.managerapp.DTO.UpdateFlowerDTO;
 import com.example.managerapp.client.FlowerClientService;
 import com.example.managerapp.exeption.BadRequestException;
-import com.example.managerapp.record.flower.Flower;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("main/flower/{flowerId:\\d+}")
@@ -42,5 +38,12 @@ public class ClientManagerFlower {
             model.addAttribute("errors", badRequestException.getErrors());
             return "redirect:/main/flower/flower_update";
         }
+    }
+
+
+    @PostMapping("delete")
+    public String deleteFlower(@PathVariable("flowerId") Long id){
+        flowerClientService.deleteFlower(id);
+        return "redirect:/main/flowers/list";
     }
 }
