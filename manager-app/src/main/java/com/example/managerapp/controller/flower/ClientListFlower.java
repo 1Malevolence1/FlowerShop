@@ -20,8 +20,8 @@ public class ClientListFlower {
 
 
     @GetMapping()
-    public String pageListFlowers(Model model){
-        model.addAttribute("templates/main/flowers", flowerClientService.allFlowers());
+    public String getPageListFlowers(Model model){
+        model.addAttribute("flowers", flowerClientService.allFlowers());
         return "main/flowers/flowers_list";
     }
 }

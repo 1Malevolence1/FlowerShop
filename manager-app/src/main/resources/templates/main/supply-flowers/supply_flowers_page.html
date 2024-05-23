@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список цветов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        .add-button {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .add-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Список цветов</h1>
+        <table>
+            <tr>
+                <th>Название цветка</th>
+                <th>Учётное количество</th>
+                <th>Фактическое количество</th>
+                <th>Добавить</th>
+
+            </tr>
+            <tr th:each="flower: ${flowers}">
+                <td th:text="${flower.title}">Цветок</td>
+                <td th:text="${flower.accountingQuantity}">Учётное количество</td>
+                <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+                <td>
+                    <form th:action="@{/main/supply-flowers/sum}" method="post">
+                        <input type="hidden" name="flowerId" th:value="${flower.id}" />
+                        <input type="number" name="addedQuantity" min="0" />
+                        <button type="submit" class="add-button">Добавить</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+</div>
+
+</body>
+</html>

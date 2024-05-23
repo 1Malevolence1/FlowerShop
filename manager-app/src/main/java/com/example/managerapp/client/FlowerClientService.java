@@ -4,11 +4,11 @@ package com.example.managerapp.client;
 import com.example.managerapp.DTO.NewFlowerDTO;
 import com.example.managerapp.DTO.UpdateFlowerDTO;
 import com.example.managerapp.DTO.Flower;
+import com.example.managerapp.DTO.supply_flower.AddFlowerSupplyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
-import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
@@ -75,5 +75,18 @@ public class FlowerClientService implements FlowerClientServiceImpl {
             } catch (HttpClientErrorException.NotFound exception){
                 throw exception;
             }
+    }
+
+
+    public void sumFlowerSupply(Long id, Integer addedQuantity){
+            restClient.patch().uri("/main/supply_flower/sum").
+                    contentType(MediaType.APPLICATION_JSON).
+                    body(new AddFlowerSupplyDTO(id, addedQuantity)).retrieve().toBodilessEntity();
+    }
+
+    public void deductFlowerSupply(Long id, Integer addedQuantity){
+        restClient.patch().uri("/main/supply_flower/deduct").
+                contentType(MediaType.APPLICATION_JSON).
+                body(new AddFlowerSupplyDTO(id, addedQuantity)).retrieve().toBodilessEntity();
     }
 }
