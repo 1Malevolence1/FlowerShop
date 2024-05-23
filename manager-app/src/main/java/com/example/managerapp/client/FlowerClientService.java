@@ -78,15 +78,5 @@ public class FlowerClientService implements FlowerClientServiceImpl {
     }
 
 
-    public void sumFlowerSupply(Long id, Integer addedQuantity){
-            restClient.patch().uri("/main/supply_flower/sum").
-                    contentType(MediaType.APPLICATION_JSON).
-                    body(new AddFlowerSupplyDTO(id, addedQuantity)).retrieve().toBodilessEntity();
-    }
 
-    public void deductFlowerSupply(Long id, Integer addedQuantity){
-        restClient.patch().uri("/main/supply_flower/deduct").
-                contentType(MediaType.APPLICATION_JSON).
-                body(new AddFlowerSupplyDTO(id, addedQuantity)).retrieve().toBodilessEntity();
-    }
 }

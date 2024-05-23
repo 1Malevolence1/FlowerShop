@@ -2,6 +2,7 @@ package com.example.managerapp.controller.supply_flower;
 
 import com.example.managerapp.DTO.supply_flower.AddFlowerSupplyDTO;
 import com.example.managerapp.client.FlowerClientService;
+import com.example.managerapp.client.SupplyFlowerRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,13 @@ import java.util.Map;
 public class SupplyFlowerController {
 
     private final FlowerClientService flowerClientService;
+    private final SupplyFlowerRestClient supplyFlowerRestClient;
 
     @Autowired
-    public SupplyFlowerController(FlowerClientService flowerClientService) {
+    public SupplyFlowerController(FlowerClientService flowerClientService, SupplyFlowerRestClient supplyFlowerRestClient) {
         this.flowerClientService = flowerClientService;
+        this.supplyFlowerRestClient = supplyFlowerRestClient;
     }
-
-
 
     @GetMapping()
     public String getSupplyFlowerPage(Model model){
@@ -36,10 +37,19 @@ public class SupplyFlowerController {
 
 
     @PostMapping("sum")
-    public String addFlowerSupply(@RequestParam("flowerId") Long id, @RequestParam("addedQuantity") Integer addedQuantity){
+    public String sumFlowerSupply(@RequestParam("flowerId") Long id, @RequestParam("addedQuantity") Integer addedQuantity){
             log.info("Метод по добавлению начался");
-            flowerClientService.sumFlowerSupply(id, addedQuantity);
+            supplyFlowerRestClient.sumFlowerSupply(id, addedQuantity);
             log.info("Изменения в id: {}, изменилось на {}", id, addedQuantity);
             return "redirect:/main/supply-flowers";
         }
+
+
+    @PostMapping("deduct")
+    public String deductFlowerSupply(@RequestParam("flowerId") Long id, @RequestParam("addedQuantity") Integer addedQuantity){
+        log.info("Метод по отниманию начался");
+        supplyFlowerRestClient.deductFlowerSupply(id, addedQuantity);
+        log.info("Изменения в id: {}, изменилось на {}", id, addedQuantity);
+        return "redirect:/main/supply-flowers";
+    }
     }

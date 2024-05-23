@@ -29,10 +29,10 @@ public class SupplyFlowerRestController {
     }
 
 
-/*    @PatchMapping("deduct")
+    @PatchMapping("deduct")
     public ResponseEntity<Void> deductFlowerSupply(@RequestBody AddFlowerSupplyDTO dto){
         log.info("Начался метод по отниманию цветов");
-        supplyFlowerService.sumFlower(dto);
+        supplyFlowerService.deductFlower(dto);
         return ResponseEntity.noContent().build();
-    }*/
+    }
 }

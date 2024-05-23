@@ -1,6 +1,7 @@
 package com.example.managerapp.config;
 
 import com.example.managerapp.client.FlowerClientService;
+import com.example.managerapp.client.SupplyFlowerRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,5 +17,12 @@ public class RestConfigClient {
     public FlowerClientService flowerClientService(@Value("${api.path}") String uri) {
         log.info("URI сервера: {}", uri);
         return new FlowerClientService(RestClient.builder().baseUrl(uri).build());
+    }
+
+
+    @Bean
+    public SupplyFlowerRestClient supplyFlowerRestClient(@Value("${api.path}") String uri) {
+        log.info("URI сервера: {}", uri);
+        return new SupplyFlowerRestClient(RestClient.builder().baseUrl(uri).build());
     }
 }
