@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,5 +36,9 @@ public class TypeFlowerClientService {
     public void crateType(NewTypeFlowerDTO dto){
         log.info("отправили запрос на создания типа");
         restClient.post().uri("/main/type_flower/create").contentType(MediaType.APPLICATION_JSON).body(dto).retrieve().toBodilessEntity();
+    }
+
+    public List<TypeFlower> showTypeFlower(){
+       return allTypeFlower();
     }
 }

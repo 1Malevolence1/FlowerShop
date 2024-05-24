@@ -1,5 +1,6 @@
 package com.example.managerapp.controller.flower.individual_flower;
 
+import com.example.managerapp.client.flower.type_flower.TypeFlowerClientService;
 import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
 import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
@@ -19,24 +20,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ClientCreateFlower {
 
     private final FlowerClientService flowerClientService;
-    
+    private final TypeFlowerClientService typeFlowerClientService;
 
     @Autowired
-    public ClientCreateFlower(FlowerClientService flowerClientService) {
+    public ClientCreateFlower(FlowerClientService flowerClientService, TypeFlowerClientService typeFlowerClientService) {
         this.flowerClientService = flowerClientService;
+        this.typeFlowerClientService = typeFlowerClientService;
     }
 
-
-
     @GetMapping()
-    public String getPageCrateFlower(){
+    public String getPageCrateFlower(Model model){
+        model.addAttribute("typeFlowers", typeFlowerClientService.showTypeFlower());
         return "main/flowers/flower_create";
     }
     @PostMapping()
     public String createFlower(NewFlowerDTO payload, Model model){
         try {
-
-
 
           Flower newFlower = flowerClientService.createFlower(payload);
             log.info("Добавлен новый цветок: {}", payload);

@@ -128,11 +128,12 @@
 
             <div class="input-container">
                 <label for="type" class="input-label">Тип:</label>
-                <input type="text" id="type" name="type" list="typeOptions"/>
-                <datalist id="typeOptions">
+                <select id="type" name="type">
+                    <option value="">Выберите тип</option>
                     <option data-th-each="typeFlower: ${typeFlowers}"
-                            data-th-value="${typeFlower.typeName}"></option>
-                </datalist>
+                            data-th-value="${typeFlower.typeName}"
+                            data-th-text="${typeFlower.typeName}"></option>
+                </select>
             </div>
 
             <div class="input-container">
