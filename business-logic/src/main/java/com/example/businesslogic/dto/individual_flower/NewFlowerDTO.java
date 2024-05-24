@@ -22,13 +22,19 @@ public class NewFlowerDTO {
       @PositiveOrZero(message = "Фактиченское количество должно быть больше или равно 0")
       private  Integer actualQuantity;
 
+    @NotBlank(message = """ 
+            поле "Тип" не может быть пустым
+            """)
+      private String type;
 
-    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
+
+    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity, String type) {
         this.title = title;
         this.price = checkObjectOnNullOtherwiseReturnZero(price);
         this.extraCharge = checkObjectOnNullOtherwiseReturnZero(extraCharge);
         this.accountingQuantity = checkObjectOnNullOtherwiseReturnZero(accountingQuantity);;
         this.actualQuantity = checkObjectOnNullOtherwiseReturnZero(actualQuantity);
+        this.type = type;
     }
 
     private Integer checkObjectOnNullOtherwiseReturnZero(Integer object){

@@ -19,6 +19,8 @@ public class NewFlowerDTO {
 
     private  Integer actualQuantity = 0;
 
+    private String type;
+
 
     public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
         this.title = title;

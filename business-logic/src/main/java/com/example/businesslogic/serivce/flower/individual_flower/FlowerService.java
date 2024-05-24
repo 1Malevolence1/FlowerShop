@@ -5,6 +5,7 @@ import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
 
 import com.example.businesslogic.repository.FlowerRepository;
+import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,12 @@ public class FlowerService implements FlowerServiceImpl {
 
     private final FlowerRepository flowerRepository;
 
+    private final TypeFlowerService typeFlowerService;
+
     @Autowired
-    public FlowerService(FlowerRepository flowerRepository) {
+    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService) {
         this.flowerRepository = flowerRepository;
+        this.typeFlowerService = typeFlowerService;
     }
 
     @Override
@@ -38,12 +42,9 @@ public class FlowerService implements FlowerServiceImpl {
         return flowerRepository.findById(id);
     }
 
-    @Override
-    public Flower createFlower(NewFlowerDTO newFlowerDTO) {
-        return null;
-    }
 
-/*    @Override
+
+    @Override
     @Transactional
     public Flower createFlower(NewFlowerDTO payload) {
         try {
@@ -53,11 +54,12 @@ public class FlowerService implements FlowerServiceImpl {
                     payload.getPrice(),
                     payload.getExtraCharge(),
                     payload.getAccountingQuantity(),
-                    payload.getActualQuantity()));
+                    payload.getActualQuantity(),
+                    typeFlowerService.findType(payload.getType())));
         } catch (DataIntegrityViolationException exception){
             throw exception;
         }
-    }*/
+    }
 
     // возможно нужно тоже сделать sql исключения
     @Override
@@ -81,5 +83,7 @@ public class FlowerService implements FlowerServiceImpl {
     public void deleteFlower(Long id) {
         flowerRepository.deleteById(id);
     }
+
+
 
 }

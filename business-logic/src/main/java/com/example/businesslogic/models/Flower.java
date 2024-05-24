@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -38,11 +39,12 @@ public class Flower {
     private Integer actualQuantity;
 
 
-    @ManyToOne
+    @ManyToOne()
     @JoinTable(
             schema = "manager", name = "flower_type_relation",
             joinColumns = @JoinColumn(name = "flower_id"),
             inverseJoinColumns = @JoinColumn(name = "type_flower_id")
     )
+    @ToString.Exclude
     private TypeFlower typeFlower;
 }

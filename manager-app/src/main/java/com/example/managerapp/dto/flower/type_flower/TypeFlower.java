@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TypeFlower {
     private Long id;
-    private String type;
+    private String typeName;
     private String description;
 }

@@ -86,16 +86,21 @@
             <th>Тип</th>
         </tr>
         <tr th:each="flower: ${type_flowers}">
-            <td th:text="${flower.id}">Цветок</td>
-            <td th:text="${flower.type}">Цветок</td>
+            <td th:text="${flower.id}">ID</td>
+            <td th:text="${flower.type}">Тип</td>
 
         </tr>
     </table>
 
-    <a data-th-href="@{/main/flowers/create}" class="add-button">
+    <a data-th-href="@{/main/type_flower/create}" class="add-button">
         <i class="fas fa-plus"></i> Добавить тип
     </a>
 
+    <form method="get">
+        <a data-th-href="@{/main/flowers/list}">
+            <button class="back-button" type="button">Назад</button>
+        </a>
+    </form>
 </div>
 
 </body>

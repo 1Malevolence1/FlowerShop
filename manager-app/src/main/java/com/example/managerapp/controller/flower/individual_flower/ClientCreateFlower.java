@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ClientCreateFlower {
 
     private final FlowerClientService flowerClientService;
+    
 
     @Autowired
     public ClientCreateFlower(FlowerClientService flowerClientService) {
@@ -34,6 +35,9 @@ public class ClientCreateFlower {
     @PostMapping()
     public String createFlower(NewFlowerDTO payload, Model model){
         try {
+
+
+
           Flower newFlower = flowerClientService.createFlower(payload);
             log.info("Добавлен новый цветок: {}", payload);
             return "redirect:/main/flower/%d/info".formatted(newFlower.id());

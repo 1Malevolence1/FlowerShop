@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
@@ -39,4 +40,8 @@ public class TypeFlowerService {
         }
     }
 
+    public TypeFlower findType(String title){
+        log.info(title);
+        return typeFlowerRepository.findByTypeName(title).orElseThrow(() -> new NoSuchElementException());
+    }
 }
