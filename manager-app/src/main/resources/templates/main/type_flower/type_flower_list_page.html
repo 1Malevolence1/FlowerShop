@@ -74,48 +74,28 @@
 <body>
 
 <div class="container">
-    <h1>Список цветов</h1>
+    <h1>Список Типов цветка</h1>
 
-    <div th:if="${flowers.isEmpty()}">
-        <p>Цветов нет.</p>
+    <div th:if="${type_flowers.isEmpty()}">
+        <p>Типов нет</p>
     </div>
 
     <table>
         <tr>
-            <th>Название цветка</th>
-            <th>Цена</th>
-            <th>Наценка</th>
-            <th>Учётное количество</th>
-            <th>Фактическое количество</th>
-            <th>Подробная информация</th>
+            <th>ID</th>
+            <th>Тип</th>
         </tr>
-        <tr th:each="flower: ${flowers}">
-            <td th:text="${flower.title}">Цветок</td>
-            <td th:text="${flower.price + ' руб.'}">Цена</td>
-            <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
-            <td th:text="${flower.accountingQuantity}">Учётное количество</td>
-            <td th:text="${flower.actualQuantity}">Фактическое количество</td>
-            <td><a data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}" class="info-link">Подробнее</a></td>
+        <tr th:each="flower: ${type_flowers}">
+            <td th:text="${flower.id}">Цветок</td>
+            <td th:text="${flower.type}">Цветок</td>
+
         </tr>
     </table>
 
     <a data-th-href="@{/main/flowers/create}" class="add-button">
-        <i class="fas fa-plus"></i> Добавить Цветок
+        <i class="fas fa-plus"></i> Добавить тип
     </a>
 
-    <a data-th-href="@{/main/supply-flowers/sum}" class="add-button">
-        <i class="fas fa-plus"></i> Поставка
-    </a>
-
-
-    <a data-th-href="@{/main/supply-flowers/deduct}" class="add-button">
-        <i class="fas fa-plus"></i> Отнять
-    </a>
-
-
-    <a data-th-href="@{/main/type_flower/list}" class="add-button">
-        <i class="fas fa-plus"></i> Список типов
-    </a>
 </div>
 
 </body>
