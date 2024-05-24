@@ -1,4 +1,4 @@
-package com.example.businesslogic.dto;
+package com.example.businesslogic.dto.individual_flower;
 
 
 import jakarta.validation.constraints.NotBlank;

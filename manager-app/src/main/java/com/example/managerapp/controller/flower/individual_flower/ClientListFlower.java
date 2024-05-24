@@ -1,6 +1,6 @@
-package com.example.managerapp.controller.flower;
+package com.example.managerapp.controller.flower.individual_flower;
 
-import com.example.managerapp.client.FlowerClientService;
+import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,8 +1,8 @@
-package com.example.managerapp.controller.flower;
+package com.example.managerapp.controller.flower.individual_flower;
 
 
-import com.example.managerapp.client.FlowerClientService;
-import com.example.managerapp.DTO.Flower;
+import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
+import com.example.managerapp.dto.flower.individual_flower.Flower;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

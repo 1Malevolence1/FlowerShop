@@ -1,10 +1,11 @@
-package com.example.managerapp.client;
+package com.example.managerapp.client.flower.individual_flower;
 
 
-import com.example.managerapp.DTO.NewFlowerDTO;
-import com.example.managerapp.DTO.UpdateFlowerDTO;
-import com.example.managerapp.DTO.Flower;
-import com.example.managerapp.DTO.supply_flower.AddFlowerSupplyDTO;
+import com.example.managerapp.client.BadRequestException;
+import com.example.managerapp.client.FlowerClientServiceImpl;
+import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
+import com.example.managerapp.dto.flower.individual_flower.UpdateFlowerDTO;
+import com.example.managerapp.dto.flower.individual_flower.Flower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;

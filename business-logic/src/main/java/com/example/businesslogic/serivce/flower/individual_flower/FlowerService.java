@@ -1,7 +1,7 @@
-package com.example.businesslogic.serivce.flower;
+package com.example.businesslogic.serivce.flower.individual_flower;
 
-import com.example.businesslogic.dto.NewFlowerDTO;
-import com.example.businesslogic.dto.UpdateFlowerDTO;
+import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
+import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
 
 import com.example.businesslogic.repository.FlowerRepository;
@@ -39,6 +39,11 @@ public class FlowerService implements FlowerServiceImpl {
     }
 
     @Override
+    public Flower createFlower(NewFlowerDTO newFlowerDTO) {
+        return null;
+    }
+
+/*    @Override
     @Transactional
     public Flower createFlower(NewFlowerDTO payload) {
         try {
@@ -52,7 +57,7 @@ public class FlowerService implements FlowerServiceImpl {
         } catch (DataIntegrityViolationException exception){
             throw exception;
         }
-    }
+    }*/
 
     // возможно нужно тоже сделать sql исключения
     @Override

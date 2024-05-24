@@ -1,8 +1,8 @@
-package com.example.businesslogic.serivce.flower;
+package com.example.businesslogic.serivce.flower.individual_flower;
 
 
-import com.example.businesslogic.dto.NewFlowerDTO;
-import com.example.businesslogic.dto.UpdateFlowerDTO;
+import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
+import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.Flower;
 
 

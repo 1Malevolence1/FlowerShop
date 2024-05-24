@@ -1,9 +1,9 @@
-package com.example.businesslogic.controler.flower;
+package com.example.businesslogic.controler.flower.individual_flower;
 
 
-import com.example.businesslogic.dto.NewFlowerDTO;
+import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.models.Flower;
-import com.example.businesslogic.serivce.flower.FlowerService;
+import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;

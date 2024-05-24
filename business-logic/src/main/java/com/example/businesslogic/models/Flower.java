@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(schema = "manager", name = "flowers")
 @Data
@@ -14,6 +16,7 @@ public class Flower {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "flower_id")
     private Long id;
 
 
@@ -35,4 +38,11 @@ public class Flower {
     private Integer actualQuantity;
 
 
+    @ManyToOne
+    @JoinTable(
+            schema = "manager", name = "flower_type_relation",
+            joinColumns = @JoinColumn(name = "flower_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_flower_id")
+    )
+    private TypeFlower typeFlower;
 }

@@ -1,4 +1,4 @@
-package com.example.managerapp.DTO;
+package com.example.managerapp.dto.flower.individual_flower;
 
 public record Flower(
         Long id,

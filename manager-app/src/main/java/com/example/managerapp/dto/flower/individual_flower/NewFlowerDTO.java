@@ -1,12 +1,12 @@
-package com.example.managerapp.DTO;
+package com.example.managerapp.dto.flower.individual_flower;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class UpdateFlowerDTO {
+
+@Data
+public class NewFlowerDTO {
+
 
     private String title;
 
@@ -19,7 +19,8 @@ public class UpdateFlowerDTO {
 
     private  Integer actualQuantity = 0;
 
-    public UpdateFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
+
+    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
         this.title = title;
         this.price = price;
         this.extraCharge = extraCharge;
@@ -27,6 +28,8 @@ public class UpdateFlowerDTO {
         this.actualQuantity = actualQuantity;
     }
 
-    public UpdateFlowerDTO() {
+    public NewFlowerDTO() {
     }
+
 }
+

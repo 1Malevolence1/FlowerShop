@@ -1,4 +1,4 @@
-package com.example.managerapp.DTO.supply_flower;
+package com.example.managerapp.dto.flower.supply_flower;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.example.managerapp.client;
+package com.example.managerapp.client.flower.supply_flower;
 
-import com.example.managerapp.DTO.supply_flower.AddFlowerSupplyDTO;
+import com.example.managerapp.dto.flower.supply_flower.AddFlowerSupplyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;

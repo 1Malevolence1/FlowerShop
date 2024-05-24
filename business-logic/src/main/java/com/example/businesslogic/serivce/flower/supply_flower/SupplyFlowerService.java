@@ -2,7 +2,7 @@ package com.example.businesslogic.serivce.flower.supply_flower;
 
 
 import com.example.businesslogic.dto.supply_flower.AddFlowerSupplyDTO;
-import com.example.businesslogic.serivce.flower.FlowerService;
+import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
