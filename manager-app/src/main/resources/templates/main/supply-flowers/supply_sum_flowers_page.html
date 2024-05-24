@@ -75,43 +75,34 @@
 
 <div class="container">
     <h1>Список цветов</h1>
+        <table>
+            <tr>
+                <th>Название цветка</th>
+                <th>Учётное количество</th>
+                <th>Фактическое количество</th>
+                <th>Добавить</th>
 
-    <div th:if="${flowers.isEmpty()}">
-        <p>Цветов нет.</p>
-    </div>
-
-    <table>
-        <tr>
-            <th>Название цветка</th>
-            <th>Цена</th>
-            <th>Наценка</th>
-            <th>Учётное количество</th>
-            <th>Фактическое количество</th>
-            <th>Подробная информация</th>
-        </tr>
-        <tr th:each="flower: ${flowers}">
-            <td th:text="${flower.title}">Цветок</td>
-            <td th:text="${flower.price + ' руб.'}">Цена</td>
-            <td th:text="${flower.extraCharge + ' руб.'}">Наценка</td>
-            <td th:text="${flower.accountingQuantity}">Учётное количество</td>
-            <td th:text="${flower.actualQuantity}">Фактическое количество</td>
-            <td><a data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}" class="info-link">Подробнее</a></td>
-        </tr>
-    </table>
-
-    <a data-th-href="@{/main/flowers/create}" class="add-button">
-        <i class="fas fa-plus"></i> Добавить Цветок
-    </a>
-
-    <a data-th-href="@{/main/supply-flowers/sum}" class="add-button">
-        <i class="fas fa-plus"></i> Поставка
-    </a>
-
-
-    <a data-th-href="@{/main/supply-flowers/deduct}" class="add-button">
-        <i class="fas fa-plus"></i> Отнять
-    </a>
+            </tr>
+            <tr th:each="flower: ${flowers}">
+                <td th:text="${flower.title}">Цветок</td>
+                <td th:text="${flower.accountingQuantity}">Учётное количество</td>
+                <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+                <td>
+                    <form th:action="@{/main/supply-flowers/sum}" method="post">
+                        <input type="hidden" name="flowerId" th:value="${flower.id}" />
+                        <input type="number" name="addedQuantity" min="0" />
+                        <button type="submit" class="add-button">Добавить</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
 </div>
+
+<form method="get">
+    <a data-th-href="@{/main/flowers/list}">
+        <button class="back-button" type="button">Назад</button>
+    </a>
+</form>
 
 </body>
 </html>

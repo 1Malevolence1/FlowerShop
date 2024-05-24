@@ -80,7 +80,7 @@
                 <th>Название цветка</th>
                 <th>Учётное количество</th>
                 <th>Фактическое количество</th>
-                <th>Добавить</th>
+                <th>Отнять</th>
 
             </tr>
             <tr th:each="flower: ${flowers}">
@@ -88,15 +88,20 @@
                 <td th:text="${flower.accountingQuantity}">Учётное количество</td>
                 <td th:text="${flower.actualQuantity}">Фактическое количество</td>
                 <td>
-                    <form th:action="@{/main/supply-flowers/sum}" method="post">
+                    <form th:action="@{/main/supply-flowers/deduct}" method="post">
                         <input type="hidden" name="flowerId" th:value="${flower.id}" />
                         <input type="number" name="addedQuantity" min="0" />
-                        <button type="submit" class="add-button">Добавить</button>
+                        <button type="submit" class="add-button">Отнять</button>
                     </form>
                 </td>
             </tr>
         </table>
 </div>
 
+<form method="get">
+    <a data-th-href="@{/main/flowers/list}">
+        <button class="back-button" type="button">Назад</button>
+    </a>
+</form>
 </body>
 </html>

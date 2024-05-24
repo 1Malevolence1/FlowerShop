@@ -29,10 +29,16 @@ public class SupplyFlowerController {
         this.supplyFlowerRestClient = supplyFlowerRestClient;
     }
 
-    @GetMapping()
-    public String getSupplyFlowerPage(Model model){
+    @GetMapping("sum")
+    public String getSumSupplyFlowerPage(Model model){
         model.addAttribute("flowers", flowerClientService.allFlowers());
-        return "main/supply-flowers/supply_flowers_page";
+        return "main/supply-flowers/supply_sum_flowers_page";
+    }
+
+    @GetMapping("deduct")
+    public String getDeductSupplyFlowerPage(Model model){
+        model.addAttribute("flowers", flowerClientService.allFlowers());
+        return "main/supply-flowers/supply_deduct_flowers_page";
     }
 
 
@@ -41,7 +47,7 @@ public class SupplyFlowerController {
             log.info("Метод по добавлению начался");
             supplyFlowerRestClient.sumFlowerSupply(id, addedQuantity);
             log.info("Изменения в id: {}, изменилось на {}", id, addedQuantity);
-            return "redirect:/main/supply-flowers";
+            return "redirect:/main/supply-flowers/sum";
         }
 
 
@@ -50,6 +56,6 @@ public class SupplyFlowerController {
         log.info("Метод по отниманию начался");
         supplyFlowerRestClient.deductFlowerSupply(id, addedQuantity);
         log.info("Изменения в id: {}, изменилось на {}", id, addedQuantity);
-        return "redirect:/main/supply-flowers";
+        return "redirect:/main/supply-flowers/deduct";
     }
     }
