@@ -41,4 +41,8 @@ public class TypeFlowerClientService {
     public List<TypeFlower> showTypeFlower(){
        return allTypeFlower();
     }
+
+    public void deleteType(Long id){
+        restClient.delete().uri("/main/type_flower/delete/%d".formatted(id)).retrieve().toBodilessEntity();
+    }
 }

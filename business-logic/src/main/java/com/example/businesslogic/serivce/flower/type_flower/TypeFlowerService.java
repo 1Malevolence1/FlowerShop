@@ -40,6 +40,12 @@ public class TypeFlowerService {
         }
     }
 
+
+    @Transactional
+    public void  deleteType(Long id){
+        typeFlowerRepository.deleteById(id);
+    }
+
     public TypeFlower findType(String title){
         log.info(title);
         return typeFlowerRepository.findByTypeName(title).orElseThrow(() -> new NoSuchElementException());

@@ -84,11 +84,17 @@
         <tr>
             <th>ID</th>
             <th>Тип</th>
+            <th>Удалить</th>
         </tr>
         <tr th:each="flower: ${type_flowers}">
             <td th:text="${flower.id}">ID</td>
             <td th:text="${flower.typeName}">Тип</td>
-
+            <td>
+                <form data-th-action="@{/main/type_flower/list/delete}" method="post">
+                    <input type="hidden" name="typeId" th:value="${flower.id}" />
+                    <button type="submit" class="add-button">удалить</button>
+                </form>
+            </td>
         </tr>
     </table>
 

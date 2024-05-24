@@ -18,18 +18,18 @@ import java.util.List;
 @Slf4j
 public class TypeFlowerController {
 
-    private final TypeFlowerService flowerService;
+    private final TypeFlowerService typeFlowerService;
 
     @Autowired
-    public TypeFlowerController(TypeFlowerService flowerService) {
-        this.flowerService = flowerService;
+    public TypeFlowerController(TypeFlowerService typeFlowerService) {
+        this.typeFlowerService = typeFlowerService;
     }
 
 
     @GetMapping("list")
     public List<TypeFlower> getAllTypeFlower(){
         log.info("метод начался");
-        return flowerService.getAllTypeFlowerBaseDate();
+        return typeFlowerService.getAllTypeFlowerBaseDate();
     }
 
     @PostMapping("create")
@@ -42,12 +42,15 @@ public class TypeFlowerController {
                 throw  new BindException(bindingResult);
             }
         }
-        flowerService.saveBaseDateTypeFlower(dto);
+        typeFlowerService.saveBaseDateTypeFlower(dto);
         log.info("Всё прошло успешно");
         log.info("Загрузили {}", dto);
         return ResponseEntity.noContent().build();
     }
 
-
-
+    @DeleteMapping("delete/{typeId}")
+    public ResponseEntity<Void> deleteTypeFlower(@PathVariable ("typeId") Long id){
+        typeFlowerService.deleteType(id);
+        return ResponseEntity.noContent().build();
+    }
 }
