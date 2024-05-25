@@ -1,9 +1,9 @@
-package com.example.businesslogic.serivce.flower.individual_flower;
+package com.example.businesslogic.repository;
 
 
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
-import com.example.businesslogic.models.Flower;
+import com.example.businesslogic.models.flower.Flower;
 
 
 import java.util.List;

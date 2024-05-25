@@ -1,12 +1,11 @@
-package com.example.businesslogic.models;
+package com.example.businesslogic.models.flower;
 
+import com.example.businesslogic.models.flower.inventory.Inventory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.List;
 
 @Entity
 @Table(schema = "manager", name = "flowers")
@@ -31,12 +30,9 @@ public class Flower {
     private Integer extraCharge;
 
 
-
-    @Column(name = "accountingQuantity")
-    private Integer accountingQuantity;
-
-    @Column(name = "actualQuantity")
-    private Integer actualQuantity;
+    @OneToOne(mappedBy = "flower", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Inventory inventory;
 
 
     @ManyToOne()
@@ -47,4 +43,6 @@ public class Flower {
     )
     @ToString.Exclude
     private TypeFlower typeFlower;
+
+
 }

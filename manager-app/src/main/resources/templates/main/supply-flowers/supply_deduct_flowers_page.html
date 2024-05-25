@@ -85,8 +85,8 @@
             </tr>
             <tr th:each="flower: ${flowers}">
                 <td th:text="${flower.title}">Цветок</td>
-                <td th:text="${flower.accountingQuantity}">Учётное количество</td>
-                <td th:text="${flower.actualQuantity}">Фактическое количество</td>
+                <td th:text="${flower.inventory.accountingQuantity}">Учётное количество</td>
+                <td th:text="${flower.inventory.actualQuantity}">Фактическое количество</td>
                 <td>
                     <form th:action="@{/main/supply-flowers/deduct}" method="post">
                         <input type="hidden" name="flowerId" th:value="${flower.id}" />

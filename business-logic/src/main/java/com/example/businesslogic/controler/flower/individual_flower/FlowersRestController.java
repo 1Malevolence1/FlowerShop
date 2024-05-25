@@ -1,6 +1,6 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
-import com.example.businesslogic.models.Flower;
+import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

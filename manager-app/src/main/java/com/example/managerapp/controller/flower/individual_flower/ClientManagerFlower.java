@@ -40,9 +40,9 @@ public class ClientManagerFlower {
                                    Model model){
         try {
 
-            flowerClientService.updateFlower(flower.id(),updateFlowerDTO);
-            log.info("Обновлён цветок с айди {}", flower.id());
-            return "redirect:/main/flower/%d/info".formatted(flower.id());
+            flowerClientService.updateFlower(flower.getId(),updateFlowerDTO);
+            log.info("Обновлён цветок с айди {}", flower.getId());
+            return "redirect:/main/flower/%d/info".formatted(flower.getId());
 
         } catch (BadRequestException badRequestException){
             model.addAttribute("payload", updateFlowerDTO);

@@ -36,10 +36,10 @@ public class ClientCreateFlower {
     @PostMapping()
     public String createFlower(NewFlowerDTO payload, Model model){
         try {
-
+            log.info("{}", payload);
           Flower newFlower = flowerClientService.createFlower(payload);
             log.info("Добавлен новый цветок: {}", payload);
-            return "redirect:/main/flower/%d/info".formatted(newFlower.id());
+            return "redirect:/main/flower/%d/info".formatted(newFlower.getId());
 
         } catch (BadRequestException exception){
                 model.addAttribute("payload", payload);

@@ -1,4 +1,4 @@
-package com.example.businesslogic.models;
+package com.example.businesslogic.models.flower;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

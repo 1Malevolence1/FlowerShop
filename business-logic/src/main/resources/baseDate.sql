@@ -14,10 +14,17 @@ create table manager.flowers(
     flower_id serial primary key,
     title varchar not null check (length(trim(title)) > 0 )  unique,
     price integer not null,
-    extra_charge integer not null,
-    accounting_quantity integer not null,
-    actual_quantity integer not null
+    extra_charge integer not null
 );
+
+create table manager.inventory_flower(
+    inventory_id serial primary key,
+    flower_id integer,
+    accounting_quantity integer NOT NULL,
+    actual_quantity integer NOT NULL,
+    foreign key (flower_id) references manager.flowers(flower_id)
+);
+
 
 CREATE TABLE manager.flower_type_relation (
     flower_id INTEGER,
