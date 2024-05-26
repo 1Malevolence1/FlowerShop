@@ -35,31 +35,29 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
         return saveSuppler(dto);
     }
 
+
     @Override
-    public void update(UpdateSupplierDTO updateSupplierDTO) {
-
-    }
-
-/*    @Override
-    public void update(UpdateSupplierDTO updateDTO) {
-        suppliersRepository.findById(updateDTO.getId()).ifPresentOrElse(
+    @Transactional
+    public void update(UpdateSupplierDTO updateDTO, Long id) {
+        suppliersRepository.findById(id).ifPresentOrElse(
                   updateSupplier -> {
-                      updateSupplier.setSupplierName(updateSupplier.getSupplierName());
+                      updateSupplier.setSupplierName(updateDTO.getSupplierName());
                       updateSupplier.setCity(updateDTO.getCity());
                       updateSupplier.setAddress(updateDTO.getAddress());
-                      updateSupplier.setContactEmail(updateDTO.getContactEmail());
-                      updateSupplier.setContactPhone(updateDTO.getContactPhone());
+                      updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
+                      updateSupplier.getContact().setContactPhone(updateDTO.getContact().getPhone());
+                      updateSupplier.getContact().setContactName(updateDTO.getContact().getName());
                   }, () -> new NoSuchElementException());
-      }*/
+      }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        suppliersRepository.deleteById(id);
+            suppliersRepository.deleteById(id);
     }
 
+
     @Override
-    @Transactional
     public List<Supplier> findAll() {
         return suppliersRepository.findAll();
     }

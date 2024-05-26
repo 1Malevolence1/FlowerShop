@@ -46,9 +46,9 @@ public class Flower {
     private TypeFlower typeFlower;
 
 
-    @ManyToOne
+ /*   @ManyToOne
     @JoinTable(name = "supplier_id")
     @ToString.Exclude
-    private Supplier suppliers;
+    private Supplier suppliers;*/
 
 }

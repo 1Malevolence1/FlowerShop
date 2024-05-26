@@ -13,7 +13,7 @@ import java.util.List;
 @Table(schema = "flowers", name = "suppliers")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class Supplier {
 
     @Id
@@ -31,13 +31,12 @@ public class Supplier {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "suppliers", cascade = CascadeType.ALL)
+/*    @OneToMany(mappedBy = "suppliers", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Flower> flowers;
+    private List<Flower> flowers;*/
 
 
-    @OneToOne()
-    @JoinColumn(name = "contact_id")
+    @OneToOne(mappedBy = "suppliers", cascade = CascadeType.ALL)
     private Contact contact;
 
     public Supplier(Long id, String supplierName, String city, String address, Contact contact) {

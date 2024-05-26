@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(schema = "flowers", name = "contact_supplier")
@@ -27,7 +28,9 @@ public class Contact {
     @Column(name = "supplier_email")
     private String email;
 
-    @OneToOne(mappedBy = "contact", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "supplier_id")
+    @ToString.Exclude
     @JsonIgnore
     private Supplier suppliers;
 

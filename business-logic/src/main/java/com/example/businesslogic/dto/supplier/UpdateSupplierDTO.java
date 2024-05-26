@@ -17,7 +17,6 @@ public class UpdateSupplierDTO {
     private Long id;
     private String supplierName;
     private String city;
-    private String contactPhone;
-    private String contactEmail;
     private String address;
+    private Contact contact;
 }
