@@ -94,7 +94,8 @@ public class FlowerService implements FlowerServiceImpl {
                     payload.getPrice(),
                     payload.getExtraCharge(),
                     null,
-                    typeFlowerService.findType(payload.getType())));
+                    typeFlowerService.findType(payload.getType()),
+                    null));
 
             saveBaseDataInventory(flower, payload);
             log.info("{}", flower);

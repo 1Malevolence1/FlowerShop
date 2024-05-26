@@ -1,6 +1,7 @@
 package com.example.businesslogic.models.flower;
 
 import com.example.businesslogic.models.flower.inventory.Inventory;
+import com.example.businesslogic.models.flower.suppliers.Suppliers;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,5 +45,10 @@ public class Flower {
     @ToString.Exclude
     private TypeFlower typeFlower;
 
+
+    @ManyToOne
+    @JoinTable(name = "supplier_id")
+    @ToString.Exclude
+    private Suppliers suppliers;
 
 }
