@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(schema = "flower", name = "suppliers")
+@Table(schema = "flowers", name = "suppliers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Suppliers {
+public class Supplier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +28,6 @@ public class Suppliers {
     private String city;
 
 
-    @Column(name = "contact_phone")
-    private String contactPhone;
-
-
-    @Column(name = "contact_email")
-    private String contactEmail;
-
-
     @Column(name = "address")
     private String address;
 
@@ -44,12 +36,15 @@ public class Suppliers {
     private List<Flower> flowers;
 
 
-    public Suppliers(Long id, String supplierName, String city, String contactPhone, String contactEmail, String address) {
+    @OneToOne()
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
+
+    public Supplier(Long id, String supplierName, String city, String address, Contact contact) {
         this.id = id;
         this.supplierName = supplierName;
         this.city = city;
-        this.contactPhone = contactPhone;
-        this.contactEmail = contactEmail;
         this.address = address;
+        this.contact = contact;
     }
 }

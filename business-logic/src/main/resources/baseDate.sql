@@ -8,13 +8,22 @@ create table flowers.type_flower(
     description text
 );
 
+create table flowers.contact_supplier(
+       contact_id serial primary key,
+       supplier_name varchar(50) not null,
+       supplier_contact varchar(20) not null,
+       supplier_email varchar(50)
+);
+
+
 CREATE TABLE flowers.suppliers (
     supplier_id SERIAL PRIMARY KEY,
     supplier_name VARCHAR(100) NOT NULL,
     city varchar(50) not null ,
-    contact_phone VARCHAR(20),
-    contact_email VARCHAR(100),
-    address TEXT not  null
+    address TEXT not  null,
+    contact_id integer unique,
+
+    foreign key (contact_id) references flowers.contact_supplier(contact_id)
 );
 
 
@@ -29,7 +38,6 @@ create table flowers.flowers(
     foreign key (supplier_id) references flowers.suppliers(supplier_id)
 
 );
-
 
 
 

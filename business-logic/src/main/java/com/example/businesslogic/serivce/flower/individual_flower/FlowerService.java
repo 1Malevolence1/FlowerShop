@@ -8,6 +8,7 @@ import com.example.businesslogic.repository.FlowerRepository;
 import com.example.businesslogic.repository.FlowerServiceImpl;
 import com.example.businesslogic.models.flower.inventory.Inventory;
 import com.example.businesslogic.repository.InventoryRepository;
+import com.example.businesslogic.serivce.flower.inventory.InventoryService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,13 @@ public class FlowerService implements FlowerServiceImpl {
 
     private final TypeFlowerService typeFlowerService;
 
-    private final InventoryRepository inventoryRepository;
+    private final InventoryService inventoryService;
 
     @Autowired
-    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryRepository inventoryRepository) {
+    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryService inventoryService) {
         this.flowerRepository = flowerRepository;
         this.typeFlowerService = typeFlowerService;
-        this.inventoryRepository = inventoryRepository;
+        this.inventoryService = inventoryService;
     }
 
     @Override
@@ -82,7 +83,7 @@ public class FlowerService implements FlowerServiceImpl {
 
     private void saveBaseDataInventory(Flower flower, NewFlowerDTO payload){
         Inventory inventory =   new Inventory( flower, payload.getAccountingQuantity(), payload.getActualQuantity());
-        inventoryRepository.save(inventory);
+        inventoryService.saveBaseDateInventory(inventory);
     }
 
 
