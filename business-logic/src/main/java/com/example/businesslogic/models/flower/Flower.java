@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(schema = "manager", name = "flowers")
+@Table(schema = "flowers", name = "flowers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,7 +37,7 @@ public class Flower {
 
     @ManyToOne()
     @JoinTable(
-            schema = "manager", name = "flower_type_relation",
+            schema = "flowers", name = "flower_type_relation",
             joinColumns = @JoinColumn(name = "flower_id"),
             inverseJoinColumns = @JoinColumn(name = "type_flower_id")
     )

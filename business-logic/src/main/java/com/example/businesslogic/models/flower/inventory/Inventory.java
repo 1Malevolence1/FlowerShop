@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(schema = "manager", name = "inventory_flower")
+@Table(schema = "flowers", name = "inventory_flower")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,8 +1,8 @@
 
 -- Создание новой схемы и таблиц
-CREATE SCHEMA IF NOT EXISTS manager;
+CREATE SCHEMA IF NOT EXISTS flowers;
 
-create table manager.type_flower(
+create table flowers.type_flower(
     type_flower_id serial primary key,
     type_name varchar(30) not null unique,
     description text
@@ -10,14 +10,15 @@ create table manager.type_flower(
 
 
 
-create table manager.flowers(
+
+create table flowers.flowers(
     flower_id serial primary key,
     title varchar not null check (length(trim(title)) > 0 )  unique,
     price integer not null,
     extra_charge integer not null
 );
 
-create table manager.inventory_flower(
+create table flowers.inventory_flower(
     inventory_id serial primary key,
     flower_id integer,
     accounting_quantity integer NOT NULL,
@@ -26,7 +27,7 @@ create table manager.inventory_flower(
 );
 
 
-CREATE TABLE manager.flower_type_relation (
+CREATE TABLE flowers.flower_type_relation (
     flower_id INTEGER,
     type_flower_id INTEGER,
     PRIMARY KEY (flower_id, type_flower_id),

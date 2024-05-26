@@ -11,7 +11,7 @@ import java.util.List;
 
 @ToString
 @Entity
-@Table(schema = "manager", name = "type_flower")
+@Table(schema = "flowers", name = "type_flower")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
