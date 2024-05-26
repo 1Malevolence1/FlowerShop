@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("main/flowers/list")
-public class FlowersRestController {
+public class FlowersListRestController {
 
     private final FlowerService flowerService;
 
     @Autowired
-    public FlowersRestController(FlowerService flowerService) {
+    public FlowersListRestController(FlowerService flowerService) {
         this.flowerService = flowerService;
     }
 
