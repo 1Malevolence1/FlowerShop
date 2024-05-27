@@ -1,11 +1,14 @@
 package com.example.managerapp.client.flower.supplier;
 
+import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.CrudService;
 import com.example.managerapp.dto.flower.supplier.NewSupplierDTO;
 import com.example.managerapp.dto.flower.supplier.Supplier;
 import com.example.managerapp.dto.flower.supplier.UpdateSupplierDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
@@ -26,7 +29,13 @@ public class SupplierRestClientService implements CrudService<NewSupplierDTO, Up
 
     @Override
     public Supplier create(NewSupplierDTO object) {
-        return null;
+        try {
+            return restClient.post().uri("/main/flowers/supplier/create").contentType(MediaType.APPLICATION_JSON).body(object)
+                    .retrieve().body(Supplier.class);
+        } catch (HttpClientErrorException.BadRequest exception){
+            ProblemDetail problemDetail = exception.getResponseBodyAs(ProblemDetail.class);
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
+        }
     }
 
     @Override

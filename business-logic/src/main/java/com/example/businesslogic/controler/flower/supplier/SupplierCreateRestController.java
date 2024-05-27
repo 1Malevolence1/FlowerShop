@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("main/flowers/supplier")
+@RequestMapping("main/flowers/supplier/create")
 @Slf4j
 public class SupplierCreateRestController
 {
@@ -31,9 +32,10 @@ public class SupplierCreateRestController
 
 
 
-    @PostMapping("create")
+    @PostMapping()
     private ResponseEntity<?> createSuppler(@Valid @RequestBody NewSupplierDTO dto, BindingResult bindingResult,
                                             UriComponentsBuilder uriComponentsBuilder) throws BindException {
+
         if(bindingResult.hasErrors()){
             if(bindingResult instanceof BindException bindException){
                 throw bindException;

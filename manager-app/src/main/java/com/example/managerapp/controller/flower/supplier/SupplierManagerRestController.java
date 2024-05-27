@@ -3,16 +3,17 @@ package com.example.managerapp.controller.flower.supplier;
 
 import com.example.managerapp.client.flower.supplier.SupplierRestClientService;
 import com.example.managerapp.dto.flower.supplier.Supplier;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 
-@RestController
+@Controller
 @RequestMapping("main/flowers/supplier/{supplierId:\\d+}/info")
+@Slf4j
 public class SupplierManagerRestController {
 
 
@@ -29,4 +30,11 @@ public class SupplierManagerRestController {
         return supplierRestClientService.find(id).orElseThrow(() -> new NoSuchElementException());
     }
 
+
+    @GetMapping()
+    public String getSupplierInfoPage(Model module, @ModelAttribute("supplier") Supplier supplier ) {
+            log.info("{}", supplier);
+            module.addAttribute("supplier", supplier);
+            return "main/supplier/supplier_info";
+    }
 }

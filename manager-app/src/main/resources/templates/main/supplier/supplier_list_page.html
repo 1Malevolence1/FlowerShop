@@ -90,16 +90,16 @@
             <td th:text="${supplier.supplierName}">Название</td>
             <td th:text="${supplier.city}">Город</td>
             <td th:text="${supplier.address}">Адрес</td>
-            <td><a data-th-href="@{/main/supplier/{supplierId}/info(supplierId=${supplier.id})}" class="info-link">Подробнее</a></td>
+            <td><a data-th-href="@{/main/flowers/supplier/{supplierId}/info(supplierId=${supplier.id})}" class="info-link">Подробнее</a></td>
         </tr>
     </table>
 
-    <a data-th-href="@{/main/flowers/create}" class="add-button">
-        <i class="fas fa-plus"></i> Добавить тип
+    <a data-th-href="@{/main/flowers/supplier/create}" class="add-button">
+        <i class="fas fa-plus"></i> Добавить поставщика
     </a>
 
 
-    <a data-th-href="@{/main/type_flower/list}" class="add-button">
+    <a data-th-href="@{/main/flowers/suppliers/list}" class="add-button">
         <i class="fas fa-plus"></i>  Назад
     </a>
 

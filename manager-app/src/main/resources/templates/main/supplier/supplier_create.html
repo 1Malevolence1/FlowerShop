@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить Поставщика</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px; /* Увеличиваем ширину контейнера */
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        input[type="submit"] {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 20px;
+            width: calc(100% - 32px);
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus {
+            border-color: #66afe9;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .image-container {
+            padding: 40px;
+            border-left: 1px solid #ccc;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            width: 200px; /* Увеличиваем ширину для названий полей */
+            margin-right: 20px;
+            font-size: 20px;
+            font-weight: bold; /* Делаем названия полей жирными */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h1>Добавить поставщика</h1>
+
+        <div class="error-message" data-th-if="${errors}">
+            <h2>Допущены Ошибки</h2>
+            <ul>
+                <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+            </ul>
+        </div>
+
+        <form data-th-action="@{/main/flowers/supplier/create}" method="post">
+            <div class="input-container">
+                <label for="supplierName" class="input-label">Название:</label>
+                <input type="text" id="supplierName" name="supplierName" data-th-value="${payload?.supplierName}" />
+            </div>
+
+            <div class="input-container">
+                <label for="city" class="input-label">Город:</label>
+                <input type="text" id="city" name="city" data-th-value="${payload?.city}" />
+            </div>
+            <div class="input-container">
+                <label for="address" class="input-label">адрес:</label>
+                <input type="text" id="address" name="address" data-th-value="${payload?.address}" />
+            </div>
+            <div class="input-container">
+                <label for="contact_contactName" class="input-label">Имя контактного лица:</label>
+                <input type="text" id="contact_contactName" name="contact.contactName" />
+            </div>
+            <div class="input-container">
+                <label for="contact_contactPhone" class="input-label">Телефон контактного лица:</label>
+                <input type="text" id="contact_contactPhone" name="contact.contactPhone" />
+            </div>
+            <div class="input-container">
+                <label for="contact_email" class="input-label">Почта контактного лица:</label>
+                <input type="text" id="contact_email" name="contact.email" />
+            </div>
+            <input type="submit" value="Добавить поставщика"/>
+        </form>
+
+    </div>
+
+</div>
+
+<form method="get">
+    <a data-th-href="@{/main/flowers/supplier/list}">
+        <button class="back-button" type="button">Назад</button>
+    </a>
+</form>
+
+<script>
+    const fileInput = document.querySelector('input[type="file"]');
+    const imagePreview = document.querySelector('.image-preview');
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function() {
+                imagePreview.src = reader.result;
+            });
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</body>
+</html>

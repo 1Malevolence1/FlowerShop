@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class Contact {
 
     @NotBlank(message = "поле имя не должно быть пустым")
-    private String name;
+    private String contactName;
     @NotBlank(message = "поле телефон не должно быть пустым")
-    private String phone;
+    private String contactPhone;
     private String email;
 }

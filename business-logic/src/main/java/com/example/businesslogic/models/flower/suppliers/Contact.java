@@ -35,9 +35,10 @@ public class Contact {
     private Supplier suppliers;
 
 
-    public Contact(String contactName, String contactPhone, String email) {
+    public Contact(String contactPhone, String contactName, String email, Supplier suppliers) {
         this.contactPhone = contactPhone;
         this.contactName = contactName;
         this.email = email;
+        this.suppliers = suppliers;
     }
 }

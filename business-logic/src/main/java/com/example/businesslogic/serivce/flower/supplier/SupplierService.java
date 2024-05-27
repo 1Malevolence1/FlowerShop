@@ -32,7 +32,9 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     @Override
     @Transactional
     public Supplier create(NewSupplierDTO dto) {
-        return saveSuppler(dto);
+       Supplier supplier = saveSuppler(dto);
+       saveDataBaseContact(dto, supplier);
+       return supplier;
     }
 
 
@@ -45,8 +47,8 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
                       updateSupplier.setCity(updateDTO.getCity());
                       updateSupplier.setAddress(updateDTO.getAddress());
                       updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
-                      updateSupplier.getContact().setContactPhone(updateDTO.getContact().getPhone());
-                      updateSupplier.getContact().setContactName(updateDTO.getContact().getName());
+                      updateSupplier.getContact().setContactPhone(updateDTO.getContact().getContactPhone());
+                      updateSupplier.getContact().setContactName(updateDTO.getContact().getContactName());
                   }, () -> new NoSuchElementException());
       }
 
@@ -83,10 +85,10 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
                 dto.getSupplierName(),
                 dto.getCity(),
                 dto.getAddress(),
-                saveDataBaseContact(dto)));
+                null));
     }
 
-    private Contact saveDataBaseContact(NewSupplierDTO dto) {
-        return contactService.saveDataBaseContact(dto);
+    private Contact saveDataBaseContact(NewSupplierDTO dto, Supplier supplier) {
+        return contactService.saveDataBaseContact(dto, supplier);
     }
 }
