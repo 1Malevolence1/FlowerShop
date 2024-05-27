@@ -21,7 +21,7 @@ public class SupplierListRestController {
     public SupplierListRestController(SupplierService supplierService) {
         this.supplierService = supplierService;
     }
-    
+
     @GetMapping()
     public List<Supplier> getListSupplier(){
        return supplierService.findAll();

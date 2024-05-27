@@ -1,4 +1,4 @@
-package com.example.managerapp.dto.flower.individual_flower;
+package com.example.managerapp.dto.flower.inventory;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

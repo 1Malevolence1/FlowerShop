@@ -1,6 +1,6 @@
 package com.example.managerapp.controller.flower.individual_flower;
 
-import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
+import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("main/flowers/list")
 public class ClientListFlower {
 
-    private final FlowerClientService flowerClientService;
+    private final FlowerRestClientService flowerRestClientService;
 
     @Autowired
-    public ClientListFlower(FlowerClientService flowerClientService) {
-        this.flowerClientService = flowerClientService;
+    public ClientListFlower(FlowerRestClientService flowerRestClientService) {
+        this.flowerRestClientService = flowerRestClientService;
     }
 
 
     @GetMapping()
     public String getPageListFlowers(Model model){
-        model.addAttribute("flowers", flowerClientService.allFlowers());
+        model.addAttribute("flowers", flowerRestClientService.allFlowers());
         return "main/flowers/flowers_list";
     }
 }

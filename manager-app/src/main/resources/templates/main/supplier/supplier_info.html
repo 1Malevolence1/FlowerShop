@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${supplier.supplierName}]] &ndash; Поставщик</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>[[${supplier.supplierName}]]</h1>
+
+<ul>
+
+    <li> <strong>ID </strong>: <span data-th-text="${supplier.id}"></span> </li>
+    <li> <strong>Название </strong>: <span data-th-text="${supplier.supplierName}"></span> </li>
+    <li> <strong>Город </strong>: <span data-th-text="${supplier.city}"></span> </li>
+    <li> <strong>Адрес </strong>: <span data-th-text="${supplier.address}"></span> </li>
+    <li> <strong>Имя контактного лица </strong>: <span data-th-text="${supplier.contact.contactName}"></span> </li>
+    <li> <strong>Телефон контактного лица </strong>: <span data-th-text="${supplier.contact.contactPhone}"></span> </li>
+    <li> <strong>Почта</strong>: <span data-th-text="${supplier.contact.email}"></span> </li>
+</ul>
+
+
+
+<form method="post" data-th-action="@{/main/flower/{flower}/delete(flower=${flower.id})}">
+    <button type="submit">Удалить</button>
+</form>
+
+
+<form method="get" >
+    <a data-th-href="@{@{/main/flower/{flowerId}/update(flowerId=${flower.id})}}">
+        <button type="button">Обновить</button></a>
+</form>
+
+<form method="get" >
+    <a data-th-href="@{/main/suppliers/list}">
+        <button type="button">Назад</button></a>
+</form>
+
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 package com.example.managerapp.controller.flower.supply_flower;
 
-import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
+import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import com.example.managerapp.client.flower.supply_flower.SupplyFlowerRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class SupplyFlowerController {
 
-    private final FlowerClientService flowerClientService;
+    private final FlowerRestClientService flowerRestClientService;
     private final SupplyFlowerRestClient supplyFlowerRestClient;
 
     @Autowired
-    public SupplyFlowerController(FlowerClientService flowerClientService, SupplyFlowerRestClient supplyFlowerRestClient) {
-        this.flowerClientService = flowerClientService;
+    public SupplyFlowerController(FlowerRestClientService flowerRestClientService, SupplyFlowerRestClient supplyFlowerRestClient) {
+        this.flowerRestClientService = flowerRestClientService;
         this.supplyFlowerRestClient = supplyFlowerRestClient;
     }
 
     @GetMapping("sum")
     public String getSumSupplyFlowerPage(Model model){
-        model.addAttribute("flowers", flowerClientService.allFlowers());
+        model.addAttribute("flowers", flowerRestClientService.allFlowers());
         return "main/supply-flowers/supply_sum_flowers_page";
     }
 
     @GetMapping("deduct")
     public String getDeductSupplyFlowerPage(Model model){
-        model.addAttribute("flowers", flowerClientService.allFlowers());
+        model.addAttribute("flowers", flowerRestClientService.allFlowers());
         return "main/supply-flowers/supply_deduct_flowers_page";
     }
 

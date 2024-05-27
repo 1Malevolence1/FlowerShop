@@ -3,7 +3,7 @@ package com.example.managerapp.controller.flower.individual_flower;
 import com.example.managerapp.dto.flower.individual_flower.Flower;
 import com.example.managerapp.dto.flower.individual_flower.UpdateFlowerDTO;
 import com.example.managerapp.client.BadRequestException;
-import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
+import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,16 +17,16 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class ClientManagerFlower {
 
-    private final FlowerClientService flowerClientService;
+    private final FlowerRestClientService flowerRestClientService;
 
     @Autowired
-    public ClientManagerFlower(FlowerClientService flowerClientService) {
-        this.flowerClientService = flowerClientService;
+    public ClientManagerFlower(FlowerRestClientService flowerRestClientService) {
+        this.flowerRestClientService = flowerRestClientService;
     }
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable("flowerId") Long id)   {
-        return flowerClientService.findFlower(id).orElseThrow(() -> new NoSuchElementException());
+        return flowerRestClientService.findFlower(id).orElseThrow(() -> new NoSuchElementException());
     }
 
     @GetMapping("update")
@@ -40,7 +40,7 @@ public class ClientManagerFlower {
                                    Model model){
         try {
 
-            flowerClientService.updateFlower(flower.getId(),updateFlowerDTO);
+            flowerRestClientService.updateFlower(flower.getId(),updateFlowerDTO);
             log.info("Обновлён цветок с айди {}", flower.getId());
             return "redirect:/main/flower/%d/info".formatted(flower.getId());
 
@@ -54,7 +54,7 @@ public class ClientManagerFlower {
 
     @PostMapping("delete")
     public String deleteFlower(@PathVariable("flowerId") Long id){
-        flowerClientService.deleteFlower(id);
+        flowerRestClientService.deleteFlower(id);
         return "redirect:/main/flowers/list";
     }
 }

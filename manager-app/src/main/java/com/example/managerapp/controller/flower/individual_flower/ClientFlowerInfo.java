@@ -1,7 +1,7 @@
 package com.example.managerapp.controller.flower.individual_flower;
 
 
-import com.example.managerapp.client.flower.individual_flower.FlowerClientService;
+import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import com.example.managerapp.dto.flower.individual_flower.Flower;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,16 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class ClientFlowerInfo {
 
-    private final FlowerClientService flowerClientService;
+    private final FlowerRestClientService flowerRestClientService;
 
 
     @Autowired
-    public ClientFlowerInfo(FlowerClientService flowerClientService) {
-        this.flowerClientService = flowerClientService;
+    public ClientFlowerInfo(FlowerRestClientService flowerRestClientService) {
+        this.flowerRestClientService = flowerRestClientService;
     }
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable("flowerId") Long id)   {
-        return flowerClientService.findFlower(id).orElseThrow(() -> new NoSuchElementException());
+        return flowerRestClientService.findFlower(id).orElseThrow(() -> new NoSuchElementException());
     }
 
 

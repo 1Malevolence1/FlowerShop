@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Validated
-public class FlowerClientService implements FlowerClientServiceImpl {
+public class FlowerRestClientService implements FlowerClientServiceImpl {
 
     private static final ParameterizedTypeReference<List<Flower>> FLOWER_TYPE_REFERENCE = new ParameterizedTypeReference<List<Flower>>() {
     };
@@ -27,7 +27,7 @@ public class FlowerClientService implements FlowerClientServiceImpl {
     private final RestClient restClient;
 
     @Autowired
-    public FlowerClientService(RestClient restClient) {
+    public FlowerRestClientService(RestClient restClient) {
         this.restClient = restClient;
     }
 
