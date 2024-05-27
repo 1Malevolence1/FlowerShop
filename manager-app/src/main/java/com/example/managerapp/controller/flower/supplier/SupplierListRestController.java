@@ -2,7 +2,6 @@ package com.example.managerapp.controller.flower.supplier;
 
 import com.example.managerapp.client.flower.supplier.SupplierRestClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

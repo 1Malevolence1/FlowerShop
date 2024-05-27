@@ -120,33 +120,33 @@
             </ul>
         </div>
 
-        <form data-th-action="@{/main/flowers/supplier/create}" method="post">
+        <form data-th-action="@{/main/flowers/supplier/{supplierID}/info/update(supplierID=${supplier.id})}" method="post">
             <div class="input-container">
                 <label for="supplierName" class="input-label">Название:</label>
-                <input type="text" id="supplierName" name="supplierName" data-th-value="${payload?.supplierName}" />
+                <input type="text" id="supplierName" name="supplierName" data-th-value="${supplier.supplierName}" />
             </div>
 
             <div class="input-container">
                 <label for="city" class="input-label">Город:</label>
-                <input type="text" id="city" name="city" data-th-value="${payload?.city}" />
+                <input type="text" id="city" name="city" data-th-value="${supplier.city}" />
             </div>
             <div class="input-container">
                 <label for="address" class="input-label">адрес:</label>
-                <input type="text" id="address" name="address" data-th-value="${payload?.address}" />
+                <input type="text" id="address" name="address" data-th-value="${supplier.address}" />
             </div>
             <div class="input-container">
                 <label for="contact_contactName" class="input-label">Имя контактного лица:</label>
-                <input type="text" id="contact_contactName" name="contact.contactName" />
+                <input type="text" id="contact_contactName" name="contact.contactName"  data-th-value="${supplier.contact.contactName}"/>
             </div>
             <div class="input-container">
                 <label for="contact_contactPhone" class="input-label">Телефон контактного лица:</label>
-                <input type="text" id="contact_contactPhone" name="contact.contactPhone" />
+                <input type="text" id="contact_contactPhone" name="contact.contactPhone"  data-th-value="${supplier.contact.contactPhone}" />
             </div>
             <div class="input-container">
                 <label for="contact_email" class="input-label">Почта контактного лица:</label>
-                <input type="text" id="contact_email" name="contact.email" />
+                <input type="text" id="contact_email" name="contact.email"  data-th-value="${supplier.contact.email}"/>
             </div>
-            <input type="submit" value="Добавить поставщика"/>
+            <input type="submit" value="Обновить"/>
         </form>
 
     </div>
@@ -154,10 +154,11 @@
 </div>
 
 <form method="get">
-    <a data-th-href="@{/main/suppliers/list}">
+    <a data-th-href="@{/main/flowers/supplier/{supplierId}/info(supplierId  =${supplier.id})}">
         <button class="back-button" type="button">Назад</button>
     </a>
 </form>
+
 
 <script>
     const fileInput = document.querySelector('input[type="file"]');

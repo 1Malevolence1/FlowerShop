@@ -67,26 +67,22 @@
 </ul>
 
 
-<!--
 
-<form method="post" data-th-action="@{/main/flower/{flower}/delete(flower=${flower.id})}">
+<form method="post" data-th-action="@{/main/flowers/supplier/{supplierId}/info/delete(supplierId=${supplier.id})}">
     <button type="submit">Удалить</button>
 </form>
--->
 
-
-<!--
 <form method="get" >
-    <a data-th-href="@{@{/main/flower/{flowerId}/update(flowerId=${flower.id})}}">
+    <a data-th-href="@{/main/flowers/supplier/{supplierId}/info/update(supplierId=${supplier.id})}">
         <button type="button">Обновить</button></a>
 </form>
--->
+
 
 <form method="get" >
     <a data-th-href="@{/main/suppliers/list}">
         <button type="button">Назад</button></a>
 </form>
 
-
 </body>
 </html>
+

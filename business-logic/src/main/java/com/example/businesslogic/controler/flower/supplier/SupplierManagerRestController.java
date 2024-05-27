@@ -55,7 +55,7 @@ public class SupplierManagerRestController {
 
 
     @DeleteMapping()
-    public ResponseEntity<?> delete(@PathVariable(name = "supplierId") Long id){
+    public ResponseEntity<Void> delete(@PathVariable(name = "supplierId") Long id){
          supplierService.delete(id);
          return ResponseEntity.noContent().build();
     }

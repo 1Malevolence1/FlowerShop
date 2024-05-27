@@ -14,7 +14,7 @@ public class NewSupplierDTO {
 
     @NotBlank(message = "поле кампания не должно быть пустым")
     private String supplierName;
-    @NotBlank(message = "поле город не должно быть пустым")
+
     private String city;
 
     @NotBlank(message = "поле адресс не должно быть пустым")

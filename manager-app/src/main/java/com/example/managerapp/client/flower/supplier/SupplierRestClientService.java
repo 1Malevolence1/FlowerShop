@@ -40,12 +40,17 @@ public class SupplierRestClientService implements CrudService<NewSupplierDTO, Up
 
     @Override
     public void update(UpdateSupplierDTO updateSupplierDTO, Long id) {
-
+        try {
+            restClient.patch().uri("main/flowers/supplier/{supplierId}", id).contentType(MediaType.APPLICATION_JSON).body(updateSupplierDTO).retrieve().toBodilessEntity();
+        } catch (HttpClientErrorException.BadRequest exception){
+            ProblemDetail problemDetail = exception.getResponseBodyAs(ProblemDetail.class);
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
+        }
     }
 
     @Override
     public void delete(Long id) {
-
+        restClient.delete().uri("main/flowers/supplier/{supplierId}", id).retrieve().toBodilessEntity();
     }
 
     @Override
