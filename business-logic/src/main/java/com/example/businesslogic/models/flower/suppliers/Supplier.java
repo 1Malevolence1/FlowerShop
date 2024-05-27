@@ -31,9 +31,9 @@ public class Supplier {
     @Column(name = "address")
     private String address;
 
-/*    @OneToMany(mappedBy = "suppliers", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "suppliers", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Flower> flowers;*/
+    private List<Flower> flowers;
 
 
     @OneToOne(mappedBy = "suppliers", cascade = CascadeType.ALL)

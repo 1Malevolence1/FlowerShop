@@ -137,6 +137,16 @@
             </div>
 
             <div class="input-container">
+                <label for="supplierName" class="input-label">Потсавщик:</label>
+                <select id="supplierName" name="supplierName">
+                    <option value="">Выберите поставщик</option>
+                    <option data-th-each="supplier: ${suppliers}"
+                            data-th-value="${supplier.supplierName}"
+                            data-th-text="${supplier.supplierName}"></option>
+                </select>
+            </div>
+
+            <div class="input-container">
                 <label for="price" class="input-label">Цена:</label>
                 <input type="number" id="price" name="price" data-th-value="${payload?.price}"/>
             </div>

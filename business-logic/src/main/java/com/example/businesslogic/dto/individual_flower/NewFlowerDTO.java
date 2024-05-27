@@ -28,13 +28,16 @@ public class NewFlowerDTO {
       private String type;
 
 
-    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity, String type) {
+    private String supplierName;
+
+    public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity, String type, String supplierName) {
         this.title = title;
         this.price = checkObjectOnNullOtherwiseReturnZero(price);
         this.extraCharge = checkObjectOnNullOtherwiseReturnZero(extraCharge);
         this.accountingQuantity = checkObjectOnNullOtherwiseReturnZero(accountingQuantity);;
         this.actualQuantity = checkObjectOnNullOtherwiseReturnZero(actualQuantity);
         this.type = type;
+        this.supplierName = supplierName;
     }
 
     private Integer checkObjectOnNullOtherwiseReturnZero(Integer object){

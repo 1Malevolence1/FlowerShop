@@ -4,9 +4,11 @@ import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.models.flower.inventory.Inventory;
+import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
 import com.example.businesslogic.repository.FlowerServiceImpl;
 import com.example.businesslogic.serivce.flower.inventory.InventoryService;
+import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,14 @@ public class FlowerService implements FlowerServiceImpl {
 
     private final InventoryService inventoryService;
 
+    private final SupplierService supplierService;
+
     @Autowired
-    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryService inventoryService) {
+    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryService inventoryService, SupplierService supplierService) {
         this.flowerRepository = flowerRepository;
         this.typeFlowerService = typeFlowerService;
         this.inventoryService = inventoryService;
+        this.supplierService = supplierService;
     }
 
     @Override
@@ -85,15 +90,20 @@ public class FlowerService implements FlowerServiceImpl {
 
     private Flower saveBaseDataFlower(NewFlowerDTO payload){
         try {
+            log.info("{}", payload);
+            Supplier supplier = supplierService.findSupplierName(payload.getSupplierName());
+            log.info("{}", supplier);
             Flower flower = flowerRepository.save(new Flower(
                     null,
                     payload.getTitle(),
                     payload.getPrice(),
                     payload.getExtraCharge(),
                     null,
-                    typeFlowerService.findType(payload.getType())));
+                    typeFlowerService.findType(payload.getType()),
+                    supplier));
 
             saveBaseDataInventory(flower, payload);
+
             log.info("{}", flower);
             return flower;
 

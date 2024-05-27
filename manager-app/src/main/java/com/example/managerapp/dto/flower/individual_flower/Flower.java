@@ -1,6 +1,7 @@
 package com.example.managerapp.dto.flower.individual_flower;
 
 import com.example.managerapp.dto.flower.inventory.Inventory;
+import com.example.managerapp.dto.flower.supplier.Supplier;
 import com.example.managerapp.dto.flower.type_flower.TypeFlower;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +17,6 @@ public class Flower {
     private Integer extraCharge;
     private Inventory inventory;
     private TypeFlower typeFlower;
+    private Supplier suppliers;
 
 }

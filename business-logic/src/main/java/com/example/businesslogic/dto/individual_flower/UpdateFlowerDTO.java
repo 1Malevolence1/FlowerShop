@@ -23,13 +23,16 @@ public class UpdateFlowerDTO {
     @PositiveOrZero(message = "Фактиченское количество должно быть больше или равно 0")
     private  Integer actualQuantity;
 
+    private String supplierName;
 
-    public UpdateFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity) {
+
+    public UpdateFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity, String supplierName) {
         this.title = title;
         this.price = checkObjectOnNullOtherwiseReturnZero(price);
         this.extraCharge = checkObjectOnNullOtherwiseReturnZero(extraCharge);
         this.accountingQuantity = checkObjectOnNullOtherwiseReturnZero(accountingQuantity);;
         this.actualQuantity = checkObjectOnNullOtherwiseReturnZero(actualQuantity);
+        this.supplierName = supplierName;
     }
 
     private Integer checkObjectOnNullOtherwiseReturnZero(Integer object){

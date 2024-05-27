@@ -1,4 +1,4 @@
-package com.example.businesslogic.dto.supplier;
+package com.example.businesslogic.dto.individual_flower.supplier;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

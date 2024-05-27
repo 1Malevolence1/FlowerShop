@@ -1,10 +1,12 @@
 package com.example.managerapp.controller.flower.individual_flower;
 
+import com.example.managerapp.client.flower.supplier.SupplierRestClientService;
 import com.example.managerapp.client.flower.type_flower.TypeFlowerClientService;
 import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
 import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import com.example.managerapp.dto.flower.individual_flower.Flower;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,20 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("main/flowers/create")
 @Slf4j
+@RequiredArgsConstructor
 public class ClientCreateFlower {
 
     private final FlowerRestClientService flowerRestClientService;
     private final TypeFlowerClientService typeFlowerClientService;
 
-    @Autowired
-    public ClientCreateFlower(FlowerRestClientService flowerRestClientService, TypeFlowerClientService typeFlowerClientService) {
-        this.flowerRestClientService = flowerRestClientService;
-        this.typeFlowerClientService = typeFlowerClientService;
-    }
+    private final SupplierRestClientService supplierRestClientService;
+
+
 
     @GetMapping()
     public String getPageCrateFlower(Model model){
         model.addAttribute("typeFlowers", typeFlowerClientService.showTypeFlower());
+        model.addAttribute("suppliers", supplierRestClientService.findAll());
         return "main/flowers/flower_create";
     }
     @PostMapping()

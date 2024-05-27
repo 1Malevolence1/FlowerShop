@@ -1,4 +1,12 @@
 
+/*
+DROP TABLE IF EXISTS flowers.flower_type_relation CASCADE;
+DROP TABLE IF EXISTS flowers.inventory_flower CASCADE;
+DROP TABLE IF EXISTS flowers.flowers CASCADE;
+DROP TABLE IF EXISTS flowers.contact_supplier CASCADE;
+DROP TABLE IF EXISTS flowers.suppliers CASCADE;
+DROP TABLE IF EXISTS flowers.type_flower CASCADE;*/
+
 -- Создание новой схемы и таблиц
 CREATE SCHEMA IF NOT EXISTS flowers;
 
@@ -23,7 +31,7 @@ create table flowers.contact_supplier(
        supplier_contact varchar(20) not null,
        supplier_email varchar(50),
        supplier_id integer,
-       foreign key (supplier_id) references flowers.suppliers(supplier_id) on delete cascade
+       foreign key (supplier_id) references flowers.suppliers(supplier_id)
 );
 
 create table flowers.flowers(
@@ -31,7 +39,7 @@ create table flowers.flowers(
     title varchar not null check (length(trim(title)) > 0 )  unique,
     price integer not null,
     extra_charge integer not null,
-    supplier_id integer
+    supplier_id INTEGER REFERENCES flowers.suppliers(supplier_id)
 );
 
 
