@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Редактировать</title>
+    <title>Добавить Поставщика</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -111,48 +111,50 @@
 
 <div class="container">
     <div class="form-container">
-        <h1>Редактирование товара &laquo;[[${flower.title}]]&raquo;</h1>
+        <h1>Добавить поставщика</h1>
 
-        <div data-th-if="${errors}" class="error-message">
+        <div class="error-message" data-th-if="${errors}">
             <h2>Допущены Ошибки</h2>
             <ul>
                 <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
             </ul>
         </div>
 
-        <form data-th-action="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}" method="post">
+        <form data-th-action="@{/main/flowers/supplier/create}" method="post">
             <div class="input-container">
-                <label for="title" class="input-label">Название:</label>
-                <input type="text" id="title" name="title"  data-th-value="${flower.title}"/>
+                <label for="supplierName" class="input-label">Название:</label>
+                <input type="text" id="supplierName" name="supplierName" data-th-value="${payload?.supplierName}" />
+            </div>
+
+            <div class="input-container">
+                <label for="city" class="input-label">Город:</label>
+                <input type="text" id="city" name="city" data-th-value="${payload?.city}" />
             </div>
             <div class="input-container">
-                <label for="price" class="input-label">Цена:</label>
-                <input type="number" id="price" name="price"  data-th-value="${flower.price}"/>
+                <label for="address" class="input-label">адрес:</label>
+                <input type="text" id="address" name="address" data-th-value="${payload?.address}" />
             </div>
             <div class="input-container">
-                <label for="extraCharge" class="input-label">Наценка:</label>
-                <input type="number" id="extraCharge" name="extraCharge" data-th-value="${flower.extraCharge}"/>
+                <label for="contact_contactName" class="input-label">Имя контактного лица:</label>
+                <input type="text" id="contact_contactName" name="contact.contactName" />
             </div>
             <div class="input-container">
-                <label for="accountingQuantity" class="input-label">Учётное количество:</label>
-                <input type="number" id="accountingQuantity" name="accountingQuantity"  data-th-value="${flower.inventory.accountingQuantity}"/>
+                <label for="contact_contactPhone" class="input-label">Телефон контактного лица:</label>
+                <input type="text" id="contact_contactPhone" name="contact.contactPhone" />
             </div>
             <div class="input-container">
-                <label for="actualQuantity" class="input-label">Фактическое количество:</label>
-                <input type="number" id="actualQuantity" name="actualQuantity"  data-th-value="${flower.inventory.actualQuantity}"/>
+                <label for="contact_email" class="input-label">Почта контактного лица:</label>
+                <input type="text" id="contact_email" name="contact.email" />
             </div>
-            <input type="submit" value="Обновить"/>
+            <input type="submit" value="Добавить поставщика"/>
         </form>
 
     </div>
-    <div class="image-container">
-        <h2>Фотография цветка</h2>
-        <img class="image-preview" src="#" alt="Preview">
-    </div>
+
 </div>
 
 <form method="get">
-    <a data-th-href="@{/main/flower/{flowerId}/info(flowerId=${flower.id})}">
+    <a data-th-href="@{/main/suppliers/list}">
         <button class="back-button" type="button">Назад</button>
     </a>
 </form>

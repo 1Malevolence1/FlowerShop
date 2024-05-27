@@ -1,9 +1,9 @@
 package com.example.managerapp.client;
 
 
-import com.example.managerapp.DTO.NewFlowerDTO;
-import com.example.managerapp.DTO.UpdateFlowerDTO;
-import com.example.managerapp.DTO.Flower;
+import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
+import com.example.managerapp.dto.flower.individual_flower.UpdateFlowerDTO;
+import com.example.managerapp.dto.flower.individual_flower.Flower;
 
 import java.util.List;
 import java.util.Optional;

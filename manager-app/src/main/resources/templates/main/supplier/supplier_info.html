@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>[[${flower.title}]] &ndash; Цветочный магазин</title>
+    <title>[[${supplier.supplierName}]] &ndash; Поставщик</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,37 +53,36 @@
 </head>
 <body>
 
-<h1>[[${flower.title}]]</h1>
+<h1>[[${supplier.supplierName}]]</h1>
 
 <ul>
 
-    <li> <strong>ID </strong>: <span data-th-text="${flower.id}"></span> </li>
-    <li> <strong>Название </strong>: <span data-th-text="${flower.title}"></span> </li>
-    <li> <strong>Тип </strong>: <span data-th-text="${flower.typeFlower.typeName}"></span> </li>
-    <li> <strong>Поставщик </strong>: <span data-th-text="${flower.suppliers.supplierName}"></span> </li>
-    <li> <strong>Цена </strong>: <span data-th-text="${flower.price}"></span> </li>
-    <li> <strong>Наценка </strong>: <span data-th-text="${flower.extraCharge}"></span> </li>
-    <li> <strong>Учётное количестов </strong>: <span data-th-text="${flower.inventory.accountingQuantity}"></span> </li>
-    <li> <strong>Фактичесокое количество </strong>: <span data-th-text="${flower.inventory.actualQuantity}"></span> </li>
+    <li> <strong>ID </strong>: <span data-th-text="${supplier.id}"></span> </li>
+    <li> <strong>Название </strong>: <span data-th-text="${supplier.supplierName}"></span> </li>
+    <li> <strong>Город </strong>: <span data-th-text="${supplier.city}"></span> </li>
+    <li> <strong>Адрес </strong>: <span data-th-text="${supplier.address}"></span> </li>
+    <li> <strong>Имя контактного лица </strong>: <span data-th-text="${supplier.contact.contactName}"></span> </li>
+    <li> <strong>Телефон контактного лица </strong>: <span data-th-text="${supplier.contact.contactPhone}"></span> </li>
+    <li> <strong>Почта</strong>: <span data-th-text="${supplier.contact.email}"></span> </li>
 </ul>
 
 
 
-<form method="post" data-th-action="@{/main/flower/{flower}/delete(flower=${flower.id})}">
+<form method="post" data-th-action="@{/main/flowers/supplier/{supplierId}/info/delete(supplierId=${supplier.id})}">
     <button type="submit">Удалить</button>
 </form>
 
-
 <form method="get" >
-    <a data-th-href="@{/main/flower/{flowerId}/update(flowerId=${flower.id})}">
+    <a data-th-href="@{/main/flowers/supplier/{supplierId}/info/update(supplierId=${supplier.id})}">
         <button type="button">Обновить</button></a>
 </form>
 
+
 <form method="get" >
-    <a data-th-href="@{/main/flowers/list}">
+    <a data-th-href="@{/main/suppliers/list}">
         <button type="button">Назад</button></a>
 </form>
 
-
 </body>
 </html>
+
