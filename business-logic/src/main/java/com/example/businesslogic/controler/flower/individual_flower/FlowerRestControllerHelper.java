@@ -26,7 +26,7 @@ public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, U
            return flowerService.createFlower(newEntity);
 
        } catch (NoSuchElementException exception) {
-           throw new IllegalArgumentException("upplier not found:" + newEntity.getSupplierName(), exception);
+           throw new IllegalArgumentException("Flower not found:" + newEntity.getSupplierName(), exception);
 
        } catch (DataIntegrityViolationException exception) {
            throw new IllegalArgumentException("Цветок с таким названием уже существует", exception);
