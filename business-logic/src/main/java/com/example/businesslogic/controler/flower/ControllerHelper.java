@@ -2,9 +2,20 @@ package com.example.businesslogic.controler.flower;
 
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 
-public interface ControllerHelper<T, E, ID> {
 
-    void updateEntity(E payload, ID id);
+public abstract  class ControllerHelper<T, E, Z,ID> {
 
-    Supplier createEntity(T newEntity);
+
+    protected void updateEntityReturnVoid(E payload, ID id) {
+        System.out.println("Ты забыл переопределить меня");
+    }
+
+   protected Z createEntity(T newEntity) {
+       System.out.println("Ты забыл переопределить меня");
+        return null;
+    }
+
+    protected void createEntityReturnVoid(T newEntity) {
+        System.out.println("Ты забыл переопределить меня");
+    }
 }

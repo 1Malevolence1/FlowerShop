@@ -43,7 +43,7 @@ public class SupplierManagerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            supplierControllerHelper.updateEntity(payload, id);
+            supplierControllerHelper.updateEntityReturnVoid(payload, id);
         }
         return ResponseEntity.noContent().build();
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SupplierControllerHelper implements ControllerHelper<NewSupplierDTO, UpdateSupplierDTO, Long> {
+public class SupplierControllerHelper extends ControllerHelper<NewSupplierDTO, UpdateSupplierDTO, Supplier, Long> {
 
     private final SupplierService supplierService;
 
@@ -19,30 +19,13 @@ public class SupplierControllerHelper implements ControllerHelper<NewSupplierDTO
     }
 
     @Override
-    public void updateEntity(UpdateSupplierDTO object, Long id) {
+    public void updateEntityReturnVoid(UpdateSupplierDTO object, Long id) {
         try {
             supplierService.update(object, id);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Паставщик с таким названием уже существует");
         }
     }
-
-/*    @Override
-    public Supplier createEntity(NewSupplierDTO newEntity) {
-        try {
-            return supplierService.create(newEntity);
-        } catch (DataIntegrityViolationException exception) {
-            String errors = exception.getMessage();
-            if(errors.contains("suppliers_supplier_name_key")) {
-                throw new IllegalArgumentException("Поставщик с таким названием уже существует", exception);
-            }
-            else {
-                throw new IllegalArgumentException("Не удалось занести поставщика в базу данных", exception);
-            }
-        }
-    }
-    */
-
 
 @Override
 public Supplier createEntity(NewSupplierDTO newEntity) {

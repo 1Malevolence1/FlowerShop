@@ -4,6 +4,7 @@ import com.example.businesslogic.dto.type_flower.NewTypeFlowerDTO;
 import com.example.businesslogic.models.flower.TypeFlower;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("main/type_flower")
+@RequiredArgsConstructor
 @Slf4j
 public class TypeFlowerController {
 
     private final TypeFlowerService typeFlowerService;
 
-    @Autowired
-    public TypeFlowerController(TypeFlowerService typeFlowerService) {
-        this.typeFlowerService = typeFlowerService;
-    }
-
+    private final TypeFlowerControllerHelper typeFlowerControllerHelper;
 
     @GetMapping("list")
     public List<TypeFlower> getAllTypeFlower(){
@@ -42,7 +40,7 @@ public class TypeFlowerController {
                 throw  new BindException(bindingResult);
             }
         }
-        typeFlowerService.saveBaseDateTypeFlower(dto);
+        typeFlowerControllerHelper.createEntityReturnVoid(dto);
         log.info("Всё прошло успешно");
         log.info("Загрузили {}", dto);
         return ResponseEntity.noContent().build();
