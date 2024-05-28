@@ -9,6 +9,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ControllerAdvice
 public class ErrorHandlingControllerAdvice {
 
@@ -20,10 +23,13 @@ public class ErrorHandlingControllerAdvice {
         return ResponseEntity.badRequest().body(problemDetail);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ProblemDetail> handlerBindException(DataIntegrityViolationException dataIntegrityViolationException){
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "ошибка sql");
-        problemDetail.setProperty("errors", dataIntegrityViolationException.getMessage());
-        return ResponseEntity.internalServerError().body(problemDetail);
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ProblemDetail> handleIllegalArgumentException(IllegalArgumentException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Некорректный аргумент");
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+        problemDetail.setProperty("errors", errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problemDetail);
     }
 }

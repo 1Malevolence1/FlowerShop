@@ -19,8 +19,7 @@ public class ContactService {
 
 
 
-    public Contact saveDataBaseContact(NewSupplierDTO dto, Supplier supplier){
-        return contactRepository.save(new Contact(dto.getContact().getContactName(), dto.getContact().getContactPhone(), dto.getContact().getEmail(), supplier));
-
+    public void saveDataBaseContact(NewSupplierDTO dto, Supplier supplier){
+         contactRepository.save(new Contact(dto.getContact().getContactName(), dto.getContact().getContactPhone(), dto.getContact().getEmail(), supplier));
     }
 }

@@ -19,7 +19,7 @@ create table flowers.type_flower(
 
 CREATE TABLE flowers.suppliers (
     supplier_id  SERIAL PRIMARY KEY,
-    supplier_name VARCHAR(100) NOT NULL,
+    supplier_name VARCHAR(100) NOT NULL unique ,
     city varchar(50) not null ,
     address TEXT not  null
 );

@@ -35,7 +35,7 @@ public class TypeFlowerService {
             TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
             typeFlowerRepository.save(typeFlower);
         } catch (DataIntegrityViolationException exception) {
-            throw exception;
+            throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }
     }
 

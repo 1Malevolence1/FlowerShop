@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class SupplierService implements CrudService<NewSupplierDTO, UpdateSupplierDTO, Supplier, Long> {
@@ -33,7 +34,7 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     @Transactional
     public Supplier create(NewSupplierDTO dto) {
        Supplier supplier = saveSuppler(dto);
-       saveDataBaseContact(dto, supplier);
+       contactService.saveDataBaseContact(dto, supplier);
        return supplier;
     }
 
@@ -67,7 +68,7 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     @Override
     @Transactional
     public Supplier find(Long id) {
-        return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+        return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Supplier not found with id: " + id));
     }
 
 
@@ -75,7 +76,13 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
         try {
             return savaDataBaseSupplier(dto);
         } catch (DataIntegrityViolationException exception) {
-            throw exception;
+            String errors = exception.getMessage();
+            if(errors.contains("suppliers_supplier_name_key")) {
+                throw new IllegalArgumentException("Поставщик с таким названием уже существует", exception);
+            }
+            else {
+                throw new IllegalArgumentException("Не удалось занести поставщика в базу данных", exception);
+            }
         }
     }
 
@@ -88,11 +95,13 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
                 null));
     }
 
-    private Contact saveDataBaseContact(NewSupplierDTO dto, Supplier supplier) {
-        return contactService.saveDataBaseContact(dto, supplier);
+
+    private Optional<Supplier> findSupplierName(String name){
+        return Optional.ofNullable(suppliersRepository.findBySupplierName(name)).orElseThrow(() -> new NoSuchElementException());
     }
 
-    public Supplier findSupplierName(String name){
-        return suppliersRepository.findBySupplierName(name);
+    public Supplier getSupplierBaseData(String supplierName) {
+        return findSupplierName(supplierName)
+                .orElseThrow(() -> new NoSuchElementException("Поставщик не найден: " + supplierName));
     }
 }

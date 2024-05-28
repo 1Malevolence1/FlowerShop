@@ -82,16 +82,17 @@ public class FlowerService implements FlowerServiceImpl {
         flowerRepository.deleteById(id);
     }
 
+    // Переместить метод в класс связанный с его логикой
     private void saveBaseDataInventory(Flower flower, NewFlowerDTO payload){
         Inventory inventory =   new Inventory( flower, payload.getAccountingQuantity(), payload.getActualQuantity());
         inventoryService.saveBaseDateInventory(inventory);
     }
 
 
-    private Flower saveBaseDataFlower(NewFlowerDTO payload){
+    private Flower saveBaseDataFlower(NewFlowerDTO payload) {
         try {
             log.info("{}", payload);
-            Supplier supplier = supplierService.findSupplierName(payload.getSupplierName());
+            Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
             log.info("{}", supplier);
             Flower flower = flowerRepository.save(new Flower(
                     null,
@@ -107,8 +108,12 @@ public class FlowerService implements FlowerServiceImpl {
             log.info("{}", flower);
             return flower;
 
-        } catch (DataIntegrityViolationException exception){
-            throw exception;
+
+        } catch (NoSuchElementException exception) {
+            throw new IllegalArgumentException("upplier not found:" + payload.getSupplierName(), exception);
+
+        } catch (DataIntegrityViolationException exception) {
+            throw new IllegalArgumentException("Не удалось добавить цветок в базу данных", exception);
         }
     }
 }
