@@ -23,7 +23,6 @@ public class ErrorHandlingControllerAdvice {
         return ResponseEntity.badRequest().body(problemDetail);
     }
 
-
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ProblemDetail> handleIllegalArgumentException(IllegalArgumentException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Некорректный аргумент");

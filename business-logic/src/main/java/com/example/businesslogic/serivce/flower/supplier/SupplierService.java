@@ -33,7 +33,12 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     @Override
     @Transactional
     public Supplier create(NewSupplierDTO dto) {
-       Supplier supplier = saveSuppler(dto);
+       Supplier supplier = suppliersRepository.save( new Supplier(null,
+               dto.getSupplierName(),
+               dto.getCity(),
+               dto.getAddress(),
+               null));
+
        contactService.saveDataBaseContact(dto, supplier);
        return supplier;
     }
@@ -42,16 +47,19 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     @Override
     @Transactional
     public void update(UpdateSupplierDTO updateDTO, Long id) {
-        suppliersRepository.findById(id).ifPresentOrElse(
-                  updateSupplier -> {
-                      updateSupplier.setSupplierName(updateDTO.getSupplierName());
-                      updateSupplier.setCity(updateDTO.getCity());
-                      updateSupplier.setAddress(updateDTO.getAddress());
-                      updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
-                      updateSupplier.getContact().setContactPhone(updateDTO.getContact().getContactPhone());
-                      updateSupplier.getContact().setContactName(updateDTO.getContact().getContactName());
-                  }, () -> new NoSuchElementException());
-      }
+
+             suppliersRepository.findById(id).ifPresentOrElse(
+                     updateSupplier -> {
+                         updateSupplier.setSupplierName(updateDTO.getSupplierName());
+                         updateSupplier.setCity(updateDTO.getCity());
+                         updateSupplier.setAddress(updateDTO.getAddress());
+                         updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
+                         updateSupplier.getContact().setContactPhone(updateDTO.getContact().getContactPhone());
+                         updateSupplier.getContact().setContactName(updateDTO.getContact().getContactName());
+                     }, () -> new NoSuchElementException("Supplier not found with id: " + id));
+
+    }
+
 
     @Override
     @Transactional
@@ -66,13 +74,12 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
     }
 
     @Override
-    @Transactional
     public Supplier find(Long id) {
         return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Supplier not found with id: " + id));
     }
 
 
-    private Supplier saveSuppler(NewSupplierDTO dto) {
+/*    private Supplier saveSuppler(NewSupplierDTO dto) {
         try {
             return savaDataBaseSupplier(dto);
         } catch (DataIntegrityViolationException exception) {
@@ -84,16 +91,8 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
                 throw new IllegalArgumentException("Не удалось занести поставщика в базу данных", exception);
             }
         }
-    }
+    }*/
 
-
-    private Supplier savaDataBaseSupplier(NewSupplierDTO dto) {
-        return suppliersRepository.save( new Supplier(null,
-                dto.getSupplierName(),
-                dto.getCity(),
-                dto.getAddress(),
-                null));
-    }
 
 
     private Optional<Supplier> findSupplierName(String name){

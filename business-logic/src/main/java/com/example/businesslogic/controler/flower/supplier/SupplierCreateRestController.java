@@ -5,6 +5,7 @@ import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("main/flowers/supplier/create")
 @Slf4j
+@RequiredArgsConstructor
 public class SupplierCreateRestController
 {
     private final SupplierService supplierService;
 
-
-    @Autowired
-    public SupplierCreateRestController(SupplierService supplierService) {
-        this.supplierService = supplierService;
-    }
+    private final SupplierControllerHelper supplierControllerHelper;
 
 
 
@@ -42,7 +40,7 @@ public class SupplierCreateRestController
                 throw new BindException(bindingResult);
             }
         }
-       Supplier suppliers =  supplierService.create(dto);
+        Supplier suppliers =  supplierControllerHelper.createEntity(dto);
         return ResponseEntity.created(uriComponentsBuilder.replacePath("main/flowers/suppliers/{supplierId}/supplier_info").build(Map.of("supplierId", suppliers.getId()))).body(suppliers);
     }
 }
