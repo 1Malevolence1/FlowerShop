@@ -56,7 +56,23 @@ public class FlowerService implements FlowerServiceImpl {
     @Override
     @Transactional
     public Flower createFlower(NewFlowerDTO payload) {
-        return saveBaseDataFlower(payload);
+            log.info("{}", payload);
+            Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
+            log.info("{}", supplier);
+            Flower flower = flowerRepository.save(new Flower(
+                    null,
+                    payload.getTitle(),
+                    payload.getPrice(),
+                    payload.getExtraCharge(),
+                    null,
+                    typeFlowerService.findType(payload.getType()),
+                    supplier));
+
+            inventoryService.saveBaseDataInventory(flower, payload);
+
+            log.info("{}", flower);
+            return flower;
+
     }
 
     // возможно нужно тоже сделать sql исключения
@@ -82,40 +98,6 @@ public class FlowerService implements FlowerServiceImpl {
         flowerRepository.deleteById(id);
     }
 
-    // Переместить метод в класс связанный с его логикой
-    private void saveBaseDataInventory(Flower flower, NewFlowerDTO payload){
-        Inventory inventory =   new Inventory( flower, payload.getAccountingQuantity(), payload.getActualQuantity());
-        inventoryService.saveBaseDateInventory(inventory);
-    }
-
-
-    private Flower saveBaseDataFlower(NewFlowerDTO payload) {
-        try {
-            log.info("{}", payload);
-            Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
-            log.info("{}", supplier);
-            Flower flower = flowerRepository.save(new Flower(
-                    null,
-                    payload.getTitle(),
-                    payload.getPrice(),
-                    payload.getExtraCharge(),
-                    null,
-                    typeFlowerService.findType(payload.getType()),
-                    supplier));
-
-            saveBaseDataInventory(flower, payload);
-
-            log.info("{}", flower);
-            return flower;
-
-
-        } catch (NoSuchElementException exception) {
-            throw new IllegalArgumentException("upplier not found:" + payload.getSupplierName(), exception);
-
-        } catch (DataIntegrityViolationException exception) {
-            throw new IllegalArgumentException("Не удалось добавить цветок в базу данных", exception);
-        }
-    }
 }
 
 
