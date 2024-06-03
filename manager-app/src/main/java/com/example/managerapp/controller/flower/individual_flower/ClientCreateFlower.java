@@ -46,8 +46,9 @@ public class ClientCreateFlower {
         } catch (BadRequestException exception){
                 model.addAttribute("payload", payload);
                 model.addAttribute("errors", exception.getErrors());
+
                 log.info("{}", exception.getErrors());
-                return "main/flowers/flower_create";
+                return getPageCrateFlower(model);
 
         }
     }
