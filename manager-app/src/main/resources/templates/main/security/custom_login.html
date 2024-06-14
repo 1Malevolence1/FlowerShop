@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body class="page light-theme">
+
+    <div class="container" >
+        <header class="page-header">
+            <div class="container">
+               <h1 style="width: 100%;">Страница входа
+                <a class="regist_button" type="button" style="top: 10%; width: 6%; margin-left: 7%; font-size: 14px;"  href="/registration">Нет аккаунта</a>
+                <!-- <button class="theme-button" type="button" style="top: 5%; width: 9%; margin-left: 0%;  padding: 2px 5px;">Тема</button>  -->
+                </h1>
+            </div>
+    </header>
+     <main>
+
+
+         <div class="login-container">
+             <h2>Login</h2>
+             <form action="/login" method="post">
+                 <label for="username">Username:</label>
+                 <input type="text" id="username" name="username" required>
+
+                 <label for="password">Password:</label>
+                 <input type="password" id="password" name="password" required>
+
+                 <button type="submit">Login</button>
+             </form>
+         </div>
+
+         <div class="error-message" th:if="${error}">
+             <p th:text="${errorMessage}">Неправильный логин или пароль</p>
+         </div>
+
+    </main>
+
+    </div>
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>

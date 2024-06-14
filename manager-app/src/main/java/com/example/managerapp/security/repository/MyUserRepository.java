@@ -1,7 +1,8 @@
 package com.example.managerapp.security.repository;
 
 
-import com.example.clientapp.security.model.MyUser;
+
+import com.example.managerapp.security.model.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

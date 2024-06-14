@@ -16,6 +16,6 @@ public class ControllerAuthentication {
             model.addAttribute("errorMessage", "Неправильный логин или пароль");
         }
         model.addAttribute("error", error != null);
-        return "custom_login";
+        return "main/security/custom_login";
     }
 }

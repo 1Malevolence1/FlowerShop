@@ -23,17 +23,17 @@ public class ControllerRegistration {
 
     @GetMapping
     public String getRegistrationPage(){
-        return "true_login";
+        return "main/security/registration";
     }
 
     @PostMapping
     public String registrationNewUser(DtoMyUser dto, Model model){
         try {
             myUserService.save(dto);
-            return "redirect:/true_autorisaishen";
+            return "redirect:main/security/custom_login";
         } catch (UsernameFoundInBaseDate usernameFoundInBaseDate){
             model.addAttribute("error", usernameFoundInBaseDate.getError());
-            return "true_login";
+            return "main/security/registration";
         }
     }
 }

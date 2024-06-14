@@ -33,7 +33,7 @@ public class SecurityConfiguration {
         })
                 .formLogin(httpSecurityFormLoginConfigurer -> {
                     httpSecurityFormLoginConfigurer.loginPage("/login").failureUrl("/login?error=true").permitAll();
-                    httpSecurityFormLoginConfigurer.defaultSuccessUrl("/main",true);
+                    httpSecurityFormLoginConfigurer.defaultSuccessUrl("/main/flowers/list",true);
                 })
                 .build();
     }
