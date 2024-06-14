@@ -1,4 +1,4 @@
-package com.example.businesslogic.serivce.flower.inventory;
+package com.example.businesslogic.serivce.flower.supply_flower.inventory;
 
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;

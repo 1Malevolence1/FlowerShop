@@ -14,4 +14,12 @@ public class Supplier {
     private String city;
     private String address;
     private Contact contact;
+
+
+    public Supplier(Long id, String supplierName, String city, String address) {
+        this.id = id;
+        this.supplierName = supplierName;
+        this.city = city;
+        this.address = address;
+    }
 }

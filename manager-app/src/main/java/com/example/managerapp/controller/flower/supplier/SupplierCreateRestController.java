@@ -30,7 +30,7 @@ public class SupplierCreateRestController {
         return "main/supplier/supplier_create";
     }
     @PostMapping
-    private String createSupplier(NewSupplierDTO payload, Model model){
+    public String createSupplier(NewSupplierDTO payload, Model model){
         try {
 
             log.info("{}", payload);

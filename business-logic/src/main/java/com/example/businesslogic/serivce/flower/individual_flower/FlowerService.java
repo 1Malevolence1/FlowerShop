@@ -3,16 +3,14 @@ package com.example.businesslogic.serivce.flower.individual_flower;
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
-import com.example.businesslogic.models.flower.inventory.Inventory;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
 import com.example.businesslogic.repository.FlowerServiceImpl;
-import com.example.businesslogic.serivce.flower.inventory.InventoryService;
+import com.example.businesslogic.serivce.flower.supply_flower.inventory.InventoryService;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
