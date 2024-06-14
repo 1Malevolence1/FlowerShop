@@ -1,6 +1,7 @@
 package com.example.managerapp.security.service;
 
-import com.example.clientapp.security.model.MyUser;
+
+import com.example.managerapp.security.model.MyUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

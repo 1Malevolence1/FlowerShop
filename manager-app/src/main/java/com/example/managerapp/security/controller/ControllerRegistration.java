@@ -1,8 +1,9 @@
 package com.example.managerapp.security.controller;
 
-import com.example.clientapp.security.dto.DtoMyUser;
-import com.example.clientapp.security.exeption.UsernameFoundInBaseDate;
-import com.example.clientapp.security.service.MyUserService;
+
+import com.example.managerapp.security.dto.DtoMyUser;
+import com.example.managerapp.security.exeption.UsernameFoundInBaseDate;
+import com.example.managerapp.security.service.MyUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

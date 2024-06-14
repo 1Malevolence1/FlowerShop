@@ -1,9 +1,10 @@
 package com.example.managerapp.security.service;
 
-import com.example.clientapp.security.dto.DtoMyUser;
-import com.example.clientapp.security.exeption.UsernameFoundInBaseDate;
-import com.example.clientapp.security.model.MyUser;
-import com.example.clientapp.security.repository.MyUserRepository;
+
+import com.example.managerapp.security.dto.DtoMyUser;
+import com.example.managerapp.security.exeption.UsernameFoundInBaseDate;
+import com.example.managerapp.security.model.MyUser;
+import com.example.managerapp.security.repository.MyUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
