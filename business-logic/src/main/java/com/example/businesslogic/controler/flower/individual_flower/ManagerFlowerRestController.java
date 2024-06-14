@@ -7,6 +7,7 @@ import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import jakarta.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,14 +22,12 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("main/flower/{flowerId:\\d+}")
+@RequiredArgsConstructor
 @Slf4j
 public class ManagerFlowerRestController {
     private final FlowerService flowerService;
 
-    @Autowired
-    public ManagerFlowerRestController(FlowerService flowerService) {
-        this.flowerService = flowerService;
-    }
+    private final FlowerRestControllerHelper flowerRestControllerHelper;
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {
@@ -51,7 +50,7 @@ public class ManagerFlowerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            flowerService.updateFlower(id, payload);
+            flowerRestControllerHelper.updateEntityReturnVoid(payload, id);
             log.info("Обновлены данные цвтека с id: {}", id);
         }
         return ResponseEntity.noContent().build();

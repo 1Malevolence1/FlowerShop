@@ -5,6 +5,7 @@ import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("main/flowers/create")
 @Slf4j
-
+@RequiredArgsConstructor
 public class CreateFlowerRestController {
 
     private final FlowerService flowerService;
 
-    @Autowired
-    public CreateFlowerRestController(FlowerService flowerService) {
-        this.flowerService = flowerService;
-    }
-
+    private final FlowerRestControllerHelper flowerRestControllerHelper;
 
     @PostMapping
     public ResponseEntity<?> createFlower(@Valid @RequestBody NewFlowerDTO payload, BindingResult bindingResult,
@@ -40,7 +37,7 @@ public class CreateFlowerRestController {
                 throw new BindException(bindingResult);
         }
         log.info("{}", payload);
-            Flower newFlower = flowerService.createFlower(payload);
+            Flower newFlower = flowerRestControllerHelper.createEntity(payload);
               log.info("Созадн новый цвето {}", newFlower);
               return ResponseEntity.created(uriComponentsBuilder.replacePath("/main/flower/{flowerId}/flower_info").build(Map.of("flowerId", newFlower.getId()))).body(newFlower);
 

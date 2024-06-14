@@ -27,7 +27,9 @@ public class NewFlowerDTO {
             """)
       private String type;
 
-
+    @NotBlank(message = """ 
+            поле "Поставщик" не может быть пустым
+            """)
     private String supplierName;
 
     public NewFlowerDTO(String title, Integer price, Integer extraCharge, Integer accountingQuantity, Integer actualQuantity, String type, String supplierName) {

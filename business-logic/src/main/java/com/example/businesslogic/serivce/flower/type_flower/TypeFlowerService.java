@@ -30,13 +30,8 @@ public class TypeFlowerService {
 
     @Transactional
     public void saveBaseDateTypeFlower(NewTypeFlowerDTO dto) {
-        try {
-            log.info("Начался метод по добавлению в базу данных");
-            TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
-            typeFlowerRepository.save(typeFlower);
-        } catch (DataIntegrityViolationException exception) {
-            throw exception;
-        }
+        TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
+        typeFlowerRepository.save(typeFlower);
     }
 
 

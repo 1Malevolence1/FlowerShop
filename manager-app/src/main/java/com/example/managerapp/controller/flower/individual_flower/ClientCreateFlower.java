@@ -39,15 +39,16 @@ public class ClientCreateFlower {
     public String createFlower(NewFlowerDTO payload, Model model){
         try {
             log.info("{}", payload);
-          Flower newFlower = flowerRestClientService.createFlower(payload);
+            Flower newFlower = flowerRestClientService.createFlower(payload);
             log.info("Добавлен новый цветок: {}", payload);
             return "redirect:/main/flower/%d/info".formatted(newFlower.getId());
 
         } catch (BadRequestException exception){
                 model.addAttribute("payload", payload);
                 model.addAttribute("errors", exception.getErrors());
+
                 log.info("{}", exception.getErrors());
-                return "main/flowers/flower_create";
+                return getPageCrateFlower(model);
 
         }
     }

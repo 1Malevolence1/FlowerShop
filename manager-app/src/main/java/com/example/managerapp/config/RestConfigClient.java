@@ -13,30 +13,38 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 @Slf4j
-public class RestConfigClient {
+public class  RestConfigClient {
 
+    @Value("${api.path}")
+    private String uri;
 
 
     @Bean
-    public TypeFlowerClientService typeFlowerClientService(@Value("${api.path}") String uri){
-        return new TypeFlowerClientService(RestClient.builder().baseUrl(uri).build());
+    public RestClient restClient(String uri){
+        return RestClient.builder().baseUrl(uri).build();
+    }
+
+
+    @Bean
+    public TypeFlowerClientService typeFlowerClientService(){
+        return new TypeFlowerClientService(restClient(uri));
     }
 
     @Bean
     public FlowerRestClientService flowerClientService(@Value("${api.path}") String uri) {
         log.info("URI сервера: {}", uri);
-        return new FlowerRestClientService(RestClient.builder().baseUrl(uri).build());
+        return new FlowerRestClientService(restClient(uri));
     }
 
 
     @Bean
     public SupplyFlowerRestClient supplyFlowerRestClient(@Value("${api.path}") String uri) {
 
-        return new SupplyFlowerRestClient(RestClient.builder().baseUrl(uri).build());
+        return new SupplyFlowerRestClient(restClient(uri));
     }
 
     @Bean
     public SupplierRestClientService supplierRestClientService(@Value("${api.path}") String uri) {
-        return new SupplierRestClientService(RestClient.builder().baseUrl(uri).build());
+        return new SupplierRestClientService(restClient(uri));
     }
 }

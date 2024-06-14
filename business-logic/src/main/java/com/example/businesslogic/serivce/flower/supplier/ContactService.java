@@ -6,6 +6,7 @@ import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ContactService {
@@ -19,8 +20,8 @@ public class ContactService {
 
 
 
-    public Contact saveDataBaseContact(NewSupplierDTO dto, Supplier supplier){
-        return contactRepository.save(new Contact(dto.getContact().getContactName(), dto.getContact().getContactPhone(), dto.getContact().getEmail(), supplier));
-
+    @Transactional
+    public void saveDataBaseContact(NewSupplierDTO dto, Supplier supplier){
+         contactRepository.save(new Contact(dto.getContact().getContactName(), dto.getContact().getContactPhone(), dto.getContact().getEmail(), supplier));
     }
 }

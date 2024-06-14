@@ -35,7 +35,7 @@ public class TypeFlowerCreate {
        }
        catch (BadRequestException exception){
            model.addAttribute("errors", exception.getErrors());
-           return "main/type_flower/create";
+           return "main/type_flower/type_flower_create_page";
        }
 
     }

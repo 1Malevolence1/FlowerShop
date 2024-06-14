@@ -74,35 +74,28 @@
 <body>
 
 <div class="container">
-    <h1>Список цветов</h1>
-        <table>
-            <tr>
-                <th>Название цветка</th>
-                <th>Учётное количество</th>
-                <th>Фактическое количество</th>
-                <th>Добавить</th>
+    <h1> Инвентарь </h1>
+    <table>
+        <tr>
+            <th>Название цветка</th>
+            <th>Учётное количество</th>
+            <th>Фактическое количество</th>
 
-            </tr>
-            <tr th:each="flower: ${flowers}">
-                <td th:text="${flower.title}">Цветок</td>
-                <td th:text="${flower.inventory.accountingQuantity}">Учётное количество</td>
-                <td th:text="${flower.inventory.actualQuantity}">Фактическое количество</td>
-                <td>
-                    <form th:action="@{/main/supply-flowers/sum}" method="post">
-                        <input type="hidden" name="flowerId" th:value="${flower.id}" />
-                        <input type="number" name="addedQuantity" min="0" />
-                        <button type="submit" class="add-button">Добавить</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
+        </tr>
+        <tr th:each="flower: ${flowers}">
+            <td th:text="${flower.title}">Цветок</td>
+            <td th:text="${flower.inventory.accountingQuantity}">Учётное количество</td>
+            <td th:text="${flower.inventory.actualQuantity}">Фактическое количество</td>
+        </tr>
+    </table>
+
+    <form method="get">
+        <a data-th-href="@{/main/flowers/list}">
+            <button class="back-button" type="button">Назад</button>
+        </a>
+    </form>
 </div>
 
-<form method="get">
-    <a data-th-href="@{/main/flowers/list}">
-        <button class="back-button" type="button">Назад</button>
-    </a>
-</form>
 
 </body>
 </html>

@@ -12,7 +12,7 @@
         }
 
         .container {
-            max-width: 1000px; /* Увеличиваем ширину контейнера */
+            max-width: 1000px;
             margin: 20px auto;
             background-color: #fff;
             border-radius: 8px;
@@ -35,7 +35,8 @@
         input[type="text"],
         input[type="number"],
         input[type="file"],
-        input[type="submit"] {
+        input[type="submit"],
+        select {
             margin-bottom: 30px;
             padding: 15px;
             border: 1px solid #ccc;
@@ -47,7 +48,8 @@
 
         input[type="text"]:focus,
         input[type="number"]:focus,
-        input[type="file"]:focus {
+        input[type="file"]:focus,
+        select:focus {
             border-color: #66afe9;
             outline: none;
         }
@@ -100,10 +102,35 @@
         }
 
         .input-label {
-            width: 200px; /* Увеличиваем ширину для названий полей */
+            width: 200px;
             margin-right: 20px;
             font-size: 20px;
-            font-weight: bold; /* Делаем названия полей жирными */
+            font-weight: bold;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+            transform: translateY(-50%);
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding-right: 30px;
         }
     </style>
 </head>
@@ -128,22 +155,26 @@
 
             <div class="input-container">
                 <label for="type" class="input-label">Тип:</label>
-                <select id="type" name="type">
-                    <option value="">Выберите тип</option>
-                    <option data-th-each="typeFlower: ${typeFlowers}"
-                            data-th-value="${typeFlower.typeName}"
-                            data-th-text="${typeFlower.typeName}"></option>
-                </select>
+                <div class="select-wrapper">
+                    <select id="type" name="type">
+                        <option value="">Выберите тип</option>
+                        <option data-th-each="typeFlower: ${typeFlowers}"
+                                data-th-value="${typeFlower.typeName}"
+                                data-th-text="${typeFlower.typeName}"></option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-container">
-                <label for="supplierName" class="input-label">Потсавщик:</label>
-                <select id="supplierName" name="supplierName">
-                    <option value="">Выберите поставщик</option>
-                    <option data-th-each="supplier: ${suppliers}"
-                            data-th-value="${supplier.supplierName}"
-                            data-th-text="${supplier.supplierName}"></option>
-                </select>
+                <label for="supplierName" class="input-label">Поставщик:</label>
+                <div class="select-wrapper">
+                    <select id="supplierName" name="supplierName">
+                        <option value="">Выберите поставщика</option>
+                        <option data-th-each="supplier: ${suppliers}"
+                                data-th-value="${supplier.supplierName}"
+                                data-th-text="${supplier.supplierName}"></option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-container">
@@ -165,10 +196,6 @@
             <input type="submit" value="Добавить цветок"/>
         </form>
 
-    </div>
-    <div class="image-container">
-        <h2>Фотография цветка</h2>
-        <img class="image-preview" src="#" alt="Preview">
     </div>
 </div>
 
