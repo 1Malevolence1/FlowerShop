@@ -1,7 +1,8 @@
 package com.example.managerapp.security.config;
 
 
-import com.example.clientapp.security.service.MyUserDetailService;
+
+import com.example.managerapp.security.service.MyUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
