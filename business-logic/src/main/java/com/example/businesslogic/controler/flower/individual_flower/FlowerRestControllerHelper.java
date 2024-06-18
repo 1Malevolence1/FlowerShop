@@ -21,7 +21,7 @@ public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, U
 
 
     @Override
-    protected Flower createEntity(NewFlowerDTO newEntity) {
+    public Flower createEntity(NewFlowerDTO newEntity) {
        try {
            return flowerService.createFlower(newEntity);
 
@@ -34,7 +34,7 @@ public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, U
     }
 
     @Override
-    protected void  updateEntityReturnVoid(UpdateFlowerDTO payload, Long id) {
+    public void  updateEntityReturnVoid(UpdateFlowerDTO payload, Long id) {
         try {
             flowerService.updateFlower(id , payload);
         } catch (DataIntegrityViolationException exception){

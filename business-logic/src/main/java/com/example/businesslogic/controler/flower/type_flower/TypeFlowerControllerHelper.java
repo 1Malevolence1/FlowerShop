@@ -17,8 +17,9 @@ public class TypeFlowerControllerHelper extends ControllerHelper<NewTypeFlowerDT
     private final TypeFlowerService typeFlowerService;
 
 
+
     @Override
-    protected void createEntityReturnVoid(NewTypeFlowerDTO newEntity) {
+    public void createEntityReturnVoid(NewTypeFlowerDTO newEntity) {
         try {
             typeFlowerService.saveBaseDateTypeFlower(newEntity);
         } catch (DataIntegrityViolationException exception) {

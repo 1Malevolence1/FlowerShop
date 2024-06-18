@@ -1,21 +1,26 @@
 package com.example.businesslogic.controler.flower;
 
-import com.example.businesslogic.models.flower.suppliers.Supplier;
+
+public abstract class ControllerHelper<T, E, Z, ID> implements ControllerHelperImpl<T, E, Z, ID> {
 
 
-public abstract  class ControllerHelper<T, E, Z,ID> {
-
-
-    protected void updateEntityReturnVoid(E payload, ID id) {
-        System.out.println("Ты забыл переопределить меня");
+    @Override
+    public void updateEntityReturnVoid(E payload, ID id) {
+        printErrorText();
     }
 
-   protected Z createEntity(T newEntity) {
-       System.out.println("Ты забыл переопределить меня");
+    @Override
+    public Z createEntity(T newEntity) {
+        printErrorText();
         return null;
     }
 
-    protected void createEntityReturnVoid(T newEntity) {
-        System.out.println("Ты забыл переопределить меня");
+    @Override
+    public void createEntityReturnVoid(T newEntity) {
+        printErrorText();
+    }
+
+    private void printErrorText(){
+        throw new RuntimeException("Ты забыл переопределить меня");
     }
 }

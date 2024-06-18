@@ -30,21 +30,7 @@ public class TypeFlowerController {
         return typeFlowerService.getAllTypeFlowerBaseDate();
     }
 
-    @PostMapping("create")
-    public ResponseEntity<?> createTypeFlower(@Valid @RequestBody NewTypeFlowerDTO dto, BindingResult bindingResult) throws BindException {
-        if(bindingResult.hasErrors()){
-            if(bindingResult instanceof BindException bindException){
-                throw bindException;
-            }
-            else {
-                throw  new BindException(bindingResult);
-            }
-        }
-        typeFlowerControllerHelper.createEntityReturnVoid(dto);
-        log.info("Всё прошло успешно");
-        log.info("Загрузили {}", dto);
-        return ResponseEntity.noContent().build();
-    }
+
 
     @DeleteMapping("delete/{typeId}")
     public ResponseEntity<Void> deleteTypeFlower(@PathVariable ("typeId") Long id){
