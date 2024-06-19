@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ContactService {
+public class ContactService implements ContactServiceImpl{
 
     private final ContactRepository contactRepository;
 
@@ -17,8 +17,7 @@ public class ContactService {
     public ContactService(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
-
-
+    @Override
 
     @Transactional
     public void saveDataBaseContact(NewSupplierDTO dto, Supplier supplier){
