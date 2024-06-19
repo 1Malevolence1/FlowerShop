@@ -3,12 +3,10 @@ package com.example.businesslogic.serivce.flower.supplier;
 
 import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
 import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
-import com.example.businesslogic.models.flower.suppliers.Contact;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.SuppliersRepository;
-import com.example.businesslogic.serivce.flower.CrudService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class SupplierService implements CrudService<NewSupplierDTO, UpdateSupplierDTO, Supplier, Long> {
+public class SupplierService implements SupplierServiceImpl {
 
 
     private final SuppliersRepository suppliersRepository;
@@ -32,7 +30,7 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
 
     @Override
     @Transactional
-    public Supplier create(NewSupplierDTO dto) {
+    public Supplier saveEntityFromBaseDateReturnObject(NewSupplierDTO dto) {
        Supplier supplier = suppliersRepository.save( new Supplier(null,
                dto.getSupplierName(),
                dto.getCity(),
@@ -46,7 +44,7 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
 
     @Override
     @Transactional
-    public void update(UpdateSupplierDTO updateDTO, Long id) {
+    public void updateEntityFromBaseDate(UpdateSupplierDTO updateDTO, Long id) {
 
              suppliersRepository.findById(id).ifPresentOrElse(
                      updateSupplier -> {
@@ -63,13 +61,13 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void deleteEntityFromBaseDateById(Long id) {
             suppliersRepository.deleteById(id);
     }
 
 
     @Override
-    public List<Supplier> findAll() {
+    public List<Supplier> findAllEntityFormBaseDate() {
         return suppliersRepository.findAll();
     }
 
@@ -96,9 +94,9 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
 
 
     private Optional<Supplier> findSupplierName(String name){
-        return Optional.ofNullable(suppliersRepository.findBySupplierName(name)).orElseThrow(() -> new NoSuchElementException());
+        return (suppliersRepository.findBySupplierName(name));
     }
-
+    @Override
     public Supplier getSupplierBaseData(String supplierName) {
         return findSupplierName(supplierName)
                 .orElseThrow(() -> new NoSuchElementException("Поставщик не найден: " + supplierName));

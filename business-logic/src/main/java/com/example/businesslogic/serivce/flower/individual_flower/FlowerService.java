@@ -5,7 +5,6 @@ import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
-import com.example.businesslogic.repository.FlowerServiceImpl;
 import com.example.businesslogic.serivce.flower.supply_flower.inventory.InventoryService;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
@@ -40,12 +39,12 @@ public class FlowerService implements FlowerServiceImpl {
     }
 
     @Override
-    public List<Flower> allFlowers() {
+    public List<Flower> findAllEntityFormBaseDate() {
         return flowerRepository.findAll();
     }
 
     @Override
-    public Optional<Flower> findFlower(Long id) {
+    public Optional<Flower> find(Long id) {
         return flowerRepository.findById(id);
     }
 
@@ -53,7 +52,7 @@ public class FlowerService implements FlowerServiceImpl {
 
     @Override
     @Transactional
-    public Flower createFlower(NewFlowerDTO payload) {
+    public Flower saveEntityFromBaseDateReturnObject(NewFlowerDTO payload) {
             log.info("{}", payload);
             Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
             log.info("{}", supplier);
@@ -63,20 +62,19 @@ public class FlowerService implements FlowerServiceImpl {
                     payload.getPrice(),
                     payload.getExtraCharge(),
                     null,
-                    typeFlowerService.findType(payload.getType()),
+                    typeFlowerService.findObject(payload.getType()),
                     supplier));
 
             inventoryService.saveBaseDataInventory(flower, payload);
 
             log.info("{}", flower);
             return flower;
-
     }
 
     // возможно нужно тоже сделать sql исключения
     @Override
     @Transactional
-    public void updateFlower(Long id, UpdateFlowerDTO payload) {
+    public void updateEntityFromBaseDate(Long id, UpdateFlowerDTO payload) {
         flowerRepository.findById(id).ifPresentOrElse(
                 newDataForflower -> {
                     newDataForflower.setTitle(payload.getTitle());
@@ -92,7 +90,7 @@ public class FlowerService implements FlowerServiceImpl {
 
     @Override
     @Transactional
-    public void deleteFlower(Long id) {
+    public void deleteEntityFromBaseDateById(Long id) {
         flowerRepository.deleteById(id);
     }
 

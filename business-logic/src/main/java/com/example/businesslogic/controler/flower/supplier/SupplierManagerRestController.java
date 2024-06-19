@@ -51,7 +51,7 @@ public class SupplierManagerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> delete(@PathVariable(name = "supplierId") Long id){
-         supplierService.delete(id);
+         supplierService.deleteEntityFromBaseDateById(id);
          return ResponseEntity.noContent().build();
     }
 }

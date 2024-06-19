@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CreateFlowerRestController {
 
-    private final FlowerService flowerService;
+
 
     private final FlowerRestControllerHelper flowerRestControllerHelper;
 

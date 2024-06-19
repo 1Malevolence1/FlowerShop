@@ -5,7 +5,6 @@ import com.example.businesslogic.models.flower.TypeFlower;
 import com.example.businesslogic.repository.TypeFlowerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
-public class TypeFlowerService {
+public class TypeFlowerService implements TypeFowlerServiceImpl<NewTypeFlowerDTO, TypeFlower> {
 
     private final TypeFlowerRepository typeFlowerRepository;
 
@@ -23,24 +22,26 @@ public class TypeFlowerService {
         this.typeFlowerRepository = typeFlowerRepository;
     }
 
-    public List<TypeFlower> getAllTypeFlowerBaseDate(){
+    @Override
+    public List<TypeFlower> findAllEntityFormBaseDate(){
         return typeFlowerRepository.findAll();
     }
 
-
+    @Override
     @Transactional
-    public void saveBaseDateTypeFlower(NewTypeFlowerDTO dto) {
+    public void saveEntityFromBaseDateNotReturnObject(NewTypeFlowerDTO dto) {
         TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
-        typeFlowerRepository.save(typeFlower);
+         typeFlowerRepository.save(typeFlower);
     }
 
-
+    @Override
     @Transactional
-    public void  deleteType(Long id){
+    public void deleteEntityFromBaseDateById(Long id) {
         typeFlowerRepository.deleteById(id);
     }
 
-    public TypeFlower findType(String title){
+    @Override
+    public TypeFlower findObject(String  title) {
         log.info(title);
         return typeFlowerRepository.findByTypeName(title).orElseThrow(() -> new NoSuchElementException());
     }

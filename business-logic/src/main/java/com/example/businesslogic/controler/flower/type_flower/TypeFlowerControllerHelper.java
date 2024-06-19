@@ -21,7 +21,7 @@ public class TypeFlowerControllerHelper extends ControllerHelper<NewTypeFlowerDT
     @Override
     public void createEntityReturnVoid(NewTypeFlowerDTO newEntity) {
         try {
-            typeFlowerService.saveBaseDateTypeFlower(newEntity);
+            typeFlowerService.saveEntityFromBaseDateNotReturnObject(newEntity);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }

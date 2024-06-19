@@ -21,7 +21,7 @@ public class SupplierControllerHelper extends ControllerHelper<NewSupplierDTO, U
     @Override
     public void updateEntityReturnVoid(UpdateSupplierDTO object, Long id) {
         try {
-            supplierService.update(object, id);
+            supplierService.updateEntityFromBaseDate(object, id);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Паставщик с таким названием уже существует");
         }
@@ -30,7 +30,7 @@ public class SupplierControllerHelper extends ControllerHelper<NewSupplierDTO, U
 @Override
 public Supplier createEntity(NewSupplierDTO newEntity) {
     try {
-        return supplierService.create(newEntity);
+        return supplierService.saveEntityFromBaseDateReturnObject(newEntity);
     } catch (DataIntegrityViolationException exception) {
        switch (exception.getMessage()){
            case "suppliers_supplier_name_key" ->  throw new IllegalArgumentException("Поставщик с таким названием уже существует", exception);

@@ -31,7 +31,7 @@ public class ManagerFlowerRestController {
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {
-        return flowerService.findFlower(id).orElseThrow(() -> new NoSuchElementException("Цветок с id %d не найден".formatted(id)));
+        return flowerService.find(id).orElseThrow(() -> new NoSuchElementException("Цветок с id %d не найден".formatted(id)));
     }
 
 
@@ -59,7 +59,7 @@ public class ManagerFlowerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> deleteFlower(@PathVariable(name = "flowerId") Long id){
-        flowerService.deleteFlower(id);
+        flowerService.deleteEntityFromBaseDateById(id);
         log.info("удалён цветок c id: {}: ", id);
         return ResponseEntity.noContent().build();
     }

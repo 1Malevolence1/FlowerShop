@@ -23,7 +23,7 @@ public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, U
     @Override
     public Flower createEntity(NewFlowerDTO newEntity) {
        try {
-           return flowerService.createFlower(newEntity);
+           return flowerService.saveEntityFromBaseDateReturnObject(newEntity);
 
        } catch (NoSuchElementException exception) {
            throw new IllegalArgumentException("Flower not found:" + newEntity.getSupplierName(), exception);
@@ -36,7 +36,7 @@ public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, U
     @Override
     public void  updateEntityReturnVoid(UpdateFlowerDTO payload, Long id) {
         try {
-            flowerService.updateFlower(id , payload);
+            flowerService.updateEntityFromBaseDate(id , payload);
         } catch (DataIntegrityViolationException exception){
             throw new IllegalArgumentException("Цветок с таким названием уже существуте", exception);
         }
