@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ import java.util.NoSuchElementException;
 public class ManagerFlowerRestController {
     private final FlowerService flowerService;
 
-    private final FlowerRestControllerHelper flowerRestControllerHelper;
+    private final FlowerRestAbstractControllerHelper flowerRestControllerHelper;
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {

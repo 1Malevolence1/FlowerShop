@@ -3,11 +3,9 @@ package com.example.businesslogic.controler.flower.supplier;
 
 import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
-import com.example.businesslogic.repository.ContactRepository;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -20,7 +18,7 @@ public class SupplierManagerRestController {
 
     private final SupplierService supplierService;
 
-    private final SupplierControllerHelper supplierControllerHelper;
+    private final SupplierAbstractControllerHelper supplierControllerHelper;
 
 
     @ModelAttribute("supplier")

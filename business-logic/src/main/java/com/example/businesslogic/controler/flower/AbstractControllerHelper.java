@@ -4,12 +4,12 @@ import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.dao.DataIntegrityViolationException;
 
 
-public abstract class ControllerHelper<NewDto, UpdateDto, Model> implements ControllerHelperImpl<NewDto, UpdateDto, Model>{
+public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> implements ControllerHelperImpl<NewDto, UpdateDto, Model>{
 
 
     private AbstractManagerBaseDate<NewDto, UpdateDto, Model> service;
 
-    public ControllerHelper(AbstractManagerBaseDate<NewDto, UpdateDto, Model> service) {
+    public AbstractControllerHelper(AbstractManagerBaseDate<NewDto, UpdateDto, Model> service) {
         this.service = service;
     }
 

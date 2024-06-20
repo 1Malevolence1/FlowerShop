@@ -2,7 +2,6 @@ package com.example.businesslogic.controler.flower.type_flower;
 
 
 import com.example.businesslogic.dto.type_flower.NewTypeFlowerDTO;
-import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TypeFlowerCreateController {
 
-    private final TypeFlowerControllerHelper typeFlowerControllerHelper;
+    private final TypeFlowerAbstractControllerHelper typeFlowerControllerHelper;
 
     @PostMapping("create")
     public ResponseEntity<?> createTypeFlower(@Valid @RequestBody NewTypeFlowerDTO dto, BindingResult bindingResult) throws BindException {

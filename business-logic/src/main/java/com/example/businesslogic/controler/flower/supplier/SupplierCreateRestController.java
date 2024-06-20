@@ -3,11 +3,9 @@ package com.example.businesslogic.controler.flower.supplier;
 
 import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
-import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -24,7 +22,7 @@ public class SupplierCreateRestController
 {
 
 
-    private final SupplierControllerHelper supplierControllerHelper;
+    private final SupplierAbstractControllerHelper supplierControllerHelper;
 
 
 
