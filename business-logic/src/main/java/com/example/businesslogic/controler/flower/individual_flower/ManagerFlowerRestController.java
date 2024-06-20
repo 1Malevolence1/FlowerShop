@@ -31,7 +31,7 @@ public class ManagerFlowerRestController {
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {
-        return flowerService.find(id).orElseThrow(() -> new NoSuchElementException("Цветок с id %d не найден".formatted(id)));
+        return flowerService.findById(id);
     }
 
 
@@ -50,7 +50,7 @@ public class ManagerFlowerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            flowerRestControllerHelper.updateEntityReturnVoid(payload, id);
+            flowerRestControllerHelper.checkUpdateEntityReturnVoid(payload, id);
             log.info("Обновлены данные цвтека с id: {}", id);
         }
         return ResponseEntity.noContent().build();

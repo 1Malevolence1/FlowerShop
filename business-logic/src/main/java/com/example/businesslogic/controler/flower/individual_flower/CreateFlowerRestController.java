@@ -37,7 +37,7 @@ public class CreateFlowerRestController {
                 throw new BindException(bindingResult);
         }
         log.info("{}", payload);
-            Flower newFlower = flowerRestControllerHelper.createEntity(payload);
+            Flower newFlower = flowerRestControllerHelper.checkSaveEntityBaseDateReturnObject(payload);
               log.info("Созадн новый цвето {}", newFlower);
               return ResponseEntity.created(uriComponentsBuilder.replacePath("/main/flower/{flowerId}/flower_info").build(Map.of("flowerId", newFlower.getId()))).body(newFlower);
 

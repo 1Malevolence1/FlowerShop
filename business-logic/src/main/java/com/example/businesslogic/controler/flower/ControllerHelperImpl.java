@@ -1,9 +1,9 @@
 package com.example.businesslogic.controler.flower;
 
-public interface ControllerHelperImpl<T, E, Z,ID>  {
-   void updateEntityReturnVoid(E payload, ID id);
+public interface ControllerHelperImpl<DtoNew, DtoUpdate, Model> {
+   void checkUpdateEntityReturnVoid(DtoUpdate payload, Long id);
 
-   Z createEntity(T newEntity);
+   Model checkSaveEntityBaseDateReturnObject(DtoNew newEntity);
+   void checkSaveEntityBaseDateNotReturnObject(DtoNew newEntity);
 
-   void createEntityReturnVoid(T newEntity);
 }

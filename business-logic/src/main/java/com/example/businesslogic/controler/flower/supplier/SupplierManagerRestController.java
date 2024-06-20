@@ -25,7 +25,7 @@ public class SupplierManagerRestController {
 
     @ModelAttribute("supplier")
     public Supplier supplier(@PathVariable("supplierId") Long id){
-        return supplierService.find(id);
+        return supplierService.findById(id);
     }
 
     @GetMapping()
@@ -43,7 +43,7 @@ public class SupplierManagerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            supplierControllerHelper.updateEntityReturnVoid(payload, id);
+            supplierControllerHelper.checkUpdateEntityReturnVoid(payload, id);
         }
         return ResponseEntity.noContent().build();
     }

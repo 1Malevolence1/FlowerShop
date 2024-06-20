@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SupplierCreateRestController
 {
-    private final SupplierService supplierService;
+
 
     private final SupplierControllerHelper supplierControllerHelper;
 
@@ -40,7 +40,7 @@ public class SupplierCreateRestController
                 throw new BindException(bindingResult);
             }
         }
-        Supplier suppliers =  supplierControllerHelper.createEntity(dto);
+        Supplier suppliers =  supplierControllerHelper.checkSaveEntityBaseDateReturnObject(dto);
         return ResponseEntity.created(uriComponentsBuilder.replacePath("main/flowers/suppliers/{supplierId}/supplier_info").build(Map.of("supplierId", suppliers.getId()))).body(suppliers);
     }
 }

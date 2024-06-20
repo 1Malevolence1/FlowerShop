@@ -22,7 +22,6 @@ public class TypeFlowerController {
 
     private final TypeFlowerService typeFlowerService;
 
-    private final TypeFlowerControllerHelper typeFlowerControllerHelper;
 
     @GetMapping("list")
     public List<TypeFlower> getAllTypeFlower(){

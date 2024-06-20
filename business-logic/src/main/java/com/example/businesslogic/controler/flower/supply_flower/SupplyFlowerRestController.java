@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class SupplyFlowerRestController {
 
+/*
     private final SupplyFlowerService supplyFlowerService;
 
+*/
 
-    @Autowired
+/*    @Autowired
     public SupplyFlowerRestController(SupplyFlowerService supplyFlowerService) {
         this.supplyFlowerService = supplyFlowerService;
     }
@@ -34,5 +36,5 @@ public class SupplyFlowerRestController {
         log.info("Начался метод по отниманию цветов");
         supplyFlowerService.deductFlower(dto);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

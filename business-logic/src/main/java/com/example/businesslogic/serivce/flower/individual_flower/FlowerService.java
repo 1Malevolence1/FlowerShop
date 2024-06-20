@@ -5,11 +5,13 @@ import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import com.example.businesslogic.serivce.flower.supply_flower.inventory.InventoryService;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class FlowerService implements FlowerServiceImpl {
+public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateFlowerDTO, Flower> {
 
 
     private final FlowerRepository flowerRepository;
@@ -32,6 +34,7 @@ public class FlowerService implements FlowerServiceImpl {
 
     @Autowired
     public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryService inventoryService, SupplierService supplierService) {
+        super(flowerRepository);
         this.flowerRepository = flowerRepository;
         this.typeFlowerService = typeFlowerService;
         this.inventoryService = inventoryService;
@@ -44,17 +47,10 @@ public class FlowerService implements FlowerServiceImpl {
     }
 
     @Override
-    public Optional<Flower> find(Long id) {
-        return flowerRepository.findById(id);
-    }
-
-
-
-    @Override
     @Transactional
     public Flower saveEntityFromBaseDateReturnObject(NewFlowerDTO payload) {
             log.info("{}", payload);
-            Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
+            Supplier supplier = supplierService.findByName(payload.getSupplierName());
             log.info("{}", supplier);
             Flower flower = flowerRepository.save(new Flower(
                     null,
@@ -62,7 +58,7 @@ public class FlowerService implements FlowerServiceImpl {
                     payload.getPrice(),
                     payload.getExtraCharge(),
                     null,
-                    typeFlowerService.findObject(payload.getType()),
+                    typeFlowerService.findByName(payload.getType()),
                     supplier));
 
             inventoryService.saveBaseDataInventory(flower, payload);
@@ -74,7 +70,7 @@ public class FlowerService implements FlowerServiceImpl {
     // возможно нужно тоже сделать sql исключения
     @Override
     @Transactional
-    public void updateEntityFromBaseDate(Long id, UpdateFlowerDTO payload) {
+    public void updateEntityFromBaseDate(UpdateFlowerDTO payload, Long id) {
         flowerRepository.findById(id).ifPresentOrElse(
                 newDataForflower -> {
                     newDataForflower.setTitle(payload.getTitle());

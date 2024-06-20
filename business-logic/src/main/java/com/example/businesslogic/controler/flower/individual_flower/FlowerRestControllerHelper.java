@@ -5,40 +5,20 @@ import com.example.businesslogic.controler.flower.ControllerHelper;
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import java.util.NoSuchElementException;
 
 @Component
-@RequiredArgsConstructor
-public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, UpdateFlowerDTO, Flower, Long> {
+public class FlowerRestControllerHelper extends ControllerHelper<NewFlowerDTO, UpdateFlowerDTO, Flower> {
 
-
-    private final FlowerService flowerService;
-
-
-    @Override
-    public Flower createEntity(NewFlowerDTO newEntity) {
-       try {
-           return flowerService.saveEntityFromBaseDateReturnObject(newEntity);
-
-       } catch (NoSuchElementException exception) {
-           throw new IllegalArgumentException("Flower not found:" + newEntity.getSupplierName(), exception);
-
-       } catch (DataIntegrityViolationException exception) {
-           throw new IllegalArgumentException("Цветок с таким названием уже существует", exception);
-       }
-    }
-
-    @Override
-    public void  updateEntityReturnVoid(UpdateFlowerDTO payload, Long id) {
-        try {
-            flowerService.updateEntityFromBaseDate(id , payload);
-        } catch (DataIntegrityViolationException exception){
-            throw new IllegalArgumentException("Цветок с таким названием уже существуте", exception);
-        }
+    @Autowired
+    public FlowerRestControllerHelper(FlowerService service) {
+        super(service);
     }
 }

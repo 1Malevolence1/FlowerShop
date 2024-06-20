@@ -32,7 +32,7 @@ public class TypeFlowerCreateController {
                 throw  new BindException(bindingResult);
             }
         }
-        typeFlowerControllerHelper.createEntityReturnVoid(dto);
+        typeFlowerControllerHelper.checkSaveEntityBaseDateNotReturnObject(dto);
         log.info("Всё прошло успешно");
         log.info("Загрузили {}", dto);
         return ResponseEntity.noContent().build();

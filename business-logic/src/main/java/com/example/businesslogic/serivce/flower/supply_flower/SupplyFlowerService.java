@@ -20,9 +20,9 @@ public class SupplyFlowerService {
     }
 
 
-    @Transactional
+    /*@Transactional
     public void sumFlower(AddFlowerSupplyDTO dto){
-        flowerService.find(dto.getFlowerId()).ifPresentOrElse(flowerUpdate -> {
+        flowerService.findById(dto.getFlowerId()).ifPresentOrElse(flowerUpdate -> {
             flowerUpdate.getInventory().setActualQuantity(flowerUpdate.getInventory().getActualQuantity() + dto.getAddedQuantity());
             flowerUpdate.getInventory().setAccountingQuantity(flowerUpdate.getInventory().getAccountingQuantity() + dto.getAddedQuantity());
         }, () -> new NoSuchFieldException());
@@ -35,5 +35,5 @@ public class SupplyFlowerService {
             flowerUpdate.getInventory().setActualQuantity(flowerUpdate.getInventory().getActualQuantity() - dto.getAddedQuantity());
         }, () -> new NoSuchFieldException());
         log.info("Цветы отняли");
-    }
+    }*/
 }

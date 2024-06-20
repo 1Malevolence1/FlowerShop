@@ -5,25 +5,20 @@ import com.example.businesslogic.controler.flower.ControllerHelper;
 import com.example.businesslogic.dto.type_flower.NewTypeFlowerDTO;
 import com.example.businesslogic.models.flower.TypeFlower;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
+import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
-public class TypeFlowerControllerHelper extends ControllerHelper<NewTypeFlowerDTO, Void, TypeFlower ,Long> {
+public class TypeFlowerControllerHelper extends ControllerHelper<NewTypeFlowerDTO, Void, TypeFlower> {
 
-    private final TypeFlowerService typeFlowerService;
-
-
-
-    @Override
-    public void createEntityReturnVoid(NewTypeFlowerDTO newEntity) {
-        try {
-            typeFlowerService.saveEntityFromBaseDateNotReturnObject(newEntity);
-        } catch (DataIntegrityViolationException exception) {
-            throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
-        }
+   @Autowired
+    public TypeFlowerControllerHelper(TypeFlowerService service) {
+        super(service);
     }
 }

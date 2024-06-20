@@ -6,7 +6,9 @@ import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDT
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.SuppliersRepository;
 
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class SupplierService implements SupplierServiceImpl {
+public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, UpdateSupplierDTO, Supplier> {
 
 
     private final SuppliersRepository suppliersRepository;
@@ -24,6 +26,7 @@ public class SupplierService implements SupplierServiceImpl {
 
     @Autowired
     public SupplierService(SuppliersRepository suppliersRepository, ContactService contactService) {
+        super(suppliersRepository);
         this.suppliersRepository = suppliersRepository;
         this.contactService = contactService;
     }
@@ -31,21 +34,18 @@ public class SupplierService implements SupplierServiceImpl {
     @Override
     @Transactional
     public Supplier saveEntityFromBaseDateReturnObject(NewSupplierDTO dto) {
-       Supplier supplier = suppliersRepository.save( new Supplier(null,
-               dto.getSupplierName(),
-               dto.getCity(),
-               dto.getAddress(),
-               null));
-
+         Supplier supplier = suppliersRepository.save( new Supplier(null,
+                 dto.getSupplierName(),
+                 dto.getCity(),
+                 dto.getAddress(),
+                 null));
        contactService.saveDataBaseContact(dto, supplier);
        return supplier;
     }
 
 
     @Override
-    @Transactional
     public void updateEntityFromBaseDate(UpdateSupplierDTO updateDTO, Long id) {
-
              suppliersRepository.findById(id).ifPresentOrElse(
                      updateSupplier -> {
                          updateSupplier.setSupplierName(updateDTO.getSupplierName());
@@ -72,7 +72,7 @@ public class SupplierService implements SupplierServiceImpl {
     }
 
     @Override
-    public Supplier find(Long id) {
+    public Supplier findById(Long id) {
         return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Supplier not found with id: " + id));
     }
 
@@ -90,15 +90,4 @@ public class SupplierService implements SupplierServiceImpl {
             }
         }
     }*/
-
-
-
-    private Optional<Supplier> findSupplierName(String name){
-        return (suppliersRepository.findBySupplierName(name));
-    }
-    @Override
-    public Supplier getSupplierBaseData(String supplierName) {
-        return findSupplierName(supplierName)
-                .orElseThrow(() -> new NoSuchElementException("Поставщик не найден: " + supplierName));
-    }
 }

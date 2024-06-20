@@ -1,26 +1,42 @@
 package com.example.businesslogic.controler.flower;
 
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
+import org.springframework.dao.DataIntegrityViolationException;
 
-public abstract class ControllerHelper<T, E, Z, ID> implements ControllerHelperImpl<T, E, Z, ID> {
+
+public abstract class ControllerHelper<NewDto, UpdateDto, Model> implements ControllerHelperImpl<NewDto, UpdateDto, Model>{
 
 
-    @Override
-    public void updateEntityReturnVoid(E payload, ID id) {
-        printErrorText();
+    private AbstractManagerBaseDate<NewDto, UpdateDto, Model> service;
+
+    public ControllerHelper(AbstractManagerBaseDate<NewDto, UpdateDto, Model> service) {
+        this.service = service;
     }
 
     @Override
-    public Z createEntity(T newEntity) {
-        printErrorText();
-        return null;
+    public void checkUpdateEntityReturnVoid(UpdateDto payload, Long id) {
+        try {
+            service.updateEntityFromBaseDate(payload, id);
+        } catch (DataIntegrityViolationException exception) {
+            throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
+        }
     }
 
     @Override
-    public void createEntityReturnVoid(T newEntity) {
-        printErrorText();
+    public Model checkSaveEntityBaseDateReturnObject(NewDto newEntity) {
+        try {
+            return service.saveEntityFromBaseDateReturnObject(newEntity);
+        } catch (DataIntegrityViolationException exception) {
+            throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
+        }
     }
 
-    private void printErrorText(){
-        throw new RuntimeException("Ты забыл переопределить меня");
+    @Override
+    public void checkSaveEntityBaseDateNotReturnObject(NewDto newEntity) {
+        try {
+            service.saveEntityFromBaseDateNotReturnObject(newEntity);
+        } catch (DataIntegrityViolationException exception) {
+            throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
+        }
     }
 }
