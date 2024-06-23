@@ -33,7 +33,7 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
     @Override
     @Transactional
-    public Supplier saveEntityFromBaseDateReturnObject(NewSupplierDTO dto) {
+    public Supplier saveEntityReturnObject(NewSupplierDTO dto) {
          Supplier supplier = suppliersRepository.save( new Supplier(null,
                  dto.getSupplierName(),
                  dto.getCity(),
@@ -45,7 +45,7 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
 
     @Override
-    public void updateEntityFromBaseDate(UpdateSupplierDTO updateDTO, Long id) {
+    public void updateEntity(UpdateSupplierDTO updateDTO, Long id) {
              suppliersRepository.findById(id).ifPresentOrElse(
                      updateSupplier -> {
                          updateSupplier.setSupplierName(updateDTO.getSupplierName());
@@ -58,23 +58,6 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
     }
 
-
-    @Override
-    @Transactional
-    public void deleteEntityFromBaseDateById(Long id) {
-            suppliersRepository.deleteById(id);
-    }
-
-
-    @Override
-    public List<Supplier> findAllEntityFormBaseDate() {
-        return suppliersRepository.findAll();
-    }
-
-    @Override
-    public Supplier findById(Long id) {
-        return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Supplier not found with id: " + id));
-    }
 
 
 /*    private Supplier saveSuppler(NewSupplierDTO dto) {

@@ -15,7 +15,7 @@ public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements Manag
     }
 
     @Override
-    public List<Model> findAllEntityFormBaseDate() {
+    public List<Model> findAllEntity() {
         return repository.findAll();
     }
 
@@ -24,32 +24,38 @@ public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements Manag
         return repository.findById(id).orElseThrow(() -> new NoSuchElementException("Не удалось найти данный объект c id: " + id));
     }
 
+
     @Override
     public Model findByName(String title) {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override
+    public int findCountAll(String nameTable) {
+        return 0;
+    }
+
+    @Override
     @Transactional
-    public void saveEntityFromBaseDateNotReturnObject(DtoNew object) {
+    public void saveEntityNotReturnObject(DtoNew object) {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override
     @Transactional
-    public Model saveEntityFromBaseDateReturnObject(DtoNew dtoNew) {
+    public Model saveEntityReturnObject(DtoNew dtoNew) {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override
     @Transactional
-    public void deleteEntityFromBaseDateById(Long id) {
-        throw new UnsupportedOperationException("Method not implemented");
+    public void deleteEntityById(Long id) {
+        repository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public void updateEntityFromBaseDate(UpdateDto dtoUpdate, Long id) {
+    public void updateEntity(UpdateDto dtoUpdate, Long id) {
         throw new UnsupportedOperationException("Method not implemented");
     }
 

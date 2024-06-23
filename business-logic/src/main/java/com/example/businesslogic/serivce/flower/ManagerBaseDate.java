@@ -1,27 +1,27 @@
 package com.example.businesslogic.serivce.flower;
 
-import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
-import com.example.businesslogic.dto.type_flower.NewTypeFlowerDTO;
-import com.example.businesslogic.models.flower.TypeFlower;
-import com.example.businesslogic.models.flower.suppliers.Supplier;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface ManagerBaseDate<DtoNew, UpdateDto, Model> {
 
-    List<Model> findAllEntityFormBaseDate();
+    List<Model> findAllEntity();
 
     Model findByName(String title);
 
 
-    void saveEntityFromBaseDateNotReturnObject(DtoNew object);
+    void saveEntityNotReturnObject(DtoNew object);
 
-    Model saveEntityFromBaseDateReturnObject(DtoNew dtoNew);
+    Model saveEntityReturnObject(DtoNew dtoNew);
 
-    void deleteEntityFromBaseDateById(Long id);
+    void deleteEntityById(Long id);
 
-    void updateEntityFromBaseDate(UpdateDto dtoUpdate, Long id);
+    void updateEntity(UpdateDto dtoUpdate, Long id);
 
     Model findById(Long id);
+
+    @Query(value = "select count(*) from :table")
+    int findCountAll(@Param("table") String nameTable);
 }

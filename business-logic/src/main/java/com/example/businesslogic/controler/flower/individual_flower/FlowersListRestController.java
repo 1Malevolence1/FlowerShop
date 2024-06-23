@@ -22,6 +22,6 @@ public class FlowersListRestController {
 
     @GetMapping
     public List<Flower> getAllFlowers(){
-        return flowerService.findAllEntityFormBaseDate();
+        return flowerService.findAllEntity();
     }
 }

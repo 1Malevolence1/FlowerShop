@@ -26,14 +26,14 @@ public class TypeFlowerController {
     @GetMapping("list")
     public List<TypeFlower> getAllTypeFlower(){
         log.info("метод начался");
-        return typeFlowerService.findAllEntityFormBaseDate();
+        return typeFlowerService.findAllEntity();
     }
 
 
 
     @DeleteMapping("delete/{typeId}")
     public ResponseEntity<Void> deleteTypeFlower(@PathVariable ("typeId") Long id){
-        typeFlowerService.deleteEntityFromBaseDateById(id);
+        typeFlowerService.deleteEntityById(id);
         return ResponseEntity.noContent().build();
     }
 }

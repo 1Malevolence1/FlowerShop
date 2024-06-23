@@ -41,14 +41,9 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
         this.supplierService = supplierService;
     }
 
-    @Override
-    public List<Flower> findAllEntityFormBaseDate() {
-        return flowerRepository.findAll();
-    }
 
     @Override
-    @Transactional
-    public Flower saveEntityFromBaseDateReturnObject(NewFlowerDTO payload) {
+    public Flower saveEntityReturnObject(NewFlowerDTO payload) {
             log.info("{}", payload);
             Supplier supplier = supplierService.findByName(payload.getSupplierName());
             log.info("{}", supplier);
@@ -69,8 +64,7 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
 
     // возможно нужно тоже сделать sql исключения
     @Override
-    @Transactional
-    public void updateEntityFromBaseDate(UpdateFlowerDTO payload, Long id) {
+    public void updateEntity(UpdateFlowerDTO payload, Long id) {
         flowerRepository.findById(id).ifPresentOrElse(
                 newDataForflower -> {
                     newDataForflower.setTitle(payload.getTitle());
@@ -82,12 +76,6 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
                     throw new NoSuchElementException();
                 }
         );
-    }
-
-    @Override
-    @Transactional
-    public void deleteEntityFromBaseDateById(Long id) {
-        flowerRepository.deleteById(id);
     }
 
 }

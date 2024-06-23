@@ -29,16 +29,8 @@ public class TypeFlowerService extends AbstractManagerBaseDate<NewTypeFlowerDTO,
         }
 
         @Override
-        @Transactional
-        public void saveEntityFromBaseDateNotReturnObject(NewTypeFlowerDTO dto) {
+        public void saveEntityNotReturnObject(NewTypeFlowerDTO dto) {
              TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
              typeFlowerRepository.save(typeFlower);
         }
-
-        @Override
-        @Transactional
-        public void deleteEntityFromBaseDateById(Long id) {
-            typeFlowerRepository.deleteById(id);
-        }
-
     }

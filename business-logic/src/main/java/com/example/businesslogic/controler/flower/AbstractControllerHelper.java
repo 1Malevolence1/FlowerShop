@@ -16,7 +16,7 @@ public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> impleme
     @Override
     public void checkUpdateEntityReturnVoid(UpdateDto payload, Long id) {
         try {
-            service.updateEntityFromBaseDate(payload, id);
+            service.updateEntity(payload, id);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }
@@ -25,7 +25,7 @@ public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> impleme
     @Override
     public Model checkSaveEntityBaseDateReturnObject(NewDto newEntity) {
         try {
-            return service.saveEntityFromBaseDateReturnObject(newEntity);
+            return service.saveEntityReturnObject(newEntity);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }
@@ -34,7 +34,7 @@ public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> impleme
     @Override
     public void checkSaveEntityBaseDateNotReturnObject(NewDto newEntity) {
         try {
-            service.saveEntityFromBaseDateNotReturnObject(newEntity);
+            service.saveEntityReturnObject(newEntity);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }

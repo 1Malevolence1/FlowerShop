@@ -49,7 +49,7 @@ public class SupplierManagerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> delete(@PathVariable(name = "supplierId") Long id){
-         supplierService.deleteEntityFromBaseDateById(id);
+         supplierService.deleteEntityById(id);
          return ResponseEntity.noContent().build();
     }
 }

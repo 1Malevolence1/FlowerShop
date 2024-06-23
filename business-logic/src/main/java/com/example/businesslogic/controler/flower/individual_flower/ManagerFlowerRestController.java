@@ -58,7 +58,7 @@ public class ManagerFlowerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> deleteFlower(@PathVariable(name = "flowerId") Long id){
-        flowerService.deleteEntityFromBaseDateById(id);
+        flowerService.deleteEntityById(id);
         log.info("удалён цветок c id: {}: ", id);
         return ResponseEntity.noContent().build();
     }
