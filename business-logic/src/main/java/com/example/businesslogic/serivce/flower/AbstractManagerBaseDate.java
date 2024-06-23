@@ -38,12 +38,24 @@ public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements Manag
     @Override
     @Transactional
     public void saveEntityNotReturnObject(DtoNew object) {
+
+    }
+
+    @Override
+    @Transactional
+    public void saveEntityNotReturnObject() {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override
     @Transactional
     public Model saveEntityReturnObject(DtoNew dtoNew) {
+        throw new UnsupportedOperationException("Method not implemented");
+    }
+
+    @Override
+    @Transactional
+    public Model saveEntityReturnObject() {
         throw new UnsupportedOperationException("Method not implemented");
     }
 

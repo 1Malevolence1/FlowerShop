@@ -13,8 +13,10 @@ public interface ManagerBaseDate<DtoNew, UpdateDto, Model> {
 
 
     void saveEntityNotReturnObject(DtoNew object);
+    void saveEntityNotReturnObject();
 
     Model saveEntityReturnObject(DtoNew dtoNew);
+    Model saveEntityReturnObject();
 
     void deleteEntityById(Long id);
 

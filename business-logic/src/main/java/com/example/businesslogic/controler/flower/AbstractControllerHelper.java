@@ -2,6 +2,7 @@ package com.example.businesslogic.controler.flower;
 
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> implements ControllerHelperImpl<NewDto, UpdateDto, Model>{
@@ -34,7 +35,7 @@ public abstract class AbstractControllerHelper<NewDto, UpdateDto, Model> impleme
     @Override
     public void checkSaveEntityBaseDateNotReturnObject(NewDto newEntity) {
         try {
-            service.saveEntityReturnObject(newEntity);
+            service.saveEntityNotReturnObject(newEntity);
         } catch (DataIntegrityViolationException exception) {
             throw new IllegalArgumentException("Тип с таким названием уже сущестует", exception);
         }

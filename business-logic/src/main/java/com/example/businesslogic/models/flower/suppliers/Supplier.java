@@ -6,14 +6,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 
 @Entity
 @Table(schema = "flowers", name = "suppliers")
 @Data
 @NoArgsConstructor
-
 public class Supplier {
 
     @Id

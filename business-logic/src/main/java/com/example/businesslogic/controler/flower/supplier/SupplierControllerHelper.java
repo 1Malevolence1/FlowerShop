@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SupplierAbstractControllerHelper extends AbstractControllerHelper<NewSupplierDTO, UpdateSupplierDTO, Supplier> {
+public class SupplierControllerHelper extends AbstractControllerHelper<NewSupplierDTO, UpdateSupplierDTO, Supplier> {
 
     @Autowired
-    public SupplierAbstractControllerHelper(SupplierService service) {
+    public SupplierControllerHelper(SupplierService service) {
         super(service);
     }
 }

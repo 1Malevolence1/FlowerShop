@@ -18,7 +18,7 @@ public class SupplierManagerRestController {
 
     private final SupplierService supplierService;
 
-    private final SupplierAbstractControllerHelper supplierControllerHelper;
+    private final SupplierControllerHelper supplierControllerHelper;
 
 
     @ModelAttribute("supplier")

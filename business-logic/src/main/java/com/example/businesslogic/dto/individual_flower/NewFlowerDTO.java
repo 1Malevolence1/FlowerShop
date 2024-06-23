@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class NewFlowerDTO {
 
-
       @NotBlank(message = "название не должно быть пустым")
       private String title;
 

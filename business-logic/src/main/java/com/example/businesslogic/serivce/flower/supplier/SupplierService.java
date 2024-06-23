@@ -8,13 +8,10 @@ import com.example.businesslogic.repository.SuppliersRepository;
 
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, UpdateSupplierDTO, Supplier> {
@@ -22,25 +19,22 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
     private final SuppliersRepository suppliersRepository;
 
-    private final ContactService contactService;
-
     @Autowired
-    public SupplierService(SuppliersRepository suppliersRepository, ContactService contactService) {
+    public SupplierService(SuppliersRepository suppliersRepository) {
         super(suppliersRepository);
         this.suppliersRepository = suppliersRepository;
-        this.contactService = contactService;
+
     }
 
     @Override
     @Transactional
     public Supplier saveEntityReturnObject(NewSupplierDTO dto) {
-         Supplier supplier = suppliersRepository.save( new Supplier(null,
+       return suppliersRepository.save( new Supplier(null,
                  dto.getSupplierName(),
                  dto.getCity(),
                  dto.getAddress(),
                  null));
-       contactService.saveDataBaseContact(dto, supplier);
-       return supplier;
+
     }
 
 
@@ -51,9 +45,9 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
                          updateSupplier.setSupplierName(updateDTO.getSupplierName());
                          updateSupplier.setCity(updateDTO.getCity());
                          updateSupplier.setAddress(updateDTO.getAddress());
-                         updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
-                         updateSupplier.getContact().setContactPhone(updateDTO.getContact().getContactPhone());
-                         updateSupplier.getContact().setContactName(updateDTO.getContact().getContactName());
+                         updateSupplier.getContact().setEmail(updateDTO.getContactDto().getEmail());
+                         updateSupplier.getContact().setContactPhone(updateDTO.getContactDto().getContactPhone());
+                         updateSupplier.getContact().setContactName(updateDTO.getContactDto().getContactName());
                      }, () -> new NoSuchElementException("Supplier not found with id: " + id));
 
     }

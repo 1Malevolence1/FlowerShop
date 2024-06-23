@@ -22,5 +22,5 @@ public class UpdateSupplierDTO {
     @NotBlank(message = "поле адресс не должно быть пустым")
     private String address;
     @Valid
-    private Contact contact;
+    private ContactDto contactDto;
 }

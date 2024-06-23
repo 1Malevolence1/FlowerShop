@@ -5,12 +5,16 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewSupplierDTO {
+
+    private Long id;
 
     @NotBlank(message = "поле кампания не должно быть пустым")
     private String supplierName;
@@ -22,5 +26,5 @@ public class NewSupplierDTO {
     private String address;
 
     @Valid
-    private Contact contact;
+    private ContactDto contact;
 }
