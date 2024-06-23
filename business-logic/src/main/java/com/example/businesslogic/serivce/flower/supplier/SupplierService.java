@@ -45,9 +45,9 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
                          updateSupplier.setSupplierName(updateDTO.getSupplierName());
                          updateSupplier.setCity(updateDTO.getCity());
                          updateSupplier.setAddress(updateDTO.getAddress());
-                         updateSupplier.getContact().setEmail(updateDTO.getContactDto().getEmail());
-                         updateSupplier.getContact().setContactPhone(updateDTO.getContactDto().getContactPhone());
-                         updateSupplier.getContact().setContactName(updateDTO.getContactDto().getContactName());
+                         updateSupplier.getContact().setEmail(updateDTO.getContact().getEmail());
+                         updateSupplier.getContact().setContactPhone(updateDTO.getContact().getContactPhone());
+                         updateSupplier.getContact().setContactName(updateDTO.getContact().getContactName());
                      }, () -> new NoSuchElementException("Supplier not found with id: " + id));
 
     }

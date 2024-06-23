@@ -12,5 +12,5 @@ public class UpdateSupplierDTO {
     private String supplierName;
     private String city;
     private String address;
-    private Contact contactDto;
+    private Contact contact;
 }
