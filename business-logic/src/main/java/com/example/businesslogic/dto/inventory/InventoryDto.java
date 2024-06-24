@@ -7,12 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class InventoryDto {
-
-    private Long flowerId;
-
     @PositiveOrZero(message = "Учётное количество должно быть больше или равно 0")
     private  Integer accountingQuantity;
     @PositiveOrZero(message = "Фактиченское количество должно быть больше или равно 0")
@@ -28,5 +24,4 @@ public class InventoryDto {
         if(object == null) return 0;
         else return object;
     }
-
 }

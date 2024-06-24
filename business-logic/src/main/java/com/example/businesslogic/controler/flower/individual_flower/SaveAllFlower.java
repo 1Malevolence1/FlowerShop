@@ -12,22 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SaveAllFlower implements SaveAll<Flower, NewFlowerDTO> {
 
     private final FlowerControllerHelper flowerRestControllerHelper;
-    private final InventoryService inventoryService;
 
-    public SaveAllFlower(FlowerControllerHelper flowerRestControllerHelper, InventoryService inventoryService) {
+
+    public SaveAllFlower(FlowerControllerHelper flowerRestControllerHelper) {
         this.flowerRestControllerHelper = flowerRestControllerHelper;
-        this.inventoryService = inventoryService;
     }
 
     @Override
     @Transactional
     public Flower saveAll(NewFlowerDTO dto) {
         Flower flower = flowerRestControllerHelper.checkSaveEntityBaseDateReturnObject(dto);
-        InventoryDto inventoryDto = new InventoryDto();
-        inventoryDto.setFlowerId(flower.getId());
-        inventoryDto.setActualQuantity(dto.getInventory().getActualQuantity());
-        inventoryDto.setAccountingQuantity(dto.getInventory().getAccountingQuantity());
-        inventoryService.saveEntityNotReturnObject(inventoryDto);
         return flower;
     }
 }

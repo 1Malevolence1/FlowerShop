@@ -27,12 +27,15 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
 
     private final SupplierService supplierService;
 
+    private final  InventoryService inventoryService;
+
     @Autowired
-    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, SupplierService supplierService) {
+    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, SupplierService supplierService, InventoryService inventoryService) {
         super(flowerRepository);
         this.flowerRepository = flowerRepository;
         this.typeFlowerService = typeFlowerService;
         this.supplierService = supplierService;
+        this.inventoryService = inventoryService;
     }
 
 
@@ -42,7 +45,7 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
             TypeFlower typeFlower = typeFlowerService.findByName(payload.getType());
 
 
-        return flowerRepository.save(new Flower(
+        Flower flower =  flowerRepository.save(new Flower(
                     null,
                     payload.getTitle(),
                     payload.getPrice(),
@@ -50,6 +53,12 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
                     null,
                     typeFlower,
                     supplier));
+
+        if (payload.getInventory() != null) {
+            inventoryService.saveEntityNotReturnObject(payload.getInventory(), flower);
+        }
+
+        return flower;
     }
 
     // возможно нужно тоже сделать sql исключения

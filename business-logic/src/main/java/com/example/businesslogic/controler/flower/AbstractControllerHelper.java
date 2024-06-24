@@ -2,6 +2,7 @@ package com.example.businesslogic.controler.flower;
 
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 

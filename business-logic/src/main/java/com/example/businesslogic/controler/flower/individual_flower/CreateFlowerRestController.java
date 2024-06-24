@@ -1,6 +1,7 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
 
+import com.example.businesslogic.controler.flower.AbstractControllerHelper;
 import com.example.businesslogic.controler.flower.SaveAll;
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.inventory.InventoryDto;
@@ -23,7 +24,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CreateFlowerRestController {
 
-    private final SaveAll<Flower, NewFlowerDTO> service;
+    private final FlowerControllerHelper controllerHelper;
 
     @PostMapping
     public ResponseEntity<?> createFlower(@Valid @RequestBody NewFlowerDTO payload, BindingResult bindingResult,
@@ -36,7 +37,7 @@ public class CreateFlowerRestController {
                 throw new BindException(bindingResult);
         }
         log.info("{}", payload);
-        Flower flower = service.saveAll(payload);
+        Flower flower = controllerHelper.checkSaveEntityBaseDateReturnObject(payload);
         log.info("Созадн новый цвето {}", flower);
         return ResponseEntity.created(uriComponentsBuilder.replacePath("/main/flower/{flowerId}/flower_info").build(Map.of("flowerId", flower.getId()))).body(flower);
 
