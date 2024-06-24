@@ -1,8 +1,8 @@
 package com.example.businesslogic.serivce.flower.supplier;
 
 
-import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
+import com.example.businesslogic.dto.supplier.NewSupplierDTO;
+import com.example.businesslogic.dto.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.SuppliersRepository;
 
@@ -52,9 +52,12 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
     }
 
+    @Override
+    public Supplier findByName(String title) {
+        return suppliersRepository.findBySupplierName(title).orElseThrow(() -> new NoSuchElementException());
+    }
 
-
-/*    private Supplier saveSuppler(NewSupplierDTO dto) {
+    /*    private Supplier saveSuppler(NewSupplierDTO dto) {
         try {
             return savaDataBaseSupplier(dto);
         } catch (DataIntegrityViolationException exception) {

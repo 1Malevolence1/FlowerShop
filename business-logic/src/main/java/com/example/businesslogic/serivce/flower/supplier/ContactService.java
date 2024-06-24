@@ -1,13 +1,12 @@
 package com.example.businesslogic.serivce.flower.supplier;
 
-import com.example.businesslogic.dto.individual_flower.supplier.ContactDto;
+import com.example.businesslogic.dto.supplier.ContactDto;
 import com.example.businesslogic.models.flower.suppliers.Contact;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.ContactRepository;
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service

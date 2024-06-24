@@ -38,7 +38,7 @@ public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements Manag
     @Override
     @Transactional
     public void saveEntityNotReturnObject(DtoNew object) {
-
+            throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override

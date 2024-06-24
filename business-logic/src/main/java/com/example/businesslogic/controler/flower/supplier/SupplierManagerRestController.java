@@ -1,7 +1,7 @@
 package com.example.businesslogic.controler.flower.supplier;
 
 
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
+import com.example.businesslogic.dto.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import jakarta.validation.Valid;

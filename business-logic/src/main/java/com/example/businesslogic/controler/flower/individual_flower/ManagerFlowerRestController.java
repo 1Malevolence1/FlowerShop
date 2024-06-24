@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
 public class ManagerFlowerRestController {
     private final FlowerService flowerService;
 
-    private final FlowerRestAbstractControllerHelper flowerRestControllerHelper;
+    private final FlowerControllerHelper flowerRestControllerHelper;
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {

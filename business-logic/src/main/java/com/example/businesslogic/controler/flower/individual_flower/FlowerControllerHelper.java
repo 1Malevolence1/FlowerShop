@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FlowerRestAbstractControllerHelper extends AbstractControllerHelper<NewFlowerDTO, UpdateFlowerDTO, Flower> {
+public class FlowerControllerHelper extends AbstractControllerHelper<NewFlowerDTO, UpdateFlowerDTO, Flower> {
 
     @Autowired
-    public FlowerRestAbstractControllerHelper(FlowerService service) {
+    public FlowerControllerHelper(FlowerService service) {
         super(service);
     }
 }

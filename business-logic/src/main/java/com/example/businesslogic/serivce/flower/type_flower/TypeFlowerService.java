@@ -1,19 +1,14 @@
 package com.example.businesslogic.serivce.flower.type_flower;
 
-import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
-import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.dto.type_flower.NewTypeFlowerDTO;
 import com.example.businesslogic.models.flower.TypeFlower;
-import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.TypeFlowerRepository;
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
     @Slf4j
@@ -33,4 +28,9 @@ public class TypeFlowerService extends AbstractManagerBaseDate<NewTypeFlowerDTO,
              TypeFlower typeFlower = new TypeFlower(null, dto.getType(), dto.getDescription());
              typeFlowerRepository.save(typeFlower);
         }
+
+    @Override
+    public TypeFlower findByName(String title) {
+        return typeFlowerRepository.findByTypeName(title).orElseThrow(() -> new NoSuchElementException());
     }
+}

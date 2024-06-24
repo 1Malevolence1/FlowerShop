@@ -1,16 +1,19 @@
-package com.example.businesslogic.dto.individual_flower.supplier;
+package com.example.businesslogic.dto.supplier;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateSupplierDTO {
+public class NewSupplierDTO {
+
     private Long id;
 
     @NotBlank(message = "поле кампания не должно быть пустым")
@@ -21,6 +24,7 @@ public class UpdateSupplierDTO {
 
     @NotBlank(message = "поле адресс не должно быть пустым")
     private String address;
+
     @Valid
     private ContactDto contact;
 }

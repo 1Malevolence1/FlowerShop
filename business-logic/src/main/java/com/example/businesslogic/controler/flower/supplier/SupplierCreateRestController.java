@@ -1,10 +1,10 @@
 package com.example.businesslogic.controler.flower.supplier;
 
 
-import com.example.businesslogic.controler.flower.ContactControllerHelperImpl;
-import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
+import com.example.businesslogic.controler.flower.SaveAll;
+import com.example.businesslogic.dto.supplier.NewSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
-import com.example.businesslogic.serivce.flower.SupplerAllService;
+import com.example.businesslogic.serivce.flower.supplier.SupplerAllService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SupplierCreateRestController
 {
-    private final SupplerAllService service;
+    private final SaveAll<Supplier, NewSupplierDTO> service;
     @PostMapping()
     private ResponseEntity<?> createSuppler(@Valid @RequestBody NewSupplierDTO dto, BindingResult bindingResult,
                                             UriComponentsBuilder uriComponentsBuilder) throws BindException {
@@ -34,7 +34,7 @@ public class SupplierCreateRestController
                 throw new BindException(bindingResult);
             }
         }
-        Supplier suppliers =  service.save(dto);
+        Supplier suppliers =  service.saveAll(dto);
         return ResponseEntity.created(uriComponentsBuilder.replacePath("main/flowers/suppliers/{supplierId}/supplier_info").build(Map.of("supplierId", suppliers.getId()))).body(suppliers);
     }
 }
