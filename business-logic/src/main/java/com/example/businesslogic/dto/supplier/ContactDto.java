@@ -16,7 +16,6 @@ public class ContactDto {
     private String contactName;
     @NotBlank(message = "поле телефон не должно быть пустым")
     private String contactPhone;
+    @NotBlank(message = "поле почта не должно быть пустым")
     private String email;
-    private Long SupplierId;
-
 }

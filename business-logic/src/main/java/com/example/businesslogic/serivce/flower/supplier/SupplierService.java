@@ -18,23 +18,25 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
 
 
     private final SuppliersRepository suppliersRepository;
+    private final ContactService contactService;
 
     @Autowired
-    public SupplierService(SuppliersRepository suppliersRepository) {
+    public SupplierService(SuppliersRepository suppliersRepository, ContactService contactService) {
         super(suppliersRepository);
         this.suppliersRepository = suppliersRepository;
-
+        this.contactService = contactService;
     }
 
     @Override
     @Transactional
     public Supplier saveEntityReturnObject(NewSupplierDTO dto) {
-       return suppliersRepository.save( new Supplier(null,
+        Supplier supplier = suppliersRepository.save( new Supplier(null,
                  dto.getSupplierName(),
                  dto.getCity(),
                  dto.getAddress(),
                  null));
-
+        contactService.saveEntityNotReturnObject(dto.getContact(), supplier);
+        return supplier;
     }
 
 

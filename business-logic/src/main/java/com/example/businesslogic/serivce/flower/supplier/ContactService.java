@@ -13,19 +13,16 @@ import org.springframework.stereotype.Service;
 public class ContactService extends AbstractManagerBaseDate<ContactDto, Void, Contact> {
 
     private final ContactRepository contactRepository;
-    private final SupplierService supplierService;
+
 
     @Autowired
-    public ContactService(ContactRepository contactRepository, SupplierService supplierService) {
+    public ContactService(ContactRepository contactRepository) {
         super(contactRepository);
         this.contactRepository = contactRepository;
-        this.supplierService = supplierService;
     }
 
-    @Override
-    @SneakyThrows
-    public void saveEntityNotReturnObject(ContactDto dto) {
-        Supplier supplier = supplierService.findById(dto.getSupplierId());
+
+    public void saveEntityNotReturnObject(ContactDto dto, Supplier supplier) {
         contactRepository.save(new Contact(null, dto.getContactName(), dto.getContactPhone(), dto.getEmail(), supplier));
     }
 }
