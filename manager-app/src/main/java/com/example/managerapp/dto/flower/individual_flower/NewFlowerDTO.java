@@ -1,6 +1,8 @@
 package com.example.managerapp.dto.flower.individual_flower;
 
 
+import com.example.managerapp.dto.flower.inventory.Inventory;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +21,7 @@ public class NewFlowerDTO {
 
     private  Integer extraCharge = 0;
 
-    private  Integer accountingQuantity = 0;
-
-    private  Integer actualQuantity = 0;
+    private Inventory inventory;
 
     private String type;
 

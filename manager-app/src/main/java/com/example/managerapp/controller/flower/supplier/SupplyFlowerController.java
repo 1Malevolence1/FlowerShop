@@ -1,4 +1,4 @@
-package com.example.managerapp.controller.flower.supply_flower;
+package com.example.managerapp.controller.flower.supplier;
 
 import com.example.managerapp.client.flower.individual_flower.FlowerRestClientService;
 import com.example.managerapp.client.flower.supply_flower.SupplyFlowerRestClient;
