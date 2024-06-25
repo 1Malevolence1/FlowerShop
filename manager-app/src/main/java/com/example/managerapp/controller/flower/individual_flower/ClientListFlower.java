@@ -21,6 +21,7 @@ public class ClientListFlower {
 
     @GetMapping()
     public String getPageListFlowers(Model model){
+        model.addAttribute("count", flowerRestClientService.countFlower().getCount());
         model.addAttribute("flowers", flowerRestClientService.allFlowers());
         return "main/flowers/flowers_list";
     }

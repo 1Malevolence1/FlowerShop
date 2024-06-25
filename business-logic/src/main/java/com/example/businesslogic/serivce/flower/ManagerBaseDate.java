@@ -1,5 +1,6 @@
 package com.example.businesslogic.serivce.flower;
 
+import com.example.businesslogic.controler.flower.individual_flower.CountAllFlower;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -24,6 +25,5 @@ public interface ManagerBaseDate<DtoNew, UpdateDto, Model> {
 
     Model findById(Long id);
 
-    @Query(value = "select count(*) from :table")
-    int findCountAll(@Param("table") String nameTable);
+    CountAllFlower findCountAll();
 }

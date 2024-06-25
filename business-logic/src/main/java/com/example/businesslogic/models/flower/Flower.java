@@ -2,6 +2,7 @@ package com.example.businesslogic.models.flower;
 
 import com.example.businesslogic.models.flower.inventory.Inventory;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

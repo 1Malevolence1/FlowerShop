@@ -1,5 +1,6 @@
 package com.example.businesslogic.serivce.flower.individual_flower;
 
+import com.example.businesslogic.controler.flower.individual_flower.CountAllFlower;
 import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
@@ -28,6 +29,8 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
     private final SupplierService supplierService;
 
     private final  InventoryService inventoryService;
+
+
 
     @Autowired
     public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, SupplierService supplierService, InventoryService inventoryService) {
@@ -76,6 +79,14 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
                 }
         );
     }
+
+    @Override
+    public CountAllFlower findCountAll( ) {
+        CountAllFlower countAllFlower = new CountAllFlower();
+        countAllFlower.setCount(flowerRepository.count());
+        return countAllFlower;
+    }
+
 
 }
 

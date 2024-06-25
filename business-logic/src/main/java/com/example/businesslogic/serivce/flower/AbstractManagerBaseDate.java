@@ -1,5 +1,9 @@
 package com.example.businesslogic.serivce.flower;
 
+import com.example.businesslogic.controler.flower.individual_flower.CountAllFlower;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +13,7 @@ import java.util.NoSuchElementException;
 public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements ManagerBaseDate<DtoNew, UpdateDto, Model>{
 
     private JpaRepository<Model, Long> repository;
+
 
     public AbstractManagerBaseDate(JpaRepository<Model, Long> repository) {
         this.repository = repository;
@@ -31,8 +36,8 @@ public class  AbstractManagerBaseDate<DtoNew, UpdateDto, Model> implements Manag
     }
 
     @Override
-    public int findCountAll(String nameTable) {
-        return 0;
+    public CountAllFlower findCountAll() {
+        throw new UnsupportedOperationException("Method not implemented");
     }
 
     @Override
