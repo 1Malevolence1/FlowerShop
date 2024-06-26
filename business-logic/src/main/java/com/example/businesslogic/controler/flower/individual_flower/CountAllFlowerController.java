@@ -1,5 +1,6 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
+import com.example.businesslogic.dto.flowers.CountAll;
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class CountAllFlowerController {
 
 
     @GetMapping()
-    public CountAllFlower getAllCountFlower() {
-        return flowerService.findCountAll();
+    public CountAll getAllCountFlower() {
+        return flowerService.countAll();
     }
 }

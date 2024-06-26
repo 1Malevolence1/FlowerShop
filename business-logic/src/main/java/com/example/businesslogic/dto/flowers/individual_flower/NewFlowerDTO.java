@@ -1,4 +1,4 @@
-package com.example.businesslogic.dto.individual_flower;
+package com.example.businesslogic.dto.flowers.individual_flower;
 
 
 import com.example.businesslogic.dto.inventory.InventoryDto;

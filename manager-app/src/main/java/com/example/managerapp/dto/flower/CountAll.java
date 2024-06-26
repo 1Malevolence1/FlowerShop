@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class CountAllFlower {
+public class CountAll {
     private long count;
 }

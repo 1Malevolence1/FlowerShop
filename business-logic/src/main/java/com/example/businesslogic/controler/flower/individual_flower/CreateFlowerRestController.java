@@ -1,7 +1,7 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
 
-import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
+import com.example.businesslogic.dto.flowers.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

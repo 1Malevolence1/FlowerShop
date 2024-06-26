@@ -3,7 +3,7 @@ package com.example.managerapp.client.flower.individual_flower;
 
 import com.example.managerapp.client.BadRequestException;
 import com.example.managerapp.client.FlowerClientServiceImpl;
-import com.example.managerapp.dto.flower.CountAllFlower;
+import com.example.managerapp.dto.flower.CountAll;
 import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
 import com.example.managerapp.dto.flower.individual_flower.UpdateFlowerDTO;
 import com.example.managerapp.dto.flower.individual_flower.Flower;
@@ -80,7 +80,7 @@ public class FlowerRestClientService implements FlowerClientServiceImpl {
     }
 
     @Override
-    public CountAllFlower countFlower() {
-        return restClient.get().uri("flower/count").retrieve().body(CountAllFlower.class);
+    public CountAll countFlower() {
+        return restClient.get().uri("flower/count").retrieve().body(CountAll.class);
     }
 }

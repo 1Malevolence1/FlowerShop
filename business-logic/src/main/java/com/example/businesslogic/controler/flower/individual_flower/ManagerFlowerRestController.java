@@ -1,7 +1,7 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
 
-import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
+import com.example.businesslogic.dto.flowers.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
