@@ -5,24 +5,17 @@ import com.example.businesslogic.models.flower.suppliers.Contact;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.ContactRepository;
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
+import com.example.businesslogic.serivce.flower.Builder;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ContactService extends AbstractManagerBaseDate<ContactDto, Void, Contact> {
+public class ContactService implements Builder<Contact, ContactDto> {
 
-    private final ContactRepository contactRepository;
-
-
-    @Autowired
-    public ContactService(ContactRepository contactRepository) {
-        super(contactRepository);
-        this.contactRepository = contactRepository;
-    }
-
-
-    public void saveEntityNotReturnObject(ContactDto dto, Supplier supplier) {
-        contactRepository.save(new Contact(null, dto.getContactName(), dto.getContactPhone(), dto.getEmail(), supplier));
+    @Override
+    public Contact build(ContactDto dto){
+        return Contact.builder().id(null).contactName(dto.getContactName()).
+                contactPhone(dto.getContactPhone()).email(dto.getEmail()).build();
     }
 }

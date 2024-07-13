@@ -3,9 +3,9 @@ package com.example.businesslogic.serivce.flower.supplier;
 
 import com.example.businesslogic.dto.supplier.NewSupplierDTO;
 import com.example.businesslogic.dto.supplier.UpdateSupplierDTO;
+import com.example.businesslogic.models.flower.suppliers.Contact;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.SuppliersRepository;
-
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,13 +30,13 @@ public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, Upd
     @Override
     @Transactional
     public Supplier saveEntityReturnObject(NewSupplierDTO dto) {
-        Supplier supplier = suppliersRepository.save( new Supplier(null,
+        Contact contact = contactService.build(dto.getContact());
+
+        return suppliersRepository.save( new Supplier(null,
                  dto.getSupplierName(),
                  dto.getCity(),
                  dto.getAddress(),
-                 null));
-        contactService.saveEntityNotReturnObject(dto.getContact(), supplier);
-        return supplier;
+                 contact));
     }
 
 

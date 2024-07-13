@@ -22,8 +22,15 @@ public class InventoryService extends AbstractManagerBaseDate<InventoryDto, Void
         this.settingInventory = settingInventory;
     }
 
-    public void saveEntityNotReturnObject(InventoryDto dto, Flower flower) {
+
+
+    @Override
+    public Inventory saveEntityReturnObject(InventoryDto dto) {
         InventoryDto inventoryDto = settingInventory.settingParameter(dto);
-        inventoryRepository.save(new Inventory(null, flower, inventoryDto.getAccountingQuantity(), inventoryDto.getActualQuantity()));
+        return inventoryRepository.save(new Inventory(null, inventoryDto.getAccountingQuantity(), inventoryDto.getActualQuantity()));
+    }
+
+    public Inventory build(InventoryDto dto){
+        return new Inventory().builder().accountingQuantity(dto.getAccountingQuantity()).actualQuantity(dto.getActualQuantity()).build();
     }
 }

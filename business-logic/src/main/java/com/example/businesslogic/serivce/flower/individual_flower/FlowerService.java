@@ -4,6 +4,7 @@ import com.example.businesslogic.dto.flowers.individual_flower.NewFlowerDTO;
 import com.example.businesslogic.dto.flowers.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 import com.example.businesslogic.models.flower.TypeFlower;
+import com.example.businesslogic.models.flower.inventory.Inventory;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
 import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
@@ -38,20 +39,21 @@ public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateF
     public Flower saveEntityReturnObject(NewFlowerDTO payload) {
         Supplier supplier = supplierService.findByName(payload.getSupplierName());
         TypeFlower typeFlower = typeFlowerService.findByName(payload.getType());
+        Inventory inventory = null;
 
+        if (payload.getInventory() != null) {
+             inventory = inventoryService.build(payload.getInventory());
+        }
 
         Flower flower = flowerRepository.save(new Flower(
                 null,
                 payload.getTitle(),
                 payload.getPrice(),
                 payload.getExtraCharge(),
-                null,
+                inventory,
                 typeFlower,
                 supplier));
 
-        if (payload.getInventory() != null) {
-            inventoryService.saveEntityNotReturnObject(payload.getInventory(), flower);
-        }
 
         return flower;
     }

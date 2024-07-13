@@ -37,7 +37,8 @@ public class Supplier {
     private List<Flower> flowers;
 
 
-    @OneToOne(mappedBy = "suppliers", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id")
     private Contact contact;
 
     public Supplier(Long id, String supplierName, String city, String address, Contact contact) {

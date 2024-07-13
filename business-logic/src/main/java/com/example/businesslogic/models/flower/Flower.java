@@ -32,7 +32,8 @@ public class Flower {
     private Integer extraCharge;
 
 
-    @OneToOne(mappedBy = "flower", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventory_id")
     @ToString.Exclude
     private Inventory inventory;
 
