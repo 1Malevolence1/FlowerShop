@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Inventory {
     private Long id;
-
-    private Integer accountingQuantity;
-
-    private Integer actualQuantity;
+    private Integer accountingQuantity = 0;
+    private Integer actualQuantity = 0;
 }

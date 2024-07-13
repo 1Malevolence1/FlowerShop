@@ -24,6 +24,6 @@ public class SupplierListRestController {
 
     @GetMapping()
     public List<Supplier> getListSupplier(){
-       return supplierService.findAll();
+       return supplierService.findAllEntity();
     }
 }

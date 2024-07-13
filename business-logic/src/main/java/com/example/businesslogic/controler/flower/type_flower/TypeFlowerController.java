@@ -22,33 +22,18 @@ public class TypeFlowerController {
 
     private final TypeFlowerService typeFlowerService;
 
-    private final TypeFlowerControllerHelper typeFlowerControllerHelper;
 
     @GetMapping("list")
     public List<TypeFlower> getAllTypeFlower(){
         log.info("метод начался");
-        return typeFlowerService.getAllTypeFlowerBaseDate();
+        return typeFlowerService.findAllEntity();
     }
 
-    @PostMapping("create")
-    public ResponseEntity<?> createTypeFlower(@Valid @RequestBody NewTypeFlowerDTO dto, BindingResult bindingResult) throws BindException {
-        if(bindingResult.hasErrors()){
-            if(bindingResult instanceof BindException bindException){
-                throw bindException;
-            }
-            else {
-                throw  new BindException(bindingResult);
-            }
-        }
-        typeFlowerControllerHelper.createEntityReturnVoid(dto);
-        log.info("Всё прошло успешно");
-        log.info("Загрузили {}", dto);
-        return ResponseEntity.noContent().build();
-    }
+
 
     @DeleteMapping("delete/{typeId}")
     public ResponseEntity<Void> deleteTypeFlower(@PathVariable ("typeId") Long id){
-        typeFlowerService.deleteType(id);
+        typeFlowerService.deleteEntityById(id);
         return ResponseEntity.noContent().build();
     }
 }

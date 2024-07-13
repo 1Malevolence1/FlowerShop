@@ -1,13 +1,11 @@
 package com.example.businesslogic.controler.flower.supplier;
 
 
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
+import com.example.businesslogic.dto.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
-import com.example.businesslogic.repository.ContactRepository;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -25,7 +23,7 @@ public class SupplierManagerRestController {
 
     @ModelAttribute("supplier")
     public Supplier supplier(@PathVariable("supplierId") Long id){
-        return supplierService.find(id);
+        return supplierService.findById(id);
     }
 
     @GetMapping()
@@ -43,7 +41,7 @@ public class SupplierManagerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            supplierControllerHelper.updateEntityReturnVoid(payload, id);
+            supplierControllerHelper.checkUpdateEntityReturnVoid(payload, id);
         }
         return ResponseEntity.noContent().build();
     }
@@ -51,7 +49,7 @@ public class SupplierManagerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> delete(@PathVariable(name = "supplierId") Long id){
-         supplierService.delete(id);
+         supplierService.deleteEntityById(id);
          return ResponseEntity.noContent().build();
     }
 }

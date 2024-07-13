@@ -69,12 +69,23 @@
         .add-button:hover {
             background-color: #45a049;
         }
+
+        .flower-count {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Список цветов</h1>
+
+    <!-- Вот тут отображается количество цветов -->
+    <div class="flower-count">
+        Всего цветов: <span th:text="${count}">0</span>
+    </div>
 
     <div th:if="${flowers.isEmpty()}">
         <p>Цветов нет.</p>
@@ -99,6 +110,7 @@
         </tr>
     </table>
 
+
     <a data-th-href="@{/main/flowers/create}" class="add-button">
         <i class="fas fa-plus"></i> Добавить Цветок
     </a>
@@ -107,12 +119,9 @@
         <i class="fas fa-plus"></i> Инвентарь
     </a>
 
-
-
     <a data-th-href="@{/main/type_flower/list}" class="add-button">
         <i class="fas fa-plus"></i> Список типов
     </a>
-
 
     <a data-th-href="@{/main/suppliers/list}" class="add-button">
         <i class="fas fa-plus"></i> Поставщики

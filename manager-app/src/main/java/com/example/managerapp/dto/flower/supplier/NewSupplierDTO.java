@@ -4,7 +4,7 @@ package com.example.managerapp.dto.flower.supplier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+
 
 @Data
 @NoArgsConstructor

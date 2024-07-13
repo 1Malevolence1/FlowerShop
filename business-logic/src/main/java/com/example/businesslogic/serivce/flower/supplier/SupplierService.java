@@ -1,53 +1,47 @@
 package com.example.businesslogic.serivce.flower.supplier;
 
 
-import com.example.businesslogic.dto.individual_flower.supplier.NewSupplierDTO;
-import com.example.businesslogic.dto.individual_flower.supplier.UpdateSupplierDTO;
-import com.example.businesslogic.models.flower.suppliers.Contact;
+import com.example.businesslogic.dto.supplier.NewSupplierDTO;
+import com.example.businesslogic.dto.supplier.UpdateSupplierDTO;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.SuppliersRepository;
-import com.example.businesslogic.serivce.flower.CrudService;
+
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
-public class SupplierService implements CrudService<NewSupplierDTO, UpdateSupplierDTO, Supplier, Long> {
+public class SupplierService extends AbstractManagerBaseDate<NewSupplierDTO, UpdateSupplierDTO, Supplier> {
 
 
     private final SuppliersRepository suppliersRepository;
-
     private final ContactService contactService;
 
     @Autowired
     public SupplierService(SuppliersRepository suppliersRepository, ContactService contactService) {
+        super(suppliersRepository);
         this.suppliersRepository = suppliersRepository;
         this.contactService = contactService;
     }
 
     @Override
     @Transactional
-    public Supplier create(NewSupplierDTO dto) {
-       Supplier supplier = suppliersRepository.save( new Supplier(null,
-               dto.getSupplierName(),
-               dto.getCity(),
-               dto.getAddress(),
-               null));
-
-       contactService.saveDataBaseContact(dto, supplier);
-       return supplier;
+    public Supplier saveEntityReturnObject(NewSupplierDTO dto) {
+        Supplier supplier = suppliersRepository.save( new Supplier(null,
+                 dto.getSupplierName(),
+                 dto.getCity(),
+                 dto.getAddress(),
+                 null));
+        contactService.saveEntityNotReturnObject(dto.getContact(), supplier);
+        return supplier;
     }
 
 
     @Override
-    @Transactional
-    public void update(UpdateSupplierDTO updateDTO, Long id) {
-
+    public void updateEntity(UpdateSupplierDTO updateDTO, Long id) {
              suppliersRepository.findById(id).ifPresentOrElse(
                      updateSupplier -> {
                          updateSupplier.setSupplierName(updateDTO.getSupplierName());
@@ -60,26 +54,12 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
 
     }
 
-
     @Override
-    @Transactional
-    public void delete(Long id) {
-            suppliersRepository.deleteById(id);
+    public Supplier findByName(String title) {
+        return suppliersRepository.findBySupplierName(title).orElseThrow(() -> new NoSuchElementException());
     }
 
-
-    @Override
-    public List<Supplier> findAll() {
-        return suppliersRepository.findAll();
-    }
-
-    @Override
-    public Supplier find(Long id) {
-        return suppliersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Supplier not found with id: " + id));
-    }
-
-
-/*    private Supplier saveSuppler(NewSupplierDTO dto) {
+    /*    private Supplier saveSuppler(NewSupplierDTO dto) {
         try {
             return savaDataBaseSupplier(dto);
         } catch (DataIntegrityViolationException exception) {
@@ -92,15 +72,4 @@ public class SupplierService implements CrudService<NewSupplierDTO, UpdateSuppli
             }
         }
     }*/
-
-
-
-    private Optional<Supplier> findSupplierName(String name){
-        return Optional.ofNullable(suppliersRepository.findBySupplierName(name)).orElseThrow(() -> new NoSuchElementException());
-    }
-
-    public Supplier getSupplierBaseData(String supplierName) {
-        return findSupplierName(supplierName)
-                .orElseThrow(() -> new NoSuchElementException("Поставщик не найден: " + supplierName));
-    }
 }

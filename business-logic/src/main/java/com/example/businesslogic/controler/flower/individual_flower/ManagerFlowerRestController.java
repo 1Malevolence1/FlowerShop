@@ -1,7 +1,7 @@
 package com.example.businesslogic.controler.flower.individual_flower;
 
 
-import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
+import com.example.businesslogic.dto.flowers.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
 
 import com.example.businesslogic.serivce.flower.individual_flower.FlowerService;
@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,11 @@ import java.util.NoSuchElementException;
 public class ManagerFlowerRestController {
     private final FlowerService flowerService;
 
-    private final FlowerRestControllerHelper flowerRestControllerHelper;
+    private final FlowerControllerHelper flowerRestControllerHelper;
 
     @ModelAttribute("flower")
     public Flower getFlower(@PathVariable(name = "flowerId") Long id) {
-        return flowerService.findFlower(id).orElseThrow(() -> new NoSuchElementException("Цветок с id %d не найден".formatted(id)));
+        return flowerService.findById(id);
     }
 
 
@@ -50,7 +49,7 @@ public class ManagerFlowerRestController {
                 throw bindException;
             } else throw new BindException(bindingResult);
         } else {
-            flowerRestControllerHelper.updateEntityReturnVoid(payload, id);
+            flowerRestControllerHelper.checkUpdateEntityReturnVoid(payload, id);
             log.info("Обновлены данные цвтека с id: {}", id);
         }
         return ResponseEntity.noContent().build();
@@ -59,7 +58,7 @@ public class ManagerFlowerRestController {
 
     @DeleteMapping()
     public ResponseEntity<Void> deleteFlower(@PathVariable(name = "flowerId") Long id){
-        flowerService.deleteFlower(id);
+        flowerService.deleteEntityById(id);
         log.info("удалён цветок c id: {}: ", id);
         return ResponseEntity.noContent().build();
     }

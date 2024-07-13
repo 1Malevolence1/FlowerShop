@@ -1,6 +1,7 @@
 package com.example.managerapp.client;
 
 
+import com.example.managerapp.dto.flower.CountAll;
 import com.example.managerapp.dto.flower.individual_flower.NewFlowerDTO;
 import com.example.managerapp.dto.flower.individual_flower.UpdateFlowerDTO;
 import com.example.managerapp.dto.flower.individual_flower.Flower;
@@ -20,5 +21,7 @@ public interface FlowerClientServiceImpl {
     void updateFlower(Long id, UpdateFlowerDTO payload);
 
     void deleteFlower(Long id);
+
+    CountAll countFlower();
 
 }

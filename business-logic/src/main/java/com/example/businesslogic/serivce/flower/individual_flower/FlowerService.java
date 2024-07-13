@@ -1,82 +1,64 @@
 package com.example.businesslogic.serivce.flower.individual_flower;
 
-import com.example.businesslogic.dto.individual_flower.NewFlowerDTO;
-import com.example.businesslogic.dto.individual_flower.UpdateFlowerDTO;
+import com.example.businesslogic.dto.flowers.individual_flower.NewFlowerDTO;
+import com.example.businesslogic.dto.flowers.individual_flower.UpdateFlowerDTO;
 import com.example.businesslogic.models.flower.Flower;
+import com.example.businesslogic.models.flower.TypeFlower;
 import com.example.businesslogic.models.flower.suppliers.Supplier;
 import com.example.businesslogic.repository.FlowerRepository;
-import com.example.businesslogic.repository.FlowerServiceImpl;
-import com.example.businesslogic.serivce.flower.supply_flower.inventory.InventoryService;
+import com.example.businesslogic.serivce.flower.AbstractManagerBaseDate;
+import com.example.businesslogic.serivce.flower.individual_flower.inventory.InventoryService;
 import com.example.businesslogic.serivce.flower.supplier.SupplierService;
 import com.example.businesslogic.serivce.flower.type_flower.TypeFlowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Slf4j
-public class FlowerService implements FlowerServiceImpl {
-
-
+public class FlowerService extends AbstractManagerBaseDate<NewFlowerDTO, UpdateFlowerDTO, Flower> {
     private final FlowerRepository flowerRepository;
-
     private final TypeFlowerService typeFlowerService;
-
+    private final SupplierService supplierService;
     private final InventoryService inventoryService;
 
-    private final SupplierService supplierService;
-
     @Autowired
-    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, InventoryService inventoryService, SupplierService supplierService) {
+    public FlowerService(FlowerRepository flowerRepository, TypeFlowerService typeFlowerService, SupplierService supplierService, InventoryService inventoryService) {
+        super(flowerRepository);
         this.flowerRepository = flowerRepository;
         this.typeFlowerService = typeFlowerService;
-        this.inventoryService = inventoryService;
         this.supplierService = supplierService;
-    }
-
-    @Override
-    public List<Flower> allFlowers() {
-        return flowerRepository.findAll();
-    }
-
-    @Override
-    public Optional<Flower> findFlower(Long id) {
-        return flowerRepository.findById(id);
+        this.inventoryService = inventoryService;
     }
 
 
-
     @Override
-    @Transactional
-    public Flower createFlower(NewFlowerDTO payload) {
-            log.info("{}", payload);
-            Supplier supplier = supplierService.getSupplierBaseData(payload.getSupplierName());
-            log.info("{}", supplier);
-            Flower flower = flowerRepository.save(new Flower(
-                    null,
-                    payload.getTitle(),
-                    payload.getPrice(),
-                    payload.getExtraCharge(),
-                    null,
-                    typeFlowerService.findType(payload.getType()),
-                    supplier));
+    public Flower saveEntityReturnObject(NewFlowerDTO payload) {
+        Supplier supplier = supplierService.findByName(payload.getSupplierName());
+        TypeFlower typeFlower = typeFlowerService.findByName(payload.getType());
 
-            inventoryService.saveBaseDataInventory(flower, payload);
 
-            log.info("{}", flower);
-            return flower;
+        Flower flower = flowerRepository.save(new Flower(
+                null,
+                payload.getTitle(),
+                payload.getPrice(),
+                payload.getExtraCharge(),
+                null,
+                typeFlower,
+                supplier));
 
+        if (payload.getInventory() != null) {
+            inventoryService.saveEntityNotReturnObject(payload.getInventory(), flower);
+        }
+
+        return flower;
     }
 
     // возможно нужно тоже сделать sql исключения
     @Override
-    @Transactional
-    public void updateFlower(Long id, UpdateFlowerDTO payload) {
+    public void updateEntity(UpdateFlowerDTO payload, Long id) {
         flowerRepository.findById(id).ifPresentOrElse(
                 newDataForflower -> {
                     newDataForflower.setTitle(payload.getTitle());
@@ -89,13 +71,6 @@ public class FlowerService implements FlowerServiceImpl {
                 }
         );
     }
-
-    @Override
-    @Transactional
-    public void deleteFlower(Long id) {
-        flowerRepository.deleteById(id);
-    }
-
 }
 
 
