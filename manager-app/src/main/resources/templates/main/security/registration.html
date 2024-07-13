@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="css/style.css">
+   
+</head>
+<body class="page light-theme">
+    
+    <div class="container" >
+        <header class="page-header">
+            <div class="container">
+               <h1 style="width: 100%;">Страница регистрации
+                <a class="regist_button" type="button" style="top: 5%; width: 6%; margin-left: 8%; font-size: 50%;" href="/main/true_autorisaishen">
+                    Вход
+                </a>
+                <!-- <button class="theme-button" type="button" style="top: 5%; width: 9%; margin-left: 0%;  padding: 2px 5px;">Тема</button>  -->
+                </h1>
+            </div>        
+    </header>
+     <main>
+
+         <div class="error-message" data-th-if="${error}">
+             <h2>Допущены Ошибки</h2>
+             <ul>
+                 <li data-th-text="${error}"></li>
+             </ul>
+         </div>
+
+        <h2>Придумайте логин</h2>
+
+
+         <form data-th-action="@{/registration}" method="post">
+             <div class="input-container">
+                 <H2>Логин</H2>
+                 <input type="text" name="username"/>
+                 <H2>Пароль</H2>
+                 <input type="text" name="password"/>
+             </div>
+             <input type="submit" value="зарегестрироваться">
+         </form>
+
+
+        <!-- <button class="button"><input type="reset" >Мне нет 18</button> -->
+    </main>
+
+    </div>
+   
+
+    <script src="js/script.js"></script>
+</body>
+</html>
