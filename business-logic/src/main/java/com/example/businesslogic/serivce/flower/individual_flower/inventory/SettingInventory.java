@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 public class SettingInventory {
 
     public InventoryDto settingParameter(InventoryDto inventoryDto){
-        return new InventoryDto(inventoryDto.getAccountingQuantity(), inventoryDto.getActualQuantity());
+        return new InventoryDto(checkObjectOnNullOtherwiseReturnZero(inventoryDto.getAccountingQuantity()), checkObjectOnNullOtherwiseReturnZero(inventoryDto.getActualQuantity()));
+    }
+
+    private Integer checkObjectOnNullOtherwiseReturnZero(Integer object){
+        if(object == null) return 0;
+        else return object;
     }
 }

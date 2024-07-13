@@ -13,24 +13,18 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class InventoryService extends AbstractManagerBaseDate<InventoryDto, Void, Inventory> {
 
-    private final InventoryRepository inventoryRepository;
     private final SettingInventory settingInventory;
+
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository, SettingInventory settingInventory) {
         super(inventoryRepository);
-        this.inventoryRepository = inventoryRepository;
         this.settingInventory = settingInventory;
     }
 
-
-
-    @Override
-    public Inventory saveEntityReturnObject(InventoryDto dto) {
-        InventoryDto inventoryDto = settingInventory.settingParameter(dto);
-        return inventoryRepository.save(new Inventory(null, inventoryDto.getAccountingQuantity(), inventoryDto.getActualQuantity()));
-    }
-
     public Inventory build(InventoryDto dto){
-        return new Inventory().builder().accountingQuantity(dto.getAccountingQuantity()).actualQuantity(dto.getActualQuantity()).build();
+        InventoryDto inventoryDto = settingInventory.settingParameter(dto);
+        return new Inventory().builder().accountingQuantity(inventoryDto.getAccountingQuantity()).actualQuantity(inventoryDto.getActualQuantity()).build();
     }
+
+
 }

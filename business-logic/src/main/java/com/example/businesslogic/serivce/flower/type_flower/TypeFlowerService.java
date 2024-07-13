@@ -23,6 +23,10 @@ public class TypeFlowerService extends AbstractManagerBaseDate<NewTypeFlowerDTO,
             this.typeFlowerRepository = typeFlowerRepository;
         }
 
+    @Override
+    public void saveEntityNotReturnObject(NewTypeFlowerDTO object) {
+        typeFlowerRepository.save(new TypeFlower(null, object.getType(), object.getDescription()));
+    }
 
     @Override
     public TypeFlower findByName(String title) {
